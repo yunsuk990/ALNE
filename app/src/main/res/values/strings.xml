@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ALNE</string>
+    <string name="app_name_1">Home Recipe</string>
+    <string name="login">로그인</string>
+    <string name="login_1">Log In</string>
+    <string name="signUp">Sign Up</string>
+    <string name="signUpWith">SIGN UP WITH</string>
+    <string name="account">Don\'t have an account?</string>
+    <string name="account_1">Have You an account?</string>
+    <string name="email">이메일</string>
+    <string name="password">비밀번호</string>
+    <string name="name">아이디</string>
+    <string name="password_confirm">비밀번호 확인</string>
+    <string name="login_findPassword_et">비밀번호 찾기</string>
+    <string name="login_findID_et">ID 찾기</string>
+    <string name="submit">회원가입</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

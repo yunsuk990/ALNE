@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/home"
+        app:showAsAction="always"
+        android:title="홈" />
+    <item
+        android:id="@+id/fridgeFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/refrigerator"
+        android:title="내 냉장고" />
+    <item
+        android:id="@+id/recipeFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/recipe"
+        android:title="레시피" />
+    <item
+        android:id="@+id/myPageFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/account"
+        app:showAsAction="always"
+        android:title="마이페이지" />
+</menu>
