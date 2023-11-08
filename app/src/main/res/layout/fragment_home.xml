@@ -22,7 +22,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-
+            app:goIcon="@drawable/circle"
             app:iconifiedByDefault="false"
             app:queryHint="요리,재료 검색"
             app:layout_constraintStart_toStartOf="parent"

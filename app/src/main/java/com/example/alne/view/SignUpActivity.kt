@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.alne.databinding.ActivitySignUpBinding
-import com.example.flo.Network.AuthInterface
+import com.example.flo.Network.AuthApi
 import com.example.flo.Network.AuthResponse
 import com.example.flo.Network.getRetrofit
 import com.example.flo.model.User
@@ -40,7 +40,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun signUp(){
-        retrofit.create(AuthInterface::class.java).signUp(User(binding.signUpNameEt.text.toString(), binding.signUpPasswordEt.text.toString()))
+        retrofit.create(AuthApi::class.java).signUp(User(binding.signUpNameEt.text.toString(), binding.signUpPasswordEt.text.toString()))
             .enqueue(object: Callback<AuthResponse>{
                 override fun onResponse(
                     call: Call<AuthResponse>,

@@ -1,12 +1,15 @@
 package com.example.alne
 
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.alne.databinding.ActivityMainBinding
 import com.example.alne.view.FridgeFragment
 import com.example.alne.view.HomeFragment
 import com.example.alne.view.MyPageFragment
 import com.example.alne.view.RecipeFragment
+import com.kakao.sdk.common.util.Utility
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         initBottomNavigation()
 
+        Log.d(TAG, "keyhash : ${Utility.getKeyHash(this)}")
 
     }
 
