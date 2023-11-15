@@ -16,6 +16,7 @@
     <string name="submit">회원가입</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="search_hint">"요리,재료 검색"</string>
-    <string name="fridge_info">"빨간색인 재료는 유통기한이 얼마 남지 않는 재료입니다!"</string>
+    <string name="search_hint">요리,재료 검색</string>
+    <string name="fridge_info">빨간색인 재료는 유통기한이 얼마 남지 않는 재료입니다!</string>
+    <string name="fridge_favorite_info">시기에 맞는 재료를 이용해서 추천하기</string>
 </resources>

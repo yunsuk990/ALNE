@@ -19,7 +19,7 @@ class ExpireAdapter(var item: ArrayList<Food>): RecyclerView.Adapter<ExpireAdapt
     override fun getItemCount(): Int = item.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.expireFoodIv.setImageResource(R.drawable.food)
+        holder.binding.expireFoodIv.setImageResource(R.drawable.google)
         holder.binding.expireFoodTitleTv.text = item[position].name
 //        holder.binding.expireDateInfoTv.text = item[position].expireDate
     }

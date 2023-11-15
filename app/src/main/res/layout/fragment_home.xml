@@ -29,40 +29,40 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <TextView
-            android:id="@+id/home_grocery_tv"
-            android:text="Grocery"
-            android:textSize="45sp"
-            android:textColor="@color/blue"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/home_sv"
-            app:layout_constraintTop_toBottomOf="@+id/home_sv"
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+<!--        <TextView-->
+<!--            android:id="@+id/home_grocery_tv"-->
+<!--            android:text="Grocery"-->
+<!--            android:textSize="45sp"-->
+<!--            android:textColor="@color/blue"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/home_sv"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/home_sv"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
 
-        <TextView
-            android:id="@+id/home_doorstep_tv"
-            android:text="At your\nDoorstep"
-            android:textStyle="bold"
-            android:textSize="28sp"
-            android:textColor="@color/black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/home_grocery_tv"
-            app:layout_constraintTop_toBottomOf="@+id/home_grocery_tv"/>
+<!--        <TextView-->
+<!--            android:id="@+id/home_doorstep_tv"-->
+<!--            android:text="At your\nDoorstep"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="28sp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/home_grocery_tv"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/home_grocery_tv"/>-->
 
-        <ImageView
-            android:id="@+id/home_fridge_iv"
-            android:layout_width="150dp"
-            android:layout_height="0dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/fridge"
-            android:layout_marginBottom="-20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/home_doorstep_tv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/home_grocery_tv"
-            app:layout_constraintTop_toTopOf="@+id/home_grocery_tv" />
+<!--        <ImageView-->
+<!--            android:id="@+id/home_fridge_iv"-->
+<!--            android:layout_width="150dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:scaleType="fitXY"-->
+<!--            android:src="@drawable/fridge"-->
+<!--            android:layout_marginBottom="-20dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/home_doorstep_tv"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/home_grocery_tv"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/home_grocery_tv" />-->
 
         <TextView
             android:id="@+id/home_fridge_title_tv"
@@ -73,8 +73,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="@+id/home_doorstep_tv"
-            app:layout_constraintTop_toBottomOf="@+id/home_fridge_iv"/>
+            app:layout_constraintStart_toStartOf="@+id/home_sv"
+            app:layout_constraintTop_toBottomOf="@+id/home_sv"/>
 
         <TextView
             android:id="@+id/home_fridge_info_tv"
@@ -88,34 +88,68 @@
             app:layout_constraintTop_toBottomOf="@+id/home_fridge_title_tv"/>
 
         <androidx.cardview.widget.CardView
-            android:layout_marginTop="10dp"
+            android:id="@+id/cardView"
             android:layout_width="0dp"
             android:layout_height="200dp"
+            android:layout_marginTop="10dp"
             app:cardBackgroundColor="@color/gray_light"
-            app:cardCornerRadius="15dp"
-            app:layout_constraintStart_toStartOf="@+id/home_fridge_info_tv"
+            app:cardCornerRadius="5dp"
             app:layout_constraintEnd_toEndOf="@+id/home_sv"
+            app:layout_constraintStart_toStartOf="@+id/home_fridge_info_tv"
             app:layout_constraintTop_toBottomOf="@+id/home_fridge_info_tv">
 
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-               <androidx.recyclerview.widget.RecyclerView
-                   android:id="@+id/home_item_rv"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                   android:orientation="vertical"
-                   app:spanCount="2"
-                   tools:listitem="@layout/item_expire" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_item_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="2"
+                    tools:listitem="@layout/item_expire" />
 
             </ScrollView>
 
         </androidx.cardview.widget.CardView>
 
+        <TextView
+            android:id="@+id/home_fridge_favorite_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="추천 레시피"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+        <TextView
+            android:id="@+id/home_fridge_favorite_info_tv"
+            android:text="@string/fridge_favorite_info"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/home_fridge_favorite_tv"
+            app:layout_constraintTop_toBottomOf="@+id/home_fridge_favorite_tv" />
 
 
+        <GridView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:horizontalSpacing="20dp"
+            app:layout_constraintStart_toStartOf="@+id/home_fridge_favorite_info_tv"
+            app:layout_constraintTop_toBottomOf="@+id/home_fridge_favorite_info_tv"
+            app:layout_constraintEnd_toEndOf="@+id/cardView"
+            android:numColumns="2"
+            tools:listitem="@layout/item_recipe"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

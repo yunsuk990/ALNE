@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.example.alne.MainActivity
 import com.example.alne.R
 import com.example.alne.databinding.ActivityLoginBinding
+import com.example.alne.model.Token
 import com.example.flo.Network.AuthApi
 import com.example.flo.Network.AuthResponse
 import com.example.flo.Network.getRetrofit
@@ -109,7 +110,22 @@ class LoginActivity : AppCompatActivity() {
             }
             else if (token != null) {
                 Log.i("kakao", "로그인 성공 ${token.accessToken}")
-                startActivity(Intent(this, MainActivity::class.java))
+
+                retrofit.create(AuthApi::class.java).accessToken(Token(token.accessToken)).enqueue(object: Callback<AuthResponse>{
+                    override fun onResponse(
+                        call: Call<AuthResponse>,
+                        response: Response<AuthResponse>,
+                    ) {
+                        Log.d("kakaoLogin", "SUCCESS")
+                        Log.d("kakaoLogin", response.body().toString())
+                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                    }
+
+                    override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
+                        Log.d("kakaoLogin", t.message.toString())
+                    }
+
+                })
             }
         }
     }

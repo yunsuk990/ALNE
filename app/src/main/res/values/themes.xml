@@ -15,4 +15,10 @@
         <item name="android:textSelectHandleWindowStyle">@color/black</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.Start" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

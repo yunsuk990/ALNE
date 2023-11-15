@@ -51,6 +51,7 @@ class SplashActivity : AppCompatActivity() {
                 }else {
                     //토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
 
+
 //                    retrofit.create(AuthApi::class.java).login(User(binding.loginEmailEt.text.toString(),  binding.loginPasswordEt.text.toString())).enqueue(object:
 //                        Callback<AuthResponse>{
 //                        override fun onResponse(
