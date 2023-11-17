@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/foodDialog"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/foodDialog"
     tools:context=".view.FoodActivity">
 
 
@@ -12,7 +12,7 @@
         android:id="@+id/food_image_iv"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/food_image_border"
         android:src="@drawable/bibimbap"
@@ -23,7 +23,7 @@
         android:id="@+id/food_name_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="재료 이름"
         android:textColor="@color/black"
@@ -38,12 +38,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="30dp"
-        app:boxStrokeColor="@color/blue"
+        android:layout_marginEnd="20dp"
         app:boxCornerRadiusBottomEnd="5dp"
         app:boxCornerRadiusBottomStart="5dp"
         app:boxCornerRadiusTopEnd="5dp"
         app:boxCornerRadiusTopStart="5dp"
+        app:boxStrokeColor="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/food_name_title_tv"
         app:layout_constraintTop_toBottomOf="@+id/food_name_title_tv">
@@ -75,12 +75,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        app:boxStrokeColor="@color/boxstroke_color"
+        android:layout_marginEnd="20dp"
         app:boxCornerRadiusBottomEnd="5dp"
         app:boxCornerRadiusBottomStart="5dp"
         app:boxCornerRadiusTopEnd="5dp"
         app:boxCornerRadiusTopStart="5dp"
-        android:layout_marginEnd="20dp"
+        app:boxStrokeColor="@color/boxstroke_color"
         app:layout_constraintEnd_toStartOf="@+id/food_storage_title_tv"
         app:layout_constraintStart_toStartOf="@+id/food_memo_title_tv"
         app:layout_constraintTop_toBottomOf="@+id/food_memo_title_tv">
@@ -107,11 +107,11 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:background="@drawable/spinner_background"
-        android:spinnerMode="dropdown"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:background="@drawable/spinner_background"
+        android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="@+id/food_storage_title_tv"
         app:layout_constraintStart_toEndOf="@+id/food_memo_tl"
         app:layout_constraintStart_toStartOf="@+id/food_storage_title_tv"
@@ -131,10 +131,10 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/food_expire_year_tl"
-        android:layout_marginTop="10dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         app:boxCornerRadiusBottomEnd="5dp"
         app:boxCornerRadiusBottomStart="5dp"
         app:boxCornerRadiusTopEnd="5dp"
@@ -153,10 +153,10 @@
         android:id="@+id/food_expire_year_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:text="년"
         android:textColor="@color/black"
         android:textSize="15sp"
-        android:layout_marginStart="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/food_expire_year_tl"
         app:layout_constraintStart_toEndOf="@+id/food_expire_year_tl"
         app:layout_constraintTop_toTopOf="@+id/food_expire_year_tl" />
@@ -166,16 +166,15 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         app:boxCornerRadiusBottomEnd="5dp"
         app:boxCornerRadiusBottomStart="5dp"
         app:boxCornerRadiusTopEnd="5dp"
         app:boxCornerRadiusTopStart="5dp"
         app:boxStrokeColor="@color/boxstroke_color"
-        android:layout_marginStart="5dp"
-        app:layout_constraintStart_toEndOf="@+id/food_expire_year_title_tv"
-        app:layout_constraintTop_toTopOf="@+id/food_expire_year_title_tv"
         app:layout_constraintBottom_toBottomOf="@+id/food_expire_year_title_tv"
-        >
+        app:layout_constraintStart_toEndOf="@+id/food_expire_year_title_tv"
+        app:layout_constraintTop_toTopOf="@+id/food_expire_year_title_tv">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="wrap_content"
@@ -187,10 +186,10 @@
         android:id="@+id/food_expire_month_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:text="월"
         android:textColor="@color/black"
         android:textSize="15sp"
-        android:layout_marginStart="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/food_expire_month_title_tl"
         app:layout_constraintStart_toEndOf="@+id/food_expire_month_title_tl"
         app:layout_constraintTop_toTopOf="@+id/food_expire_month_title_tl" />
@@ -200,15 +199,15 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         app:boxCornerRadiusBottomEnd="5dp"
         app:boxCornerRadiusBottomStart="5dp"
         app:boxCornerRadiusTopEnd="5dp"
         app:boxCornerRadiusTopStart="5dp"
-        android:layout_marginStart="5dp"
         app:boxStrokeColor="@color/boxstroke_color"
+        app:layout_constraintBottom_toBottomOf="@+id/food_expire_month_title_tv"
         app:layout_constraintStart_toEndOf="@+id/food_expire_month_title_tv"
-        app:layout_constraintTop_toTopOf="@+id/food_expire_month_title_tv"
-        app:layout_constraintBottom_toBottomOf="@+id/food_expire_month_title_tv">
+        app:layout_constraintTop_toTopOf="@+id/food_expire_month_title_tv">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="wrap_content"
@@ -230,22 +229,43 @@
         app:layout_constraintTop_toTopOf="@+id/food_expire_day_title_tl" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="match_parent"
+        android:id="@+id/cancel_bt"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/button_border"
-        android:text="편집하기"
-        android:textColor="@color/black"
+        android:background="@drawable/button_border2"
+        android:text="취소"
+        android:textColor="@color/blue"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:layout_marginTop="30dp"
-        app:layout_goneMarginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/food_expire_month_title_tl" />
+        app:layout_constraintEnd_toStartOf="@+id/submit_bt"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/food_expire_title_tv"
+        app:layout_constraintTop_toBottomOf="@+id/food_expire_month_title_tl"
+        app:layout_goneMarginBottom="30dp" />
 
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/submit_bt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_borde_blue2"
+        android:text="재료추가"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/food_food_name_tl"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cancel_bt"
+        app:layout_constraintTop_toBottomOf="@+id/food_expire_month_title_tl"
+        app:layout_constraintVertical_bias="0.502"
+        app:layout_goneMarginBottom="30dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

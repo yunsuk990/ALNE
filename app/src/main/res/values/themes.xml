@@ -21,4 +21,9 @@
         <item name="android:windowFullscreen">true</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="Dialog_food" parent="@style/Theme.MaterialComponents.Dialog">
+
+        <item name="dialogCornerRadius">20dp</item>
+    </style>
 </resources>
