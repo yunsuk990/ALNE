@@ -1,16 +1,20 @@
 package com.example.alne.view
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.example.alne.R
 import com.example.alne.databinding.ItemFridgeBinding
 import com.example.alne.model.Food
 
-class FridgeAdapter(private val items: ArrayList<Food>): RecyclerView.Adapter<FridgeAdapter.ViewHolder>() {
+class FridgeAdapter(val items: ArrayList<Food>): RecyclerView.Adapter<FridgeAdapter.ViewHolder>() {
+
 
     interface MyItemClickListener {
         fun onItemClick(food: Food)
+        fun onInfoClick(view: View, position: Int)
     }
     private lateinit var mItemClickListener : MyItemClickListener
     fun setMyItemClickListener(itemClickListener: MyItemClickListener){
@@ -37,7 +41,8 @@ class FridgeAdapter(private val items: ArrayList<Food>): RecyclerView.Adapter<Fr
         }
 
         holder.binding.itemFridgeDeleteIb.setOnClickListener{
-            deleteFood(position)
+            mItemClickListener.onInfoClick(it,position)
+//            deleteFood(position)
         }
     }
 

@@ -23,7 +23,7 @@
                 android:id="@+id/item_fridge_iv"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
                 android:background="@drawable/food_image_border"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -41,6 +41,22 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/item_fridge_iv"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:text="냉장"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:background="@drawable/textview_border"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+
+                android:paddingLeft="7dp"
+                android:paddingRight="7dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@+id/item_fridge_expire_tv"
+                app:layout_constraintTop_toTopOf="@+id/item_fridge_expire_tv"
+                app:layout_constraintBottom_toBottomOf="@+id/item_fridge_expire_tv" />
 
             <TextView
                 android:id="@+id/item_fridge_expire_tv"
@@ -79,7 +95,7 @@
                 app:layout_constraintStart_toStartOf="@+id/item_fridge_expire_info_tv"
                 app:layout_constraintTop_toBottomOf="@+id/item_fridge_expire_info_tv" />
 
-            <androidx.appcompat.widget.AppCompatImageButton
+            <ImageButton
                 android:id="@+id/item_fridge_delete_ib"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
