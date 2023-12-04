@@ -1,25 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+        android:id="@+id/item_recipe_cv"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="20dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:scaleType="fitXY"
+            android:layout_width="170dp"
+            android:layout_height="140dp"
             android:background="@color/gray"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"/>
-
+            android:scaleType="fitXY" />
 
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/item_recipe_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="음식이름"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/item_recipe_cv"
+        app:layout_constraintTop_toBottomOf="@+id/item_recipe_cv" />
+
+    <ImageView
+        android:id="@+id/item_recipe_iv"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/star"
+        android:layout_marginStart="15dp"
+        app:layout_constraintStart_toEndOf="@+id/item_recipe_title_tv"
+        app:layout_constraintTop_toTopOf="@+id/item_recipe_title_tv"
+        app:layout_constraintBottom_toBottomOf="@+id/item_recipe_title_tv"/>
+
+    <TextView
+        android:id="@+id/item_recipe_star_tv"
+        android:text="4.4"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        app:layout_constraintStart_toEndOf="@+id/item_recipe_iv"
+        app:layout_constraintTop_toTopOf="@+id/item_recipe_iv"
+        app:layout_constraintBottom_toBottomOf="@+id/item_recipe_iv"/>
+
+    <ImageView
+        android:id="@+id/item_recipe_cook_iv"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/chef"
+        app:layout_constraintStart_toStartOf="@+id/item_recipe_title_tv"
+        app:layout_constraintTop_toBottomOf="@+id/item_recipe_title_tv" />
+
+    <TextView
+        android:id="@+id/item_recipe_rank_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="보통"
+        android:textColor="@color/lightblue"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_recipe_cook_iv"
+        app:layout_constraintStart_toEndOf="@+id/item_recipe_cook_iv"
+        app:layout_constraintTop_toTopOf="@+id/item_recipe_cook_iv" />
+
+    <ImageView
+        android:id="@+id/item_recipe_time_iv"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="15dp"
+        android:src="@drawable/timer"
+        app:layout_constraintBottom_toBottomOf="@+id/item_recipe_rank_tv"
+        app:layout_constraintStart_toEndOf="@+id/item_recipe_rank_tv"
+        app:layout_constraintTop_toTopOf="@+id/item_recipe_rank_tv" />
+
+    <TextView
+        android:id="@+id/item_recipe_time_tv"
+        android:text="약 40분"
+        android:textSize="12sp"
+        android:textColor="@color/lightblue"
+        android:layout_marginStart="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/item_recipe_time_iv"
+        app:layout_constraintTop_toTopOf="@+id/item_recipe_time_iv"
+        app:layout_constraintBottom_toBottomOf="@+id/item_recipe_time_iv"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_recipe_time_tv"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
