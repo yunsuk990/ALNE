@@ -26,9 +26,9 @@
 
     <ImageButton
         android:id="@+id/recipe_dj_ib"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_margin="10dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_margin="15dp"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
         android:src="@drawable/dj"
@@ -36,9 +36,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <HorizontalScrollView
+        android:id="@+id/recipe_menu_sv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:scrollbars="none"
         app:layout_constraintTop_toBottomOf="@+id/recipe_sv"
         app:layout_constraintStart_toStartOf="@+id/recipe_sv"
         app:layout_constraintEnd_toEndOf="parent">
@@ -49,19 +51,17 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:background="@drawable/image_border"
+                android:id="@+id/recipe_menu_All_linear"
+                android:background="@drawable/memu_click"
                 android:orientation="vertical"
-                android:padding="7dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-
-                <ImageView
-                    android:src="@drawable/recipe_ex1"
-                    android:scaleType="fitXY"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"/>
-
                 <TextView
+                    android:id="@+id/recipe_menu_All_tv"
                     android:text="ALL"
                     android:textStyle="bold"
                     android:layout_gravity="center"
@@ -72,19 +72,15 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="10dp"
                 android:background="@drawable/image_border"
                 android:orientation="vertical"
-                android:padding="7dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-
-                <ImageView
-                    android:src="@drawable/recipe_ex1"
-                    android:scaleType="fitXY"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"/>
-
                 <TextView
                     android:text="한식"
                     android:textStyle="bold"
@@ -96,20 +92,15 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginStart="15dp"
-
+                android:layout_marginStart="10dp"
                 android:background="@drawable/image_border"
                 android:orientation="vertical"
-                android:padding="7dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-
-                <ImageView
-                    android:src="@drawable/recipe_ex1"
-                    android:scaleType="fitXY"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"/>
-
                 <TextView
                     android:text="중식"
                     android:textStyle="bold"
@@ -121,20 +112,15 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginStart="15dp"
-
+                android:layout_marginStart="10dp"
                 android:background="@drawable/image_border"
                 android:orientation="vertical"
-                android:padding="7dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-
-                <ImageView
-                    android:src="@drawable/recipe_ex1"
-                    android:scaleType="fitXY"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"/>
-
                 <TextView
                     android:text="일식"
                     android:textStyle="bold"
@@ -146,20 +132,15 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginStart="15dp"
-
+                android:layout_marginStart="10dp"
                 android:background="@drawable/image_border"
                 android:orientation="vertical"
-                android:padding="7dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-
-                <ImageView
-                    android:src="@drawable/recipe_ex1"
-                    android:scaleType="fitXY"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"/>
-
                 <TextView
                     android:text="양식"
                     android:textStyle="bold"
@@ -171,19 +152,15 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginStart="15dp"
-
+                android:layout_marginStart="10dp"
                 android:background="@drawable/image_border"
                 android:orientation="vertical"
-                android:padding="7dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-
-                <ImageView
-                    android:src="@drawable/recipe_ex1"
-                    android:scaleType="fitXY"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"/>
 
                 <TextView
                     android:text="ALL"
@@ -198,6 +175,171 @@
         </LinearLayout>
 
     </HorizontalScrollView>
+
+<!--    <HorizontalScrollView-->
+<!--        android:id="@+id/recipe_menu_sv"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:scrollbars="none"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/recipe_sv"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/recipe_sv"-->
+<!--        app:layout_constraintEnd_toEndOf="parent">-->
+
+<!--        <LinearLayout-->
+<!--            android:orientation="horizontal"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/recipe_menu_All_linear"-->
+<!--                android:background="@drawable/memu_click"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="5dp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <ImageView-->
+<!--                    android:src="@drawable/recipe_ex1"-->
+<!--                    android:scaleType="fitXY"-->
+<!--                    android:layout_width="45dp"-->
+<!--                    android:layout_height="45dp"/>-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/recipe_menu_All_tv"-->
+<!--                    android:text="ALL"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"/>-->
+
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_marginStart="15dp"-->
+<!--                android:background="@drawable/image_border"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="5dp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <ImageView-->
+<!--                    android:src="@drawable/recipe_ex1"-->
+<!--                    android:scaleType="fitXY"-->
+<!--                    android:layout_width="45dp"-->
+<!--                    android:layout_height="45dp"/>-->
+
+<!--                <TextView-->
+<!--                    android:text="한식"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"/>-->
+
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_marginStart="15dp"-->
+<!--                android:background="@drawable/image_border"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="5dp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <ImageView-->
+<!--                    android:src="@drawable/recipe_ex1"-->
+<!--                    android:scaleType="fitXY"-->
+<!--                    android:layout_width="45dp"-->
+<!--                    android:layout_height="45dp"/>-->
+
+<!--                <TextView-->
+<!--                    android:text="중식"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"/>-->
+
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_marginStart="15dp"-->
+
+<!--                android:background="@drawable/image_border"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="5dp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <ImageView-->
+<!--                    android:src="@drawable/recipe_ex1"-->
+<!--                    android:scaleType="fitXY"-->
+<!--                    android:layout_width="45dp"-->
+<!--                    android:layout_height="45dp"/>-->
+
+<!--                <TextView-->
+<!--                    android:text="일식"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"/>-->
+
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_marginStart="15dp"-->
+<!--                android:background="@drawable/image_border"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="5dp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <ImageView-->
+<!--                    android:src="@drawable/recipe_ex1"-->
+<!--                    android:scaleType="fitXY"-->
+<!--                    android:layout_width="45dp"-->
+<!--                    android:layout_height="45dp"/>-->
+
+<!--                <TextView-->
+<!--                    android:text="양식"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"/>-->
+
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_marginStart="15dp"-->
+<!--                android:background="@drawable/image_border"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="5dp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <ImageView-->
+<!--                    android:src="@drawable/recipe_ex1"-->
+<!--                    android:scaleType="fitXY"-->
+<!--                    android:layout_width="45dp"-->
+<!--                    android:layout_height="45dp"/>-->
+
+<!--                <TextView-->
+<!--                    android:text="ALL"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"/>-->
+
+<!--            </LinearLayout>-->
+
+<!--        </LinearLayout>-->
+
+<!--    </HorizontalScrollView>-->
 
 
 
