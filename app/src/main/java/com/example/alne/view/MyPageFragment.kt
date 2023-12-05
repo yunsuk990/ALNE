@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.alne.databinding.FragmentMyPageBinding
+import com.example.alne.view.Login.LoginActivity
+import com.example.alne.view.SignUp.SignUpActivity
+import com.example.alne.view.MyPage.Splash.StartActivity
 import com.kakao.sdk.user.UserApiClient
 
 class MyPageFragment : Fragment() {

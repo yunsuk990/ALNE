@@ -5,10 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.alne.databinding.ActivityMainBinding
-import com.example.alne.view.FridgeFragment
-import com.example.alne.view.HomeFragment
+import com.example.alne.view.Fridge.FridgeFragment
+import com.example.alne.view.Home.HomeFragment
 import com.example.alne.view.MyPageFragment
-import com.example.alne.view.RecipeFragment
+import com.example.alne.view.Recipe.RecipeFragment
 import com.kakao.sdk.common.util.Utility
 
 class MainActivity : AppCompatActivity() {

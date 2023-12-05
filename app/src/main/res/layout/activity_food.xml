@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/foodDialog"
-    tools:context=".view.FoodActivity">
+    tools:context=".view.Fridge.FoodActivity">
 
 
     <ImageView
