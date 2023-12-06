@@ -1,15 +1,13 @@
 package com.example.alne.view.Recipe
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.alne.R
 import com.example.alne.databinding.FragmentRecipeBinding
-import com.example.alne.databinding.FragmentRecipeDetailBinding
 import com.example.alne.model.Recipe
-import com.example.alne.view.Home.HomeFragment
 
 class RecipeFragment : Fragment() {
     lateinit var binding: FragmentRecipeBinding
@@ -22,8 +20,7 @@ class RecipeFragment : Fragment() {
         binding.recipeMenuAllTv.requestFocus()
 
         binding.recipeMenuAllTv.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_container, RecipeDetailFragment())
-                .commitAllowingStateLoss()
+            startActivity(Intent(requireContext(), RecipeDetailActivity::class.java))
         }
 
 

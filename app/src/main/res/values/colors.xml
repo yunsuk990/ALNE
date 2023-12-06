@@ -13,5 +13,7 @@
     <color name="lightblue">#09386C</color>
     <color name="gray">#939293</color>
     <color name="gray_light">#F1F1F1</color>
-    <color name="recipe_toolbar">#819994</color>
+    <color name="gray_light1">#B1B1B1</color>
+    <color name="recipe_toolbar">#E6819994</color>
+    <color name="orange">#D94216</color>
 </resources>

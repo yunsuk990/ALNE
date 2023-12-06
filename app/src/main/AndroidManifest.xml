@@ -19,6 +19,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".view.Recipe.RecipeDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.Fridge.FoodActivity"
             android:exported="false" />
         <activity
@@ -32,9 +35,8 @@
         </activity>
         <activity
             android:name=".view.MyPage.Splash.SplashActivity"
-            android:theme="@style/Theme.Start"
-            android:exported="true">
-        </activity>
+            android:exported="true"
+            android:theme="@style/Theme.Start"></activity>
         <activity
             android:name=".view.SignUp.SignUpActivity"
             android:exported="false" />
@@ -44,21 +46,6 @@
         <activity
             android:name=".view.MyPage.Splash.StartActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-
-<!--                &lt;!&ndash; Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" &ndash;&gt;-->
-<!--                <data-->
-<!--                    android:host="oauth"-->
-<!--                    android:scheme="kakaob3be3ef965add985a1b3f7aa438b633c" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
     </application>
 
 </manifest>

@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.Recipe.RecipeDetailActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/recipe_detail_tb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/recipe_toolbar"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ToolbarColoredBackArrow"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:menu="@menu/recipe_detail_menu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+        </androidx.appcompat.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/recipe_detail_food_iv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/food_exp1"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"/>
+
+        <TextView
+            android:id="@+id/recipe_detail_title_tv"
+            android:layout_margin="15dp"
+            android:text="가는파잡채"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/recipe_detail_food_iv"
+            app:layout_constraintTop_toBottomOf="@+id/recipe_detail_food_iv"/>
+
+        <LinearLayout
+            android:id="@+id/recipe_detail_category_linear"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/recipe_detail_title_tv"
+            app:layout_constraintTop_toBottomOf="@+id/recipe_detail_title_tv">
+
+            <TextView
+                android:id="@+id/recipe_detail_category_tv1"
+                android:text="#한식"
+                android:textColor="@color/gray_light1"
+                android:textSize="12sp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@drawable/textview_rec_border"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/recipe_detail_category_tv2"
+                android:text="#한식"
+                android:textSize="12sp"
+                android:textColor="@color/gray_light1"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/textview_rec_border"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/recipe_detail_view"
+            android:background="@color/gray"
+            android:layout_width="15dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="@+id/recipe_detail_category_linear"
+            app:layout_constraintTop_toBottomOf="@+id/recipe_detail_category_linear" />
+
+        <TextView
+            android:id="@+id/recipe_detail_introduce_tv"
+            android:textColor="@color/gray"
+            android:text="가는파로 잡채 요리 한번 해볼까요?"
+            android:textSize="14sp"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/recipe_detail_view"
+            app:layout_constraintTop_toBottomOf="@+id/recipe_detail_view" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/recipe_detail_carview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="15dp"
+            android:layout_marginRight="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/recipe_detail_introduce_tv"
+            app:layout_constraintTop_toBottomOf="@+id/recipe_detail_introduce_tv">
+
+            <LinearLayout
+                android:weightSum="4"
+                android:orientation="horizontal"
+                android:background="@color/orange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:id="@+id/recipe_detail_carview_linear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/timer_white" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="약 40분"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_weight="0.5"
+                    android:id="@+id/horizontal"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="|"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/recipe_detail_carview_linear"
+                    app:layout_constraintStart_toEndOf="@+id/recipe_detail_carview_linear"
+                    app:layout_constraintTop_toTopOf="@+id/recipe_detail_carview_linear" />
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:id="@+id/recipe_detail_carview_linear1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/horizontal"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/timer_white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="보통"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_weight="0.5"
+                    android:id="@+id/horizontal1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="|"
+                    android:textColor="@color/white"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/recipe_detail_carview_linear1"
+                    app:layout_constraintStart_toEndOf="@+id/recipe_detail_carview_linear1"
+                    app:layout_constraintTop_toTopOf="@+id/recipe_detail_carview_linear1" />
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:id="@+id/recipe_detail_carview_linear2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/horizontal"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/timer_white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="100kcal"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/recipe_detail_tl"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/recipe_detail_carview"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tabIndicatorColor="@color/orange"
+            app:tabIndicatorFullWidth="true"
+            app:tabSelectedTextColor="@color/orange"
+            app:tabTextColor="@color/gray"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="재료" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="순서 및 후기" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="참고 영상" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recipe_detail_tl"
+            app:layout_constraintStart_toStartOf="@+id/recipe_detail_tl"
+            app:layout_constraintEnd_toEndOf="@+id/recipe_detail_tl"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
