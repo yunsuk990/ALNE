@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/item_review_iv"
+        android:src="@drawable/bibimbap"
+        android:background="@drawable/food_image_border"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/item_review_nickname"
+        android:text="닉네임"
+        android:layout_marginStart="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/item_review_iv"
+        app:layout_constraintTop_toTopOf="@+id/item_review_iv"/>
+
+    <ImageView
+        android:id="@+id/item_review_start1"
+        android:src="@drawable/star"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toEndOf="@+id/item_review_nickname"
+        app:layout_constraintTop_toTopOf="@+id/item_review_nickname"
+        app:layout_constraintBottom_toBottomOf="@+id/item_review_nickname"/>
+    <ImageView
+        android:id="@+id/item_review_start2"
+        android:src="@drawable/star"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        app:layout_constraintStart_toEndOf="@+id/item_review_start1"
+        app:layout_constraintTop_toTopOf="@+id/item_review_start1"
+        app:layout_constraintBottom_toBottomOf="@+id/item_review_start1"/>
+    <ImageView
+        android:id="@+id/item_review_start3"
+        android:src="@drawable/star"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        app:layout_constraintStart_toEndOf="@+id/item_review_start2"
+        app:layout_constraintTop_toTopOf="@+id/item_review_start2"
+        app:layout_constraintBottom_toBottomOf="@+id/item_review_start2"/>
+    <ImageView
+        android:id="@+id/item_review_start4"
+        android:src="@drawable/star"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        app:layout_constraintStart_toEndOf="@+id/item_review_start3"
+        app:layout_constraintTop_toTopOf="@+id/item_review_start3"
+        app:layout_constraintBottom_toBottomOf="@+id/item_review_start3"/>
+    <ImageView
+        android:id="@+id/item_review_start5"
+        android:src="@drawable/star"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        app:layout_constraintStart_toEndOf="@+id/item_review_start4"
+        app:layout_constraintTop_toTopOf="@+id/item_review_start4"
+        app:layout_constraintBottom_toBottomOf="@+id/item_review_start4"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5"
+        android:layout_marginStart="3dp"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/item_review_start5"
+        app:layout_constraintStart_toEndOf="@+id/item_review_start5"
+        app:layout_constraintTop_toTopOf="@+id/item_review_start5" />
+
+    <TextView
+        android:id="@+id/item_review_summary"
+        android:text="너무 맛있었어요"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/item_review_nickname"
+        app:layout_constraintTop_toBottomOf="@+id/item_review_nickname"/>
+
+    <TextView
+        android:id="@+id/item_review_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:layout_marginTop="8dp"
+        android:text="23.11.27"
+        app:layout_constraintStart_toStartOf="@+id/item_review_summary"
+        app:layout_constraintTop_toBottomOf="@+id/item_review_summary" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/food_exp1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
