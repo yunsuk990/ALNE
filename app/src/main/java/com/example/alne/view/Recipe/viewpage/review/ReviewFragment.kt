@@ -10,10 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.alne.R
 import com.example.alne.databinding.FragmentReviewBinding
 import com.example.alne.model.Order
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class ReviewFragment : Fragment() {
     lateinit var binding: FragmentReviewBinding
+    lateinit var reviewAdapter: ReviewVPAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -22,11 +24,12 @@ class ReviewFragment : Fragment() {
 
         var starView = layoutInflater.inflate(R.layout.layout_tab_star, null)
         var reviewView = layoutInflater.inflate(R.layout.layout_tab_review, null)
-        var list = arrayListOf(starView, reviewView)
+        var list = arrayListOf(reviewView, starView)
         starView.findViewById<TextView>(R.id.recipe_star_title).text = "평점"
         binding.recipeReviewTl.addTab(binding.recipeReviewTl.newTab().setCustomView(starView))
         binding.recipeReviewTl.addTab(binding.recipeReviewTl.newTab().setCustomView(reviewView))
-        binding.recipeReviewVp.adapter = ReviewVPAdapter(this)
+        reviewAdapter = ReviewVPAdapter(this)
+        binding.recipeReviewVp.adapter = reviewAdapter
         TabLayoutMediator(binding.recipeReviewTl, binding.recipeReviewVp){
                 tap, position ->
             tap.customView = list[position]

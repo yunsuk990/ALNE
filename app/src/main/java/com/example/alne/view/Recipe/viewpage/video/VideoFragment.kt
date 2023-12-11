@@ -17,4 +17,9 @@ class VideoFragment : Fragment() {
         binding = FragmentVideoBinding.inflate(layoutInflater)
         return binding.root
     }
+
+    override fun onResume() {
+        super.onResume()
+        binding.root.requestLayout()
+    }
 }

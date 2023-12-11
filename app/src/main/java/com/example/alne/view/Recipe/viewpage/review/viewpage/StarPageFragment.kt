@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.alne.databinding.FragmentStarPageBinding
+import com.example.alne.view.Recipe.viewpage.review.ReviewFragment
 
 class StarPageFragment : Fragment() {
 
@@ -20,6 +21,8 @@ class StarPageFragment : Fragment() {
         return binding.root
     }
 
-
-
+    override fun onResume() {
+        super.onResume()
+        binding.root.requestLayout()
+    }
 }

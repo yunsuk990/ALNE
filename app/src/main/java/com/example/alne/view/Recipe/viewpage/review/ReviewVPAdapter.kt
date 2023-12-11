@@ -11,8 +11,8 @@ class ReviewVPAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = 2
     override fun createFragment(position: Int): Fragment {
         return when(position){
-            0 -> StarPageFragment()
-            else -> ReviewPageFragment()
+            0 -> ReviewPageFragment()
+            else -> StarPageFragment()
         }
     }
 }

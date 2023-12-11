@@ -10,7 +10,7 @@
         android:id="@+id/recipe_review_rv"
         android:nestedScrollingEnabled="false"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         tools:listitem="@layout/item_order"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toBottomOf="@+id/recipe_review_rv"
         android:background="@color/gray_light"
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="15dp"/>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/recipe_review_tl"

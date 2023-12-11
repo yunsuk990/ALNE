@@ -19,12 +19,8 @@ class RecipeDetailActivity : AppCompatActivity() {
         binding = ActivityRecipeDetailBinding.inflate(layoutInflater)
         binding.recipeDetailTb.bringToFront()
         setContentView(binding.root)
-
-
         init()
         setOnClickListener()
-
-
     }
     private fun init(){
         val recipeAdapter = RecipeDetailVPAdapter(this@RecipeDetailActivity)

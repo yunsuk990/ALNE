@@ -23,6 +23,11 @@ class RecipeFragment : Fragment() {
             startActivity(Intent(requireContext(), RecipeDetailActivity::class.java))
         }
 
+        binding.recipeDjIb.setOnClickListener {
+            val bottomSheet = ClassFragment()
+            bottomSheet.show(requireActivity().supportFragmentManager, bottomSheet.tag )
+        }
+
 
         val items = ArrayList<Recipe>()
         items.add(Recipe("라면", "--", "라면", "일식", "40분", "40분", "보통", "11"))

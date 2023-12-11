@@ -221,7 +221,6 @@
         android:id="@+id/cancel_bt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/button_border2"
@@ -234,10 +233,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/food_expire_title_tv"
         app:layout_goneMarginBottom="30dp" />
-
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
