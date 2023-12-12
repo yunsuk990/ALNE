@@ -11,6 +11,18 @@ import com.example.alne.model.Recipe
 
 class RecipeGVAdapter(val context: Context, val items: ArrayList<Recipe>): BaseAdapter() {
 
+
+
+    interface setOnClickListener {
+        fun clickItem(recipe: Recipe)
+    }
+
+    private lateinit var myItemClickListener: setOnClickListener
+
+    fun setMyItemClickListener(itemClickListener: setOnClickListener){
+        myItemClickListener = itemClickListener
+    }
+
     override fun getCount(): Int = items.size
 
     override fun getItem(p0: Int): Any {
@@ -26,6 +38,9 @@ class RecipeGVAdapter(val context: Context, val items: ArrayList<Recipe>): BaseA
         view.findViewById<TextView>(R.id.item_recipe_title_tv).text = items[p0].name
         view.findViewById<TextView>(R.id.item_recipe_time_tv).text = items[p0].time
         view.findViewById<TextView>(R.id.item_recipe_rank_tv).text = items[p0].difficulty
+        view.setOnClickListener{
+            myItemClickListener.clickItem(items[p0])
+        }
 //        binding.itemRecipeIv.setImageResource(items[p0].imageURL)
         return view
     }
