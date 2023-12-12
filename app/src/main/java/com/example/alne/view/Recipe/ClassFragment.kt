@@ -1,6 +1,7 @@
 package com.example.alne.view.Recipe
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,11 @@ class ClassFragment : BottomSheetDialogFragment(){
         savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentClassBinding.inflate(layoutInflater)
+        setOnClickListener()
+        return binding.root
+    }
 
+    private fun setOnClickListener(){
         binding.classKoreanFoodBt.setOnClickListener { it.isSelected = !it.isSelected }
         binding.classJapanFoodBt.setOnClickListener { it.isSelected = !it.isSelected }
         binding.classChinaFoodBt.setOnClickListener { it.isSelected = !it.isSelected }
@@ -57,8 +62,62 @@ class ClassFragment : BottomSheetDialogFragment(){
         binding.classBeanBt.setOnClickListener { it.isSelected = !it.isSelected }
         binding.classEtcBt.setOnClickListener { it.isSelected = !it.isSelected }
         binding.classVegetablesBt.setOnClickListener { it.isSelected = !it.isSelected }
+        binding.classResetBt.setOnClickListener {
+            binding.classKoreanFoodBt.isSelected = false
+            binding.classJapanFoodBt.isSelected = false
+            binding.classChinaFoodBt.isSelected = false
+            binding.classItalyFoodBt.isSelected = false
+            binding.classAsianfoodBt.isSelected = false
+            binding.classFishBt.isSelected = false
+            binding.classStirFryBt.isSelected = false
+            binding.classPizzaBt.isSelected = false
+            binding.classSteamedBt.isSelected = false
+            binding.classHotpotBt.isSelected = false
+            binding.classSaladBt.isSelected = false
+            binding.classNoodleBt.isSelected = false
+            binding.classRiceCakeBt.isSelected = false
+            binding.classSeasoningSauceBt.isSelected = false
+            binding.classRiceBt.isSelected = false
+            binding.classSoupBt.isSelected = false
+            binding.classPancakeBt.isSelected = false
+            binding.classBreadBt.isSelected = false
+            binding.classRisottoBt.isSelected = false
+            binding.classFriedFoodBt.isSelected = false
+            binding.classLunchBt.isSelected = false
+            binding.classKimchiBt.isSelected = false
+            binding.classItalianBt.isSelected = false
+            binding.classAfforestationBt.isSelected = false
+            binding.classBeverageBt.isSelected = false
+            binding.classBurgerBt.isSelected = false
+            binding.classGrains1Bt.isSelected = false
+            binding.classVegeBt.isSelected = false
+            binding.classMushroomBt.isSelected = false
+            binding.classSeaweedBt.isSelected = false
+            binding.classNutsBt.isSelected = false
+            binding.classBeefBt.isSelected = false
+            binding.classPigbeefBt.isSelected = false
+            binding.classChickenBeefBt.isSelected = false
+            binding.classProcessedFoodsBt.isSelected = false
+            binding.classFlourBt.isSelected = false
+            binding.classEggBt.isSelected = false
+            binding.classFish1Bt.isSelected = false
+            binding.classBeanBt.isSelected = false
+            binding.classEtcBt.isSelected = false
+            binding.classVegetablesBt.isSelected = false
+        }
 
+        binding.classSetBt.setOnClickListener {
+            setClass()
+            dismiss()
+        }
 
-        return binding.root
     }
+
+    private fun setClass(){
+
+    }
+
+
+
+
 }

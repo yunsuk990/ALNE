@@ -24,16 +24,22 @@
         app:queryHint="레시피 검색"
         app:voiceIcon="@drawable/add" />
 
-    <ImageButton
+    <androidx.cardview.widget.CardView
         android:id="@+id/recipe_dj_ib"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_margin="15dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitXY"
-        android:src="@drawable/dj"
+        app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:scaleType="fitXY"
+            android:src="@drawable/dj" />
+    </androidx.cardview.widget.CardView>
+
 
     <HorizontalScrollView
         android:id="@+id/recipe_menu_sv"

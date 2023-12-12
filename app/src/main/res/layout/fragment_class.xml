@@ -873,13 +873,13 @@
         android:text="초기화"
         android:textStyle="bold"
         android:textColor="@color/blue"
-        app:layout_constraintEnd_toStartOf="@+id/appCompatButton"
+        app:layout_constraintEnd_toStartOf="@+id/class_set_bt"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/class_vegetables_bt" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/appCompatButton"
+        android:id="@+id/class_set_bt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
