@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.alne.databinding.ActivitySignUpBinding
 import com.example.alne.view.Login.LoginActivity
+import com.example.alne.viewmodel.SignUpViewModel
 import com.example.flo.Network.AuthApi
 import com.example.flo.Network.AuthResponse
 import com.example.flo.Network.getRetrofit
@@ -18,54 +21,42 @@ import retrofit2.Retrofit
 
 class SignUpActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivitySignUpBinding
-    lateinit var retrofit: Retrofit
+    private lateinit var binding: ActivitySignUpBinding
+    private lateinit var viewModel: SignUpViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
-        retrofit = getRetrofit()
         setContentView(binding.root)
 
-        binding.signUpLoginBt.setOnClickListener {
-            if(binding.signUpNameEt.text?.isNotEmpty()!! || binding.signUpEmailEt.text?.isNotEmpty()!! || binding.signUpPasswordEt.text?.isNotEmpty()!! || binding.signUpPasswordVerifyEt.text?.isNotEmpty()!!){
-                if(binding.signUpPasswordEt.text.toString() == binding.signUpPasswordVerifyEt.text.toString()){
-                    signUp()
-                }else{
-                    Toast.makeText(this, "비밀번호가 다릅니다.", Toast.LENGTH_LONG).show()
+        viewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
+        viewModel.signUpRespond.observe(this, Observer { res ->
+            when(res?.status){
+                200 -> {
+                    Toast.makeText(this@SignUpActivity, "회원가입했습니다.",Toast.LENGTH_LONG).show()
+                    startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
                 }
-            }else{
-                Toast.makeText(this, "빈칸을 채워주세요.", Toast.LENGTH_LONG).show()
+                401 -> {
+                    Toast.makeText(this@SignUpActivity, "동일한 아이디가 존재합니다.", Toast.LENGTH_LONG).show()
+                }
             }
+        })
+
+        binding.signUpLoginBt.setOnClickListener {
+            checkSignUp()
         }
-
     }
 
-    private fun signUp(){
-        retrofit.create(AuthApi::class.java).signUp(User(binding.signUpNameEt.text.toString(), binding.signUpPasswordEt.text.toString()))
-            .enqueue(object: Callback<AuthResponse>{
-                override fun onResponse(
-                    call: Call<AuthResponse>,
-                    response: Response<AuthResponse>,
-                ) {
-                    if(response.isSuccessful){
-                        var res = response.body()
-                        when(res?.status){
-                            200 -> {
-                                Toast.makeText(this@SignUpActivity, "회원가입했습니다.",Toast.LENGTH_LONG).show()
-                                startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
-                            }
-                            401 -> {
-                                Toast.makeText(this@SignUpActivity, "동일한 아이디가 존재합니다.", Toast.LENGTH_LONG).show()
-                            }
-                        }
-                        Log.d("signUp_success", res.toString())
-                    }
-                }
-
-                override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
-                    Log.d("signUp_failure", t.message.toString())
-                }
-
-            })
+    private fun checkSignUp(){
+        if(binding.signUpNameEt.text?.isNotEmpty()!! || binding.signUpEmailEt.text?.isNotEmpty()!! || binding.signUpPasswordEt.text?.isNotEmpty()!! || binding.signUpPasswordVerifyEt.text?.isNotEmpty()!!){
+            if(binding.signUpPasswordEt.text.toString() == binding.signUpPasswordVerifyEt.text.toString()){
+                viewModel.signUp(User(binding.signUpEmailEt.text.toString(), binding.signUpPasswordEt.text.toString()))
+            }else{
+                Toast.makeText(this, "비밀번호가 다릅니다.", Toast.LENGTH_LONG).show()
+            }
+        }else{
+            Toast.makeText(this, "빈칸을 채워주세요.", Toast.LENGTH_LONG).show()
+        }
     }
+
+
 }

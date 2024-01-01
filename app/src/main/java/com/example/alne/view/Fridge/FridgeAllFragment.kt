@@ -40,17 +40,6 @@ class FridgeAllFragment : Fragment() {
         binding = FragmentFridgeAllBinding.inflate(inflater, container, false)
 
 
-
-        var testData = ArrayList<Food>().apply {
-//            add(Food("사과",0,null,null,"2023-12-20까지"))
-//            add(Food("바나나",0,null,null,"2023-11-20까지"))
-//            add(Food("당근",0,null,null,"2023-12-230까지"))
-//            add(Food("오이",0,null,null,"2023-11-26까지"))
-//            add(Food("오이",0,null,null,"2023-11-26까지"))
-//            add(Food("오이",0,null,null,"2023-11-26까지"))
-//            add(Food("오이",0,null,null,"2023-11-26까지"))
-//            add(Food("오이",0,null,null,"2023-11-26까지"))
-        }
         fridgeadapter = FridgeAdapter()
         binding.fridgeAllRv.adapter = fridgeadapter
         binding.fridgeAllRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false )
@@ -89,21 +78,6 @@ class FridgeAllFragment : Fragment() {
         getFridgeFood()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        Log.d("FridgeAllFragment", "onViewCreated")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d("FridgeAllFragment", "onDestroyView")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("FridgeAllFragment", "onDestroy")
-    }
-
     fun getFridgeFood(){
         retrofit = getRetrofit()
         retrofit.create(FridgeApi::class.java).getFridgeFood(getUserToken()).enqueue(object:
@@ -132,6 +106,8 @@ class FridgeAllFragment : Fragment() {
                             Log.d("getFridgeFood", fridge[0].toString())
                         }
                     }
+                }else{
+                    Log.d("getFridgeFood", response.body().toString())
                 }
             }
 
@@ -169,9 +145,9 @@ class FridgeAllFragment : Fragment() {
     }
 
     fun getUserToken(): Int{
-        val sharedPreferences = activity?.getSharedPreferences("user_token", AppCompatActivity.MODE_PRIVATE)
+        val sharedPreferences = activity?.getSharedPreferences("user_info", AppCompatActivity.MODE_PRIVATE)
         val userToken = sharedPreferences?.getInt("userId", 0)!!
-        Log.d("getUserToken", userToken.toString())
+        Log.d("userId", userToken.toString())
         return userToken
     }
 

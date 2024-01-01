@@ -21,7 +21,7 @@
         <activity
             android:name=".view.Recipe.RecipeDetailActivity"
             android:exported="false" />
-        <activity
+        <activity   
             android:name=".view.Fridge.FoodActivity"
             android:exported="false" />
         <activity

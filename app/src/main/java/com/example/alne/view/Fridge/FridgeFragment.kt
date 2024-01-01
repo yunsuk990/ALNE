@@ -135,7 +135,7 @@ class FridgeFragment : Fragment() {
 
         override fun onResume() {
             super.onResume()
-            dialogFragmentResize(context!!, this, 1f, 0.7f)
+            dialogFragmentResize(requireContext(), this, 1f, 0.7f)
         }
         fun dialogFragmentResize(context: Context, dialogFragment: DialogFragment, width: Float, height: Float) {
             val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
@@ -160,7 +160,9 @@ class FridgeFragment : Fragment() {
 
     fun addFridgeData(title: String, exp: String?, memo: String?, storage: String){
         retrofit = getRetrofit()
-        retrofit.create(FridgeApi::class.java).addFridgeFood(Food(getUserToken(), title,exp,memo,storage, null)).enqueue(object: Callback<FridgePostResponse> {
+        var jwt = getUserToken()
+//        Log.d("jwt", jwt.toString())
+        retrofit.create(FridgeApi::class.java).addFridgeFood(Food(jwt, title,exp,memo,storage, null)).enqueue(object: Callback<FridgePostResponse> {
             override fun onResponse(
                 call: Call<FridgePostResponse>,
                 response: Response<FridgePostResponse>,
@@ -186,27 +188,9 @@ class FridgeFragment : Fragment() {
         })
     }
 
-
-
-
-    override fun onStart() {
-        Log.d("FridgeFragment", "onStart()")
-        super.onStart()
-    }
-    override fun onPause() {
-        Log.d("FridgeFragment", "onPause()")
-        super.onPause()
-    }
-
-    override fun onDestroyView() {
-        Log.d("FridgeFragment", "onDestroyView()")
-        super.onDestroyView()
-    }
-
     fun getUserToken(): Int{
-        val sharedPreferences = activity?.getSharedPreferences("user_token", AppCompatActivity.MODE_PRIVATE)
+        val sharedPreferences = activity?.getSharedPreferences("user_info", AppCompatActivity.MODE_PRIVATE)
         val userToken = sharedPreferences?.getInt("userId", 0)!!
-        Log.d("getUserToken", userToken.toString())
         return userToken
     }
 }
