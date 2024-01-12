@@ -3,28 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/foodDialog"
+    android:background="@drawable/dialog_border"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".view.Fridge.FoodActivity">
 
 
-    <ImageView
+    <androidx.cardview.widget.CardView
         android:id="@+id/food_image_iv"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/food_image_border"
-        android:src="@drawable/bibimbap"
+        android:src="@drawable/add_black"
+        app:cardCornerRadius="100dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:src="@drawable/add_black" />
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/food_name_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
         android:text="재료 이름"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -53,6 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:editable="false"
+            android:clickable="false"
             android:text="소고기"
             android:textColor="@color/black"
             android:textSize="15sp" />
@@ -62,7 +71,7 @@
         android:id="@+id/food_memo_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:text="메모"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -90,7 +99,8 @@
             android:id="@+id/food_memo_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="국거리용 소고기\n구이용 소고기 등등"
+            android:hint="메모 작성.."
+            android:lines="3"
             android:textColor="@color/black"
             android:textSize="15sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -110,19 +120,19 @@
         android:id="@+id/spinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:background="@drawable/spinner_background"
         android:spinnerMode="dropdown"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="@+id/food_storage_title_tv"
         app:layout_constraintStart_toEndOf="@+id/food_memo_tl"
         app:layout_constraintStart_toStartOf="@+id/food_storage_title_tv"
-        app:layout_constraintTop_toBottomOf="@+id/food_storage_title_tv" />
+        app:layout_constraintTop_toTopOf="@+id/food_memo_tl" />
 
     <TextView
         android:id="@+id/food_expire_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="유통기한"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -205,34 +215,36 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginBottom="20dp"
         android:background="@drawable/button_borde_blue2"
         android:text="재료추가"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/food_food_name_tl"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/cancel_bt"
-        app:layout_goneMarginBottom="30dp" />
+        app:layout_constraintTop_toBottomOf="@+id/food_add_timepicker_linear" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancel_bt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="20dp"
         android:background="@drawable/button_border2"
         android:text="취소"
         android:textColor="@color/blue"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/submit_bt"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/food_expire_title_tv"
-        app:layout_goneMarginBottom="30dp" />
+        app:layout_constraintTop_toBottomOf="@+id/food_add_datepicker_linear" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

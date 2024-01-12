@@ -18,7 +18,7 @@ class SignUpViewModel: ViewModel() {
     val signUpRespond: LiveData<AuthResponse> = _signUpRespond
 
     fun signUp(user: User){
-        repository.signUp(user).enqueue(object: Callback<AuthResponse> {
+        repository.signUp(user).enqueue(object: Callback<AuthResponse>{
             override fun onResponse(
                 call: Call<AuthResponse>,
                 response: Response<AuthResponse>,
@@ -30,12 +30,7 @@ class SignUpViewModel: ViewModel() {
 
             override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
                 Log.d("signUp_failure", t.message.toString())
-
             }
         })
     }
-
-
-
-
 }

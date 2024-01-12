@@ -1,11 +1,17 @@
 package com.example.alne.view.Fridge
 
 import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Context
+import android.graphics.Color
+import android.graphics.Point
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.PopupMenu
@@ -13,32 +19,35 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.alne.Network.FridgeApi
-import com.example.alne.Network.FridgeGetResponse
 import com.example.alne.R
 import com.example.alne.databinding.FragmentFridgeAllBinding
 import com.example.alne.model.Food
-import com.example.flo.Network.getRetrofit
+import com.example.alne.model.Jwt
+import com.example.alne.model.UserId
+import com.example.alne.viewmodel.FridgeViewModel
 import com.google.android.material.textfield.TextInputEditText
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.google.gson.Gson
 import retrofit2.Retrofit
 
 
-class FridgeAllFragment : Fragment() {
+class FridgeAllFragment : Fragment(), MyCustomDialogDetailInterface {
     lateinit var binding: FragmentFridgeAllBinding
-    val items = arrayListOf<String>("냉장", "냉동")
     lateinit var fridgeadapter: FridgeAdapter
-    lateinit var retrofit: Retrofit
+    lateinit var viewModel: FridgeViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentFridgeAllBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this).get(FridgeViewModel::class.java)
 
+        if(getUserToken() != null){
+            viewModel.getFridgeFood(getUserToken().accessToken!!, UserId(getUserToken().userId))
+        }
 
         fridgeadapter = FridgeAdapter()
         binding.fridgeAllRv.adapter = fridgeadapter
@@ -48,6 +57,7 @@ class FridgeAllFragment : Fragment() {
                 getCustomDialog(food)
             }
 
+            // 보유재료 삭제 기능
             override fun onInfoClick(view: View, position: Int) {
                 val popupBase = view.findViewById<ImageButton>(R.id.item_fridge_delete_ib)
                 val popupMenu = PopupMenu(context, popupBase)
@@ -66,91 +76,29 @@ class FridgeAllFragment : Fragment() {
             }
         })
 
-//        binding.fridgeAllFloatingBt.setOnClickListener {
-//            getCustomDialog(null)
-//        }
+        viewModel.getFridgeLiveData.observe(viewLifecycleOwner, Observer { res ->
+            fridgeadapter.addAllFood(res)
+        })
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-        Log.d("FridgeAllFragment", "onStart")
-        getFridgeFood()
+    private fun getCustomDialog(food: Food){
+        CustomDialogDetail(requireContext(),food, this@FridgeAllFragment).show(requireActivity().supportFragmentManager, "CustomDialog")
+//        if(food != null){
+//            view.rootView.findViewById<TextInputEditText>(R.id.food_title_et).setText(food.name)
+//            view.rootView.findViewById<TextInputEditText>(R.id.food_memo_tv).setText(food.memo)
+//
+//        }
     }
 
-    fun getFridgeFood(){
-        retrofit = getRetrofit()
-        retrofit.create(FridgeApi::class.java).getFridgeFood(getUserToken()).enqueue(object:
-            Callback<FridgeGetResponse> {
-            override fun onResponse(
-                call: Call<FridgeGetResponse>,
-                response: Response<FridgeGetResponse>,
-            ) {
-                Log.d("getFridgeFood", "onSuccess")
-                if(response.isSuccessful) {
-                    var res = response.body()
-                    when(res?.status){
-                        200 -> {
-                            var fridge = res.data
-                            var items: ArrayList<Food> = ArrayList()
-                            for(item in fridge){
-                                var name = item.ingredient.name
-                                var image = item.ingredient.image
-                                var storage = item.storage
-                                var expire = item.exp
-                                var memo = item.memo
-                                var food = Food(null, name, expire, memo, storage, image)
-                                items.add(food)
-                            }
-                            fridgeadapter.addAllFood(items)
-                            Log.d("getFridgeFood", fridge[0].toString())
-                        }
-                    }
-                }else{
-                    Log.d("getFridgeFood", response.body().toString())
-                }
-            }
-
-            override fun onFailure(call: Call<FridgeGetResponse>, t: Throwable) {
-                Log.d("getFridgeFood", t.message.toString())
-            }
-
-        })
-    }
-
-    private fun getCustomDialog(food: Food?){
-        val myAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, items)
-        val layoutInflater = LayoutInflater.from(context)
-        val view = layoutInflater.inflate(R.layout.item_foodadd,  null)
-        val spinner = view.rootView.findViewById<Spinner>(R.id.spinner)
-        spinner.adapter = myAdapter
-        spinner.setSelection(0)
-        if(food != null){
-            view.rootView.findViewById<TextInputEditText>(R.id.food_title_et).setText(food.name)
-            view.rootView.findViewById<TextInputEditText>(R.id.food_memo_tv).setText(food.memo)
-
-        }
-
-        val alertDialog = AlertDialog.Builder(context, R.style.Dialog_food)
-            .setView(view)
-            .create()
-        view.rootView.findViewById<AppCompatButton>(R.id.cancel_bt).setOnClickListener {
-            alertDialog.dismiss()
-        }
-        view.rootView.findViewById<AppCompatButton>(R.id.submit_bt).setOnClickListener {
-//            fridgeadapter.addFood(Food("사과",0,null,null,"2023-12-20까지"))
-            alertDialog.dismiss()
-        }
-        alertDialog.show()
-    }
-
-    fun getUserToken(): Int{
+    fun getUserToken(): Jwt{
         val sharedPreferences = activity?.getSharedPreferences("user_info", AppCompatActivity.MODE_PRIVATE)
-        val userToken = sharedPreferences?.getInt("userId", 0)!!
-        Log.d("userId", userToken.toString())
-        return userToken
+        val userJwt = Gson().fromJson(sharedPreferences?.getString("jwt",null), Jwt::class.java)
+        Log.d("getjwt", userJwt.toString())
+        return userJwt
     }
 
+    override fun onSubmitBtnClicked(food: Food) {
 
-
+    }
 }

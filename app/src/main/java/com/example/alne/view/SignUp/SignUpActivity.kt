@@ -49,7 +49,7 @@ class SignUpActivity : AppCompatActivity() {
     private fun checkSignUp(){
         if(binding.signUpNameEt.text?.isNotEmpty()!! || binding.signUpEmailEt.text?.isNotEmpty()!! || binding.signUpPasswordEt.text?.isNotEmpty()!! || binding.signUpPasswordVerifyEt.text?.isNotEmpty()!!){
             if(binding.signUpPasswordEt.text.toString() == binding.signUpPasswordVerifyEt.text.toString()){
-                viewModel.signUp(User(binding.signUpEmailEt.text.toString(), binding.signUpPasswordEt.text.toString()))
+                viewModel.signUp(User(binding.signUpEmailEt.text.toString(), binding.signUpNameEt.text.toString() ,binding.signUpPasswordEt.text.toString()))
             }else{
                 Toast.makeText(this, "비밀번호가 다릅니다.", Toast.LENGTH_LONG).show()
             }

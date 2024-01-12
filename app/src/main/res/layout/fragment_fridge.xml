@@ -54,7 +54,7 @@
     
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/fridge_vp"
-        android:background="@color/white"
+        android:background="@color/gray_light"
         app:layout_constraintStart_toStartOf="@+id/fridge_tl"
         app:layout_constraintEnd_toEndOf="@+id/fridge_tl"
         app:layout_constraintTop_toBottomOf="@+id/fridge_tl"

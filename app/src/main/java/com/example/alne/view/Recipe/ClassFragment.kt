@@ -19,7 +19,6 @@ class ClassFragment : BottomSheetDialogFragment(){
         setOnClickListener()
         return binding.root
     }
-
     private fun setOnClickListener(){
         binding.classKoreanFoodBt.setOnClickListener { it.isSelected = !it.isSelected }
         binding.classJapanFoodBt.setOnClickListener { it.isSelected = !it.isSelected }
@@ -110,14 +109,8 @@ class ClassFragment : BottomSheetDialogFragment(){
             setClass()
             dismiss()
         }
-
     }
-
     private fun setClass(){
 
     }
-
-
-
-
 }

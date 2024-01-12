@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -20,6 +21,10 @@ import com.example.flo.Network.AuthResponse
 import com.example.flo.Network.getRetrofit
 import com.example.flo.model.User
 import com.google.gson.Gson
+import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.common.model.ClientError
+import com.kakao.sdk.common.model.ClientErrorCause
+import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -42,20 +47,41 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+
+        //일반 유저 로그인 성공 여부
         viewModel.loginRespond.observe(this, Observer { res ->
             when(res?.status) {
                 200 -> {
                     Toast.makeText(this@LoginActivity, "로그인", Toast.LENGTH_LONG).show()
-                    saveJwt(res.data)
+                    saveJwt(res.data!!)
+                    Log.d("loginRespond", res.data.toString())
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                 }
                 401 -> {
-//                    if(res.data == 10){
-//                        Toast.makeText(this@LoginActivity, "비밀번호가 틀렸습니다", Toast.LENGTH_LONG).show()
-//                    }
-//                    if(res.data == 0) {
-//                        Toast.makeText(this@LoginActivity, "아이디가 존재하지 않습니다", Toast.LENGTH_LONG).show()
-//                    }
+                    Toast.makeText(this@LoginActivity, "아이디 또는 비밀번호가 틀렸습니다", Toast.LENGTH_LONG).show()
+                }
+            }
+            binding.loginPb.visibility = View.INVISIBLE
+        })
+
+
+        //카카오 로그인 성공 여부
+        viewModel.kakaoRespond.observe(this, Observer { token ->
+            Log.d("kakao_token", token.toString())
+            if(token != null){
+                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            }
+        })
+
+        //카카오 유저 정보 서버와 통신 성공 여부
+        viewModel.kakaoMyServerRespond.observe(this, Observer { res ->
+            when(res.status){
+                200 -> {
+                    Toast.makeText(this@LoginActivity, "카카오톡 회원가입 성공", Toast.LENGTH_LONG).show()
+                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                }
+                401 -> {
+                    Toast.makeText(this@LoginActivity, "카카오톡 회원가입 실패", Toast.LENGTH_LONG).show()
                 }
             }
         })
@@ -86,54 +112,22 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.loginKakaoBt.setOnClickListener {
-//            kakaoLogin()
+            viewModel.kakaoLogin()
         }
 
         binding.loginGoogleBt.setOnClickListener {
-            UserApiClient.instance.me { user, error ->
-                Log.d("kakao_nickname", user?.kakaoAccount?.name.toString() )
-                Log.d("kakao_age", user?.kakaoAccount?.profile?.nickname.toString() )
-                Log.d("kakao_email", user?.kakaoAccount?.profile?.profileImageUrl.toString() )
-            }
+
         }
 
         binding.loginLoginBt.setOnClickListener{
-            viewModel.login(User(binding.loginEmailEt.text.toString(), binding.loginPasswordEt.text.toString()))
+            binding.loginPb.visibility = View.VISIBLE
+            viewModel.login(User(binding.loginEmailEt.text.toString(),null, binding.loginPasswordEt.text.toString()))
         }
+
     }
-
-//    private fun kakaoLogin() {
-//        UserApiClient.instance.loginWithKakaoAccount(this) { token, error ->
-//            if (error != null) {
-//                Log.e("kakao", "로그인 실패", error)
-//            }
-//            else if (token != null) {
-//                Log.i("kakao", "로그인 성공 ${token.accessToken}")
-//
-//                retrofit.create(AuthApi::class.java).accessToken(Token(token.accessToken)).enqueue(object: Callback<AuthResponse>{
-//                    override fun onResponse(
-//                        call: Call<AuthResponse>,
-//                        response: Response<AuthResponse>,
-//                    ) {
-//                        Log.d("kakaoLogin", "SUCCESS")
-//                        Log.d("kakaoLogin", response.body().toString())
-//                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-//                    }
-//
-//                    override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
-//                        Log.d("kakaoLogin", t.message.toString())
-//                    }
-//
-//                })
-//            }
-//        }
-//    }
-
     override fun onResume() {
         super.onResume()
-        val sharedPreferences = getSharedPreferences("login_setting", MODE_PRIVATE)
-        saveId = sharedPreferences.getBoolean("saveId", false)
-        autoLogin = sharedPreferences.getBoolean("autoLogin", false)
+        getLoginSetting()
         if(autoLogin){
             binding.loginAutoLoginIb.setImageResource(R.drawable.checked)
         }else{
@@ -148,6 +142,19 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
+        saveLoginSetting()
+    }
+
+    fun saveJwt(data: Jwt){
+        Log.d("jwt" , data.toString())
+        val sharedPreferences = getSharedPreferences("user_info", AppCompatActivity.MODE_PRIVATE)
+        val edit = sharedPreferences.edit()
+        edit.putString("jwt", Gson().toJson(data))
+        edit.commit()
+    }
+
+    // 자동로그인, 아이디기록 여부 저장
+    fun saveLoginSetting(){
         val sharedPreferences = getSharedPreferences("login_setting", MODE_PRIVATE)
         val edit = sharedPreferences.edit()
         edit.putBoolean("saveId", saveId)
@@ -155,17 +162,9 @@ class LoginActivity : AppCompatActivity() {
         edit.commit()
     }
 
-//    fun autoLogin(){
-//        val sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE)
-//        val edit = sharedPreferences.edit()
-//        edit.putString("ID", binding.loginEmailEt.text.toString())
-//        edit.commit()
-//    }
-
-    fun saveJwt(data: Jwt){
-        val sharedPreferences = getSharedPreferences("user_info", AppCompatActivity.MODE_PRIVATE)
-        val edit = sharedPreferences.edit()
-        edit.putString("userId", Gson().toJson(data))
-        edit.commit()
+    fun getLoginSetting(){
+        val sharedPreferences = getSharedPreferences("login_setting", MODE_PRIVATE)
+        saveId = sharedPreferences.getBoolean("saveId", false)
+        autoLogin = sharedPreferences.getBoolean("autoLogin", false)
     }
 }
