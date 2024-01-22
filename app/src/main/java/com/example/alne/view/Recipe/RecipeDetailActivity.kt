@@ -15,7 +15,7 @@ import com.google.gson.Gson
 class RecipeDetailActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityRecipeDetailBinding
-    private val information = arrayListOf("재료", "순서 및 후기","참고 영상")
+    private val information = arrayListOf("순서 및 후기", "재료","참고 영상")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRecipeDetailBinding.inflate(layoutInflater)

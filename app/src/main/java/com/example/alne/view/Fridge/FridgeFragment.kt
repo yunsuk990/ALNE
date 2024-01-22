@@ -8,12 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.alne.Network.FridgeApi
 import com.example.alne.Network.FridgePostResponse
 import com.example.alne.databinding.FragmentFridgeBinding
 import com.example.alne.model.Food
 import com.example.alne.model.Jwt
+import com.example.alne.model.UserId
 import com.example.alne.viewmodel.FridgeViewModel
 import com.example.flo.Network.getRetrofit
 import com.google.android.material.tabs.TabLayoutMediator
@@ -32,7 +34,7 @@ class FridgeFragment : Fragment(), MyCustomDialogInterface{
         savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentFridgeBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this).get(FridgeViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(FridgeViewModel::class.java)
 
         //ViewPager - TabLayout 연결
         val fridgeAdapter = FridgeVPAdapter(this)
@@ -45,6 +47,7 @@ class FridgeFragment : Fragment(), MyCustomDialogInterface{
         binding.fridgeFloatingBt.setOnClickListener{
             CustomDialogAdd(requireContext(), getUserToken(), this@FridgeFragment).show(requireActivity().supportFragmentManager, "CustomDialog")
         }
+
         return binding.root
     }
 
@@ -57,5 +60,10 @@ class FridgeFragment : Fragment(), MyCustomDialogInterface{
 
     override fun onSubmitBtnClicked(food: Food) {
         viewModel.addFridgeData(getUserToken().accessToken!!, food)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("FridgeFragment", "destroy")
     }
 }

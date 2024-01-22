@@ -21,6 +21,10 @@ class FridgeViewModel: ViewModel() {
     private val _getFridgeLiveData = MutableLiveData<ArrayList<Food>>()
     val getFridgeLiveData: LiveData<ArrayList<Food>> = _getFridgeLiveData
 
+    //재료 등록 성공 여부
+    private val _addFridgeLiveData = MutableLiveData<Boolean>()
+    val addFridgeLiveData: LiveData<Boolean> = _addFridgeLiveData
+
     fun addFridgeData(accessToken: String,food: Food){
         repository.addFridgeData(accessToken,food).enqueue(object: Callback<FridgePostResponse>{
             override fun onResponse(
@@ -35,11 +39,10 @@ class FridgeViewModel: ViewModel() {
                         200 -> {
                             Log.d("addFridgeData", "재료 등록 성공")
                             Log.d("addFridgeData", response.body()?.data.toString())
-
-                            //전체 재료 정보 업데이트
-//                            getFridgeFood(food.userId!!)
+                            _addFridgeLiveData.postValue(true)
                         }
                         401 -> {
+                            _addFridgeLiveData.postValue(true)
                             Log.d("addFridgeData", "재료 등록 실패")
                         }
                     }
@@ -76,7 +79,6 @@ class FridgeViewModel: ViewModel() {
                                 items.add(food)
                             }
                             _getFridgeLiveData.postValue(items)
-                            Log.d("getFridgeFood", fridge[0].toString())
                         }
                     }
                 }else{

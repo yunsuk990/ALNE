@@ -26,6 +26,8 @@ import com.example.alne.model.Jwt
 import com.google.gson.Gson
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
+import kotlin.math.min
 
 class CustomDialogAdd(context: Context, val jwt: Jwt, myCustomDialogInterface: MyCustomDialogInterface): DialogFragment() {
     private lateinit var binding: ItemFoodaddBinding
@@ -41,6 +43,8 @@ class CustomDialogAdd(context: Context, val jwt: Jwt, myCustomDialogInterface: M
     val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
     val time = System.currentTimeMillis()
     val timeFormat = SimpleDateFormat("hh:mm")
+    val date = Date()
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd")
 
     private var myCustomDialogInterface:MyCustomDialogInterface? = null
 
@@ -57,12 +61,12 @@ class CustomDialogAdd(context: Context, val jwt: Jwt, myCustomDialogInterface: M
         binding = ItemFoodaddBinding.inflate(inflater, container, false)
         var hour = timeFormat.format(time).split(":")[0]
         var minute = timeFormat.format(time).split(":")[1]
-        var date: String? = null
-        var time: String? = null
+        var date: String? = dateFormat.format(date).split("-")[0] +"."+ dateFormat.format(date).split("-")[1] +"."+ dateFormat.format(date).split("-")[2]
+        var time: String? = hour +":"+ minute
 
         binding.submitBt.setOnClickListener {
             val title = binding.foodTitleEt.text.toString()
-            Log.d("data", title + " "+ storage)
+            Log.d("time",date + " " + time)
             myCustomDialogInterface?.onSubmitBtnClicked(Food(jwt.userId,title,date + " " + time,binding
                 .foodMemoTv.text.toString(),storage!!,null))
             dismiss()
@@ -91,7 +95,8 @@ class CustomDialogAdd(context: Context, val jwt: Jwt, myCustomDialogInterface: M
         binding.foodAddDatePicker.text = "${year}.${month}.${dayOfMonth}"
         var mDateSetListener = object: DatePickerDialog.OnDateSetListener{
             override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
-                date = "${p1}.${p2}.${p3}"
+                var p4 = p2+1
+                date = "${p1}.${p4}.${p3}"
                 binding.foodAddDatePicker.text = date
             }
         }

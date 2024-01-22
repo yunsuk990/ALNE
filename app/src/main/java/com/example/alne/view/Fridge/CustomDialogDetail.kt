@@ -140,6 +140,8 @@ class CustomDialogDetail(context: Context, val food: Food, myCustomDialogDetailI
     }
 }
 
+
+// 재료 수정하기(편집)
 interface MyCustomDialogDetailInterface {
-    fun onSubmitBtnClicked(food: Food)
+    fun onSubmitBtnDetailClicked(food: Food)
 }

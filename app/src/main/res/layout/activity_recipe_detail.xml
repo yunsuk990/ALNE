@@ -279,12 +279,12 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="재료" />
+                android:text="순서 및 후기" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="순서 및 후기" />
+                android:text="재료" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"

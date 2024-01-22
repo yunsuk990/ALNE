@@ -22,8 +22,9 @@ class FridgeAdapter(): RecyclerView.Adapter<FridgeAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemFridgeBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(food: Food){
+            var date = food.exp!!.split(" ")
             binding.itemFridgeTitleTv.text = food.name
-            binding.itemFridgeExpireTv.text = food.exp
+            binding.itemFridgeExpireTv.text = date[0]+" 까지"
             binding.itemFridgeIv.setImageResource(R.drawable.bibimbap)
         }
     }

@@ -5,8 +5,7 @@
     android:id="@+id/foodDialog"
     android:background="@drawable/dialog_border"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".view.Fridge.FoodActivity">
+    android:layout_height="wrap_content">
 
 
     <androidx.cardview.widget.CardView

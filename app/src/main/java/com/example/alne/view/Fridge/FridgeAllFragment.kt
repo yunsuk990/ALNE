@@ -43,8 +43,9 @@ class FridgeAllFragment : Fragment(), MyCustomDialogDetailInterface {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentFridgeAllBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this).get(FridgeViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(FridgeViewModel::class.java)
 
+        Log.d("FridgeAllFragment", "onCreateView")
         if(getUserToken() != null){
             viewModel.getFridgeFood(getUserToken().accessToken!!, UserId(getUserToken().userId))
         }
@@ -77,18 +78,22 @@ class FridgeAllFragment : Fragment(), MyCustomDialogDetailInterface {
         })
 
         viewModel.getFridgeLiveData.observe(viewLifecycleOwner, Observer { res ->
+            Log.d("getFridge", res.toString())
             fridgeadapter.addAllFood(res)
         })
+
+        viewModel.addFridgeLiveData.observe(viewLifecycleOwner, Observer { res ->
+            if(res){
+                //전체 재료 정보 업데이트
+                viewModel.getFridgeFood(getUserToken().accessToken!!, UserId(getUserToken().userId))
+            }
+        })
+
         return binding.root
     }
 
     private fun getCustomDialog(food: Food){
         CustomDialogDetail(requireContext(),food, this@FridgeAllFragment).show(requireActivity().supportFragmentManager, "CustomDialog")
-//        if(food != null){
-//            view.rootView.findViewById<TextInputEditText>(R.id.food_title_et).setText(food.name)
-//            view.rootView.findViewById<TextInputEditText>(R.id.food_memo_tv).setText(food.memo)
-//
-//        }
     }
 
     fun getUserToken(): Jwt{
@@ -98,7 +103,10 @@ class FridgeAllFragment : Fragment(), MyCustomDialogDetailInterface {
         return userJwt
     }
 
-    override fun onSubmitBtnClicked(food: Food) {
+
+    // 재료 수정하기(편집)
+    override fun onSubmitBtnDetailClicked(food: Food) {
 
     }
+
 }
