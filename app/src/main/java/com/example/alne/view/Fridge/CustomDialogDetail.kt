@@ -19,18 +19,13 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.TimePicker
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.example.alne.databinding.ItemFoodDetailBinding
-import com.example.alne.databinding.ItemFoodaddBinding
 import com.example.alne.model.Food
 import com.example.alne.model.Jwt
-import com.google.gson.Gson
-import java.text.SimpleDateFormat
 import java.util.Calendar
 
-class CustomDialogDetail(context: Context, val food: Food, myCustomDialogDetailInterface: MyCustomDialogDetailInterface): DialogFragment() {
+class CustomDialogDetail(context: Context, val jwt: Jwt, val food: Food, myCustomDialogDetailInterface: MyCustomDialogDetailInterface): DialogFragment() {
     private lateinit var binding: ItemFoodDetailBinding
     var storage: String? = null
     val myAdapter = ArrayAdapter(
@@ -38,12 +33,6 @@ class CustomDialogDetail(context: Context, val food: Food, myCustomDialogDetailI
         R.layout.simple_spinner_dropdown_item,
         arrayListOf("냉장", "냉동")
     )
-    val calendar = Calendar.getInstance()
-    val year = calendar.get(Calendar.YEAR)
-    val month = calendar.get(Calendar.MONTH)
-    val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
-    val time = System.currentTimeMillis()
-    val timeFormat = SimpleDateFormat("hh:mm")
 
     private var myCustomDialogDetailInterface:MyCustomDialogDetailInterface? = null
 
@@ -58,10 +47,15 @@ class CustomDialogDetail(context: Context, val food: Food, myCustomDialogDetailI
         savedInstanceState: Bundle?
     ): View? {
         binding = ItemFoodDetailBinding.inflate(inflater, container, false)
-        var hour = timeFormat.format(time).split(":")[0]
-        var minute = timeFormat.format(time).split(":")[1]
-        var date: String? = null
-        var time: String? = null
+        var dateString: String = food.exp!!
+        var date = dateString.split(" ")[0]
+        var time = dateString.split(" ")[1]
+        var calendar = Calendar.getInstance()
+        calendar.set(Calendar.YEAR, date.split(".")[0].toInt())
+        calendar.set(Calendar.MONTH, date.split(".")[1].toInt())
+        calendar.set(Calendar.DAY_OF_MONTH, date.split(".")[2].toInt())
+        calendar.set(Calendar.HOUR, time.split(":")[0].toInt())
+        calendar.set(Calendar.MINUTE, time.split(":")[1].toInt())
 
         binding.foodTitleEt.setText(food.name)
         binding.foodMemoTv.setText(food.memo)
@@ -69,8 +63,8 @@ class CustomDialogDetail(context: Context, val food: Food, myCustomDialogDetailI
         binding.submitBt.setOnClickListener {
             val title = binding.foodTitleEt.text.toString()
             Log.d("data", title + " "+ storage)
-//            myCustomDialogDetailInterface?.onSubmitBtnClicked(Food(jwt.userId,title,date + " " + time,binding
-//                .foodMemoTv.text.toString(),storage!!,null))
+            myCustomDialogDetailInterface?.onSubmitBtnDetailClicked(Food(jwt.userId,title,date + " " + time,binding
+                .foodMemoTv.text.toString(),storage!!,null))
             dismiss()
         }
 
@@ -94,14 +88,14 @@ class CustomDialogDetail(context: Context, val food: Food, myCustomDialogDetailI
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {}
         }
-        binding.foodAddDatePicker.text = "${year}.${month}.${dayOfMonth}"
+        binding.foodAddDatePicker.text = "${calendar.get(Calendar.YEAR)}.${String.format("%02d",calendar.get(Calendar.MONTH))}.${String.format("%02d",calendar.get(Calendar.DAY_OF_MONTH))}"
         var mDateSetListener = object: DatePickerDialog.OnDateSetListener{
             override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
                 date = "${p1}.${p2}.${p3}"
                 binding.foodAddDatePicker.text = date
             }
         }
-        binding.foodAddTimePicker.text = "${hour}:${minute}"
+        binding.foodAddTimePicker.text = "${String.format("%02d",calendar.get(Calendar.HOUR))}:${String.format("%02d",calendar.get(Calendar.MINUTE))}"
         var mTimeSetListener = object: TimePickerDialog.OnTimeSetListener{
             override fun onTimeSet(p0: TimePicker?, p1: Int, p2: Int) {
                 Log.d("time",p1.toString() + " " + p2.toString())
@@ -111,10 +105,10 @@ class CustomDialogDetail(context: Context, val food: Food, myCustomDialogDetailI
         }
         binding.foodAddDatepickerLinear.setOnClickListener{
             DatePickerDialog(requireContext(),
-                AlertDialog.THEME_HOLO_LIGHT,mDateSetListener, year,month,dayOfMonth).show()
+                AlertDialog.THEME_HOLO_LIGHT,mDateSetListener, calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show()
         }
         binding.foodAddTimepickerLinear.setOnClickListener{
-            TimePickerDialog(requireContext(), AlertDialog.THEME_HOLO_LIGHT, mTimeSetListener, Integer.parseInt(hour),  Integer.parseInt(minute),true).show()
+            TimePickerDialog(requireContext(), AlertDialog.THEME_HOLO_LIGHT, mTimeSetListener, calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE),true).show()
         }
         return binding.root
     }

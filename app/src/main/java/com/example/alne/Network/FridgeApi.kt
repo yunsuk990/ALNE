@@ -4,10 +4,8 @@ import com.example.alne.model.Food
 import com.example.alne.model.UserId
 import retrofit2.Call
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
-import retrofit2.http.Query
 
 interface FridgeApi {
 
@@ -22,5 +20,10 @@ interface FridgeApi {
         @Header("accessToken") accessToken: String,
         @Body userId: UserId
     ): Call<FridgeGetResponse>
+
+    @POST("/delFridge")
+    fun deleteFridgeFood(
+        @Body userId: UserId
+    ): Call<FridgePostResponse>
 
 }

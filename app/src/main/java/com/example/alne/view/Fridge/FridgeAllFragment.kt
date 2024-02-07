@@ -28,14 +28,11 @@ import com.example.alne.model.Food
 import com.example.alne.model.Jwt
 import com.example.alne.model.UserId
 import com.example.alne.viewmodel.FridgeViewModel
-import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.Gson
-import retrofit2.Retrofit
 
 
 class FridgeAllFragment : Fragment(), MyCustomDialogDetailInterface {
     lateinit var binding: FragmentFridgeAllBinding
-    lateinit var fridgeadapter: FridgeAdapter
     lateinit var viewModel: FridgeViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,10 +44,10 @@ class FridgeAllFragment : Fragment(), MyCustomDialogDetailInterface {
 
         Log.d("FridgeAllFragment", "onCreateView")
         if(getUserToken() != null){
-            viewModel.getFridgeFood(getUserToken().accessToken!!, UserId(getUserToken().userId))
+            viewModel.getFridgeFood(getUserToken().accessToken!!, UserId(getUserToken().userId, null))
         }
 
-        fridgeadapter = FridgeAdapter()
+        val fridgeadapter = FridgeAdapter(requireContext())
         binding.fridgeAllRv.adapter = fridgeadapter
         binding.fridgeAllRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false )
         fridgeadapter.setMyItemClickListener(object: FridgeAdapter.MyItemClickListener {
@@ -67,8 +64,10 @@ class FridgeAllFragment : Fragment(), MyCustomDialogDetailInterface {
                     when(m.itemId){
                         R.id.menu_modify -> getCustomDialog(fridgeadapter.items[position])
                         R.id.menu_delete -> {
-                            fridgeadapter.items.removeAt(position)
                             fridgeadapter.notifyDataSetChanged()
+                            viewModel.deleteFridgeFood(UserId( getUserToken().userId,
+                                fridgeadapter.items[position].userId!!
+                            ))
                         }
                     }
                     false
@@ -85,7 +84,14 @@ class FridgeAllFragment : Fragment(), MyCustomDialogDetailInterface {
         viewModel.addFridgeLiveData.observe(viewLifecycleOwner, Observer { res ->
             if(res){
                 //전체 재료 정보 업데이트
-                viewModel.getFridgeFood(getUserToken().accessToken!!, UserId(getUserToken().userId))
+                viewModel.getFridgeFood(getUserToken().accessToken!!, UserId(getUserToken().userId, null))
+            }
+        })
+
+        viewModel.delFridgeLiveData.observe(viewLifecycleOwner, Observer { res ->
+            Log.d("delFridge", res.toString())
+            if (res){
+                viewModel.getFridgeFood(getUserToken().accessToken!!, UserId(getUserToken().userId, null))
             }
         })
 
@@ -93,7 +99,7 @@ class FridgeAllFragment : Fragment(), MyCustomDialogDetailInterface {
     }
 
     private fun getCustomDialog(food: Food){
-        CustomDialogDetail(requireContext(),food, this@FridgeAllFragment).show(requireActivity().supportFragmentManager, "CustomDialog")
+        CustomDialogDetail(requireContext(),getUserToken(),food, this@FridgeAllFragment).show(requireActivity().supportFragmentManager, "CustomDialog")
     }
 
     fun getUserToken(): Jwt{
@@ -106,7 +112,7 @@ class FridgeAllFragment : Fragment(), MyCustomDialogDetailInterface {
 
     // 재료 수정하기(편집)
     override fun onSubmitBtnDetailClicked(food: Food) {
-
+        viewModel.addFridgeData(getUserToken().accessToken!!, food)
     }
 
 }

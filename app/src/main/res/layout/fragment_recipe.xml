@@ -11,34 +11,35 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/searchview_bg"
+        app:queryBackground="@null"
         android:inputType="text"
         android:paddingLeft="-8dp"
         app:goIcon="@drawable/circle"
         app:iconifiedByDefault="false"
-        app:layout_constraintBottom_toBottomOf="@+id/recipe_dj_ib"
-        app:layout_constraintEnd_toStartOf="@+id/recipe_dj_ib"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/recipe_dj_ib"
         app:queryHint="레시피 검색"
         app:voiceIcon="@drawable/add" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/recipe_dj_ib"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="15dp"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:scaleType="fitXY"
-            android:src="@drawable/dj" />
-    </androidx.cardview.widget.CardView>
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/recipe_dj_ib"-->
+<!--        android:layout_width="40dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_margin="15dp"-->
+<!--        app:cardCornerRadius="15dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:scaleType="fitXY"-->
+<!--            android:src="@drawable/dj" />-->
+<!--    </androidx.cardview.widget.CardView>-->
 
 
     <HorizontalScrollView
@@ -169,18 +170,18 @@
 
     </HorizontalScrollView>
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        android:text="한식"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/recipe_menu_sv"
-        app:layout_constraintTop_toBottomOf="@+id/recipe_menu_sv" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView4"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="5dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:text="한식"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/recipe_menu_sv"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/recipe_menu_sv" />-->
 
     <GridView
         android:id="@+id/recipe_gv"
@@ -197,8 +198,8 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:orientation="horizontal"
         tools:listitem="@layout/item_recipe"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintStart_toStartOf="@+id/recipe_menu_sv"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_menu_sv" />
 
 <!--    <HorizontalScrollView-->
 <!--        android:id="@+id/recipe_menu_sv"-->

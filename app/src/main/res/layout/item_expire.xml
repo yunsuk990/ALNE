@@ -55,7 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="8dp"
             android:layout_marginTop="5dp"
-            android:progressDrawable="@drawable/progressbar_border"
+            android:progressDrawable="@drawable/progressbar_border_high"
             app:layout_constraintStart_toStartOf="@+id/expire_date_info_tv"
             app:layout_constraintTop_toBottomOf="@+id/expire_date_info_tv"
             app:layout_constraintEnd_toEndOf="parent"/>

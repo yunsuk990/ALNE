@@ -15,6 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/item_recipe_iv"
             android:layout_width="170dp"
             android:layout_height="140dp"
             android:background="@color/gray"
@@ -36,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/item_recipe_cv" />
 
     <ImageView
-        android:id="@+id/item_recipe_iv"
+        android:id="@+id/item_recipe_rank_iv"
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:src="@drawable/star"
@@ -52,9 +53,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
-        app:layout_constraintStart_toEndOf="@+id/item_recipe_iv"
-        app:layout_constraintTop_toTopOf="@+id/item_recipe_iv"
-        app:layout_constraintBottom_toBottomOf="@+id/item_recipe_iv"/>
+        app:layout_constraintStart_toEndOf="@+id/item_recipe_rank_iv"
+        app:layout_constraintTop_toTopOf="@+id/item_recipe_rank_iv"
+        app:layout_constraintBottom_toBottomOf="@+id/item_recipe_rank_iv"/>
 
     <ImageView
         android:id="@+id/item_recipe_cook_iv"

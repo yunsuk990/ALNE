@@ -14,15 +14,12 @@ import com.example.alne.R
 import com.example.alne.databinding.ItemFridgeBinding
 import com.example.alne.model.Food
 import java.text.SimpleDateFormat
-import java.time.Year
 
-class FridgeAdapter(val context: Context): RecyclerView.Adapter<FridgeAdapter.ViewHolder>() {
-
+class FridgeFrozenAdapter(val context: Context): RecyclerView.Adapter<FridgeFrozenAdapter.ViewHolder>() {
 
     val items: ArrayList<Food> = ArrayList()
     var calendar = Calendar.getInstance()
     init {
-        Log.d("adapter", "1")
         calendar.set(Calendar.HOUR, 0)
         calendar.set(Calendar.MINUTE, 0)
         calendar.set(Calendar.SECOND, 0)
@@ -45,7 +42,6 @@ class FridgeAdapter(val context: Context): RecyclerView.Adapter<FridgeAdapter.Vi
             var sfp = SimpleDateFormat("yyyy.MM.dd")
             var da = sfp.parse(date[0])
             var diff: Long = ((da.time - calendar.time.time)/ (60 * 60 * 24 * 1000))
-            Log.d("diff", diff.toString())
 
             // 유효날짜 - 등록 날짜
             var startExp = 7.0
@@ -107,7 +103,11 @@ class FridgeAdapter(val context: Context): RecyclerView.Adapter<FridgeAdapter.Vi
 
     fun addAllFood(item: ArrayList<Food>){
         items.clear()
-        items.addAll(item)
+        for(food in item){
+            if(food.storage == "FROZEN"){
+                items.add(food)
+            }
+        }
         notifyDataSetChanged()
     }
 

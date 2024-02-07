@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
+import com.bumptech.glide.Glide
 import com.example.alne.R
 import com.example.alne.databinding.ActivityRecipeDetailBinding
 import com.example.alne.model.Recipe
@@ -28,7 +30,12 @@ class RecipeDetailActivity : AppCompatActivity() {
         var recipe: Recipe = Gson().fromJson(intent.getStringExtra("recipe"), Recipe::class.java)
         binding.recipeDetailTitleTv.text = recipe.name
         binding.recipeDetailChefTv.text = recipe.difficulty
-        binding.recipeDetailTimeTv.text = "약 " + recipe.time
+        binding.recipeDetailIntroduceTv.text = recipe.introduce
+        binding.recipeDetailCategoryTv1.text = "#" + recipe.classification
+        binding.recipeDetailTimeTv.text = "약 " + recipe.time + "분"
+        binding.recipeDetailKcalTv.text = recipe.calorie.toString() + "kcal"
+        Glide.with(this@RecipeDetailActivity).load(recipe.imageURL).into(binding.recipeDetailFoodIv)
+
 
         val recipeAdapter = RecipeDetailVPAdapter(this@RecipeDetailActivity)
         binding.recipeDetailVp.adapter = recipeAdapter

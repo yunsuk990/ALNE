@@ -15,6 +15,10 @@
     <color name="gray">#939293</color>
     <color name="gray_light">#F1F1F1</color>
     <color name="gray_light1">#B1B1B1</color>
-    <color name="recipe_toolbar">#E6819994</color>
+    <color name="recipe_toolbar">#E6D94216</color>
     <color name="orange">#D94216</color>
+    <color name="green">#00FF1A</color>
+    <color name="pb_low_high">#FFD500</color>
+    <color name="pb_high_low">#FF9900</color>
+
 </resources>

@@ -1,17 +1,20 @@
 package com.example.alne.view.Recipe
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.example.alne.R
 import com.example.alne.model.Recipe
 
-class RecipeGVAdapter(val context: Context, val items: ArrayList<Recipe>): BaseAdapter() {
+class RecipeGVAdapter(val context: Context): BaseAdapter() {
 
-
+    val items: ArrayList<Recipe> = ArrayList()
 
     interface setOnClickListener {
         fun clickItem(recipe: Recipe)
@@ -36,12 +39,19 @@ class RecipeGVAdapter(val context: Context, val items: ArrayList<Recipe>): BaseA
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.item_recipe, null)
         view.findViewById<TextView>(R.id.item_recipe_title_tv).text = items[p0].name
-        view.findViewById<TextView>(R.id.item_recipe_time_tv).text = items[p0].time
+        view.findViewById<TextView>(R.id.item_recipe_time_tv).text = "약 " + items[p0].time + "분"
         view.findViewById<TextView>(R.id.item_recipe_rank_tv).text = items[p0].difficulty
+        Glide.with(context).load(items[p0].imageURL).into(view.findViewById<ImageView>(R.id.item_recipe_iv))
         view.setOnClickListener{
             myItemClickListener.clickItem(items[p0])
         }
 //        binding.itemRecipeIv.setImageResource(items[p0].imageURL)
         return view
+    }
+    fun addItems(item: ArrayList<Recipe>){
+        items.clear()
+        items.addAll(item)
+        notifyDataSetChanged()
+        Log.d("items", items.toString())
     }
 }

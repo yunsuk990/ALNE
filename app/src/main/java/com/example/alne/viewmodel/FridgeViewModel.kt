@@ -25,6 +25,11 @@ class FridgeViewModel: ViewModel() {
     private val _addFridgeLiveData = MutableLiveData<Boolean>()
     val addFridgeLiveData: LiveData<Boolean> = _addFridgeLiveData
 
+
+    //재료 삭제 성공 여부
+    private val _delFridgeLiveData = MutableLiveData<Boolean>()
+    val delFridgeLiveData: LiveData<Boolean> = _delFridgeLiveData
+
     fun addFridgeData(accessToken: String,food: Food){
         repository.addFridgeData(accessToken,food).enqueue(object: Callback<FridgePostResponse>{
             override fun onResponse(
@@ -90,6 +95,33 @@ class FridgeViewModel: ViewModel() {
                 Log.d("getFridgeFood", t.message.toString())
             }
 
+        })
+    }
+
+    fun deleteFridgeFood(userId: UserId){
+        repository.deleteFridgeFood(userId).enqueue(object: Callback<FridgePostResponse>{
+            override fun onResponse(
+                call: Call<FridgePostResponse>,
+                response: Response<FridgePostResponse>,
+            ) {
+                var res = response.body()
+                Log.d("deleteFridgeFood", "onSuccess")
+                Log.d("deleteFridgeFood", res.toString())
+                if(response.isSuccessful){
+                    when(res?.status){
+                        200 -> {
+                            _delFridgeLiveData.postValue(true)
+                        }
+                        else -> {
+                            _delFridgeLiveData.postValue(false)
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<FridgePostResponse>, t: Throwable) {
+                _delFridgeLiveData.postValue(false)
+            }
         })
     }
 }
