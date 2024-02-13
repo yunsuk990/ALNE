@@ -92,7 +92,7 @@ class CustomDialogAdd(context: Context, val jwt: Jwt, myCustomDialogInterface: M
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {}
         }
-        binding.foodAddDatePicker.text = "${year}.${month}.${dayOfMonth}"
+        binding.foodAddDatePicker.text = "${year}.${month+1}.${dayOfMonth}"
         var mDateSetListener = object: DatePickerDialog.OnDateSetListener{
             override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
                 var p4 = p2+1

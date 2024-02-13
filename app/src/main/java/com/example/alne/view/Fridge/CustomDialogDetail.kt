@@ -91,7 +91,7 @@ class CustomDialogDetail(context: Context, val jwt: Jwt, val food: Food, myCusto
         binding.foodAddDatePicker.text = "${calendar.get(Calendar.YEAR)}.${String.format("%02d",calendar.get(Calendar.MONTH))}.${String.format("%02d",calendar.get(Calendar.DAY_OF_MONTH))}"
         var mDateSetListener = object: DatePickerDialog.OnDateSetListener{
             override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
-                date = "${p1}.${p2}.${p3}"
+                date = "${p1}.${p2+1}.${p3}"
                 binding.foodAddDatePicker.text = date
             }
         }

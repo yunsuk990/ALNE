@@ -1,34 +1,39 @@
 package com.example.alne.viewmodel
 
+import android.app.Application
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.alne.Network.FridgeGetResponse
 import com.example.alne.Network.FridgePostResponse
 import com.example.alne.model.Food
+import com.example.alne.model.Jwt
 import com.example.alne.model.UserId
+import com.example.alne.repository.fridgeRepository
 import com.example.alne.repository.repository
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FridgeViewModel: ViewModel() {
+class FridgeViewModel(private val application: Application) : AndroidViewModel(application) {
 
-    private val repository = repository()
+    private val repository = fridgeRepository()
 
     //재료 등록 정보
     private val _getFridgeLiveData = MutableLiveData<ArrayList<Food>>()
     val getFridgeLiveData: LiveData<ArrayList<Food>> = _getFridgeLiveData
 
-    //재료 등록 성공 여부
-    private val _addFridgeLiveData = MutableLiveData<Boolean>()
-    val addFridgeLiveData: LiveData<Boolean> = _addFridgeLiveData
 
+    init {
+        if(getUserToken() != null){
+            getFridgeFood(getUserToken().accessToken!!, UserId(getUserToken().userId, null))
+        }
 
-    //재료 삭제 성공 여부
-    private val _delFridgeLiveData = MutableLiveData<Boolean>()
-    val delFridgeLiveData: LiveData<Boolean> = _delFridgeLiveData
+    }
 
     fun addFridgeData(accessToken: String,food: Food){
         repository.addFridgeData(accessToken,food).enqueue(object: Callback<FridgePostResponse>{
@@ -44,10 +49,10 @@ class FridgeViewModel: ViewModel() {
                         200 -> {
                             Log.d("addFridgeData", "재료 등록 성공")
                             Log.d("addFridgeData", response.body()?.data.toString())
-                            _addFridgeLiveData.postValue(true)
+                            getFridgeFood(getUserToken().accessToken!!, UserId(getUserToken().userId, null))
+
                         }
                         401 -> {
-                            _addFridgeLiveData.postValue(true)
                             Log.d("addFridgeData", "재료 등록 실패")
                         }
                     }
@@ -110,18 +115,25 @@ class FridgeViewModel: ViewModel() {
                 if(response.isSuccessful){
                     when(res?.status){
                         200 -> {
-                            _delFridgeLiveData.postValue(true)
+                            getFridgeFood(getUserToken().accessToken!!, UserId(getUserToken().userId, null))
                         }
                         else -> {
-                            _delFridgeLiveData.postValue(false)
+
                         }
                     }
                 }
             }
 
             override fun onFailure(call: Call<FridgePostResponse>, t: Throwable) {
-                _delFridgeLiveData.postValue(false)
+
             }
         })
+    }
+
+    fun getUserToken(): Jwt {
+        val sharedPreferences = application?.getSharedPreferences("user_info", AppCompatActivity.MODE_PRIVATE)
+        val userJwt = Gson().fromJson(sharedPreferences?.getString("jwt",null), Jwt::class.java)
+        Log.d("getjwt", userJwt.toString())
+        return userJwt
     }
 }

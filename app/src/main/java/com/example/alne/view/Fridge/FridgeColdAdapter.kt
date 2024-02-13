@@ -59,9 +59,9 @@ class FridgeColdAdapter(val context: Context): RecyclerView.Adapter<FridgeColdAd
 
             var progress: Double = (startExp - diff) / startExp
             var scale = progress*100
-            Log.d("progress_cold", progress.toString())
-            Log.d("diff_cold", diff.toString())
-            Log.d("scale_cold", scale.toString())
+            Log.d("cold:progress_cold", progress.toString())
+            Log.d("cold:diff_cold", diff.toString())
+            Log.d("cold:scale_cold", scale.toString())
             if(scale in 0.0..20.0){
                 binding.itemFridgeExpireInfoTv.setTextColor(Color.parseColor("#00FF1A"))
                 binding.itemFridgePb.progressDrawable = ContextCompat.getDrawable(context, R.drawable.progressbar_border_low)

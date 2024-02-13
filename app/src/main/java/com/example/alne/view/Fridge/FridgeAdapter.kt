@@ -16,13 +16,12 @@ import com.example.alne.model.Food
 import java.text.SimpleDateFormat
 import java.time.Year
 
-class FridgeAdapter(val context: Context): RecyclerView.Adapter<FridgeAdapter.ViewHolder>() {
+class FridgeAdapter(val context: Context,  val items: ArrayList<Food>): RecyclerView.Adapter<FridgeAdapter.ViewHolder>() {
 
 
-    val items: ArrayList<Food> = ArrayList()
     var calendar = Calendar.getInstance()
     init {
-        Log.d("adapter", "1")
+        Log.d("adapter", "create")
         calendar.set(Calendar.HOUR, 0)
         calendar.set(Calendar.MINUTE, 0)
         calendar.set(Calendar.SECOND, 0)
@@ -62,8 +61,9 @@ class FridgeAdapter(val context: Context): RecyclerView.Adapter<FridgeAdapter.Vi
 
             var progress: Double = (startExp - diff) / startExp
             var scale = progress*100
-            Log.d("progress", progress.toString())
-            Log.d("diff", diff.toString())
+            Log.d("fridge:progress", progress.toString())
+            Log.d("fridge:diff", diff.toString())
+            Log.d("fridge:scale", scale.toString())
             if(scale in 0.0..20.0){
                 binding.itemFridgeExpireInfoTv.setTextColor(Color.parseColor("#00FF1A"))
                 binding.itemFridgePb.progressDrawable = ContextCompat.getDrawable(context, R.drawable.progressbar_border_low)
@@ -108,6 +108,12 @@ class FridgeAdapter(val context: Context): RecyclerView.Adapter<FridgeAdapter.Vi
     fun addAllFood(item: ArrayList<Food>){
         items.clear()
         items.addAll(item)
+        notifyDataSetChanged()
+    }
+
+    fun addFood(item: Food){
+        items.add(items.size-1, item)
+        Log.d("adapter:item.size", items.size.toString())
         notifyDataSetChanged()
     }
 

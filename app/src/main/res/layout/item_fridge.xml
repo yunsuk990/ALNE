@@ -95,10 +95,11 @@
 
             <ImageButton
                 android:id="@+id/item_fridge_delete_ib"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:scaleType="fitXY"
                 android:background="@color/white"
-                android:src="@drawable/more"
+                android:src="@drawable/close"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,6 +27,7 @@ class FridgeColdFragment : Fragment(), MyCustomDialogDetailInterface {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+        Log.d("FridgeColdFragment", "onCreateView")
         // Inflate the layout for this fragment
         binding = FragmentFridgeColdBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireActivity()).get(FridgeViewModel::class.java)
@@ -52,7 +53,7 @@ class FridgeColdFragment : Fragment(), MyCustomDialogDetailInterface {
                             viewModel.deleteFridgeFood(
                                 UserId(getUserToken().userId,
                                     fridgeColdAdapter.items[position].userId!!
-                            )
+                                )
                             )
                         }
                     }

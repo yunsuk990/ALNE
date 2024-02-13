@@ -29,7 +29,7 @@ import retrofit2.Response
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = repository()
+    private val repository = repository(application)
     private val _loginRespond = MutableLiveData<LoginResponse>()
     val loginRespond: LiveData<LoginResponse> = _loginRespond
 
