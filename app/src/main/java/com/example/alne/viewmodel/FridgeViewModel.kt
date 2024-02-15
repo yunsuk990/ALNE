@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.alne.GlobalApplication
 import com.example.alne.Network.FridgeGetResponse
 import com.example.alne.Network.FridgePostResponse
 import com.example.alne.model.Food
@@ -32,7 +33,6 @@ class FridgeViewModel(private val application: Application) : AndroidViewModel(a
         if(getUserToken() != null){
             getFridgeFood(getUserToken().accessToken!!, UserId(getUserToken().userId, null))
         }
-
     }
 
     fun addFridgeData(accessToken: String,food: Food){
@@ -85,7 +85,7 @@ class FridgeViewModel(private val application: Application) : AndroidViewModel(a
                                 var storage = item.storage
                                 var expire = item.exp
                                 var memo = item.memo
-                                var food = Food(item.ingredient.id, name, expire, memo, storage, image)
+                                var food = Food(item.ingredient.id, name, expire,item.addDate, memo, storage, image)
                                 items.add(food)
                             }
                             _getFridgeLiveData.postValue(items)
@@ -130,10 +130,5 @@ class FridgeViewModel(private val application: Application) : AndroidViewModel(a
         })
     }
 
-    fun getUserToken(): Jwt {
-        val sharedPreferences = application?.getSharedPreferences("user_info", AppCompatActivity.MODE_PRIVATE)
-        val userJwt = Gson().fromJson(sharedPreferences?.getString("jwt",null), Jwt::class.java)
-        Log.d("getjwt", userJwt.toString())
-        return userJwt
-    }
+    fun getUserToken() = GlobalApplication.prefManager.getUserToken()
 }

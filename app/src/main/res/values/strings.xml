@@ -14,9 +14,15 @@
     <string name="login_findPassword_et">비밀번호 찾기</string>
     <string name="login_findID_et">ID 찾기</string>
     <string name="submit">회원가입</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_hint">요리,재료 검색</string>
     <string name="fridge_info">빨간색인 재료는 유통기한이 얼마 남지 않는 재료입니다!</string>
     <string name="fridge_favorite_info">시기에 맞는 재료를 이용해서 추천하기</string>
+
+    <string-array name="alert_photo">
+        <item>카메라로 사직찍기</item>
+        <item>앨범에서 가져오기</item>
+    </string-array>
 </resources>

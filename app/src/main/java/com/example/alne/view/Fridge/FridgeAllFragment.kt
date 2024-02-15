@@ -22,7 +22,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.alne.GlobalApplication
 import com.example.alne.R
+import com.example.alne.SharedPrefManager
 import com.example.alne.databinding.FragmentFridgeAllBinding
 import com.example.alne.model.Food
 import com.example.alne.model.Jwt
@@ -73,13 +75,7 @@ class FridgeAllFragment : Fragment(), MyCustomDialogDetailInterface {
         CustomDialogDetail(requireContext(),getUserToken(),food, this).show(requireActivity().supportFragmentManager, "CustomDialog")
     }
 
-    fun getUserToken(): Jwt{
-        val sharedPreferences = activity?.getSharedPreferences("user_info", AppCompatActivity.MODE_PRIVATE)
-        val userJwt = Gson().fromJson(sharedPreferences?.getString("jwt",null), Jwt::class.java)
-        Log.d("getjwt", userJwt.toString())
-        return userJwt
-    }
-
+    fun getUserToken() = GlobalApplication.prefManager.getUserToken()
 
     // 재료 수정하기(편집)
     override fun onSubmitBtnDetailClicked(food: Food) {
