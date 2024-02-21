@@ -8,10 +8,11 @@
 
     <ImageView
         android:id="@+id/item_review_iv"
-        android:src="@drawable/bibimbap"
+        android:src="@drawable/user"
         android:background="@drawable/food_image_border"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:padding="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -102,12 +103,18 @@
         app:layout_constraintStart_toStartOf="@+id/item_review_summary"
         app:layout_constraintTop_toBottomOf="@+id/item_review_summary" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/food_exp1"
+    <androidx.cardview.widget.CardView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/food_exp1" />
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

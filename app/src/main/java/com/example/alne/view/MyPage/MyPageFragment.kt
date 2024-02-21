@@ -8,53 +8,46 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.alne.databinding.FragmentMyPageBinding
 import com.example.alne.view.Login.LoginActivity
 import com.example.alne.view.SignUp.SignUpActivity
 import com.example.alne.view.Splash.StartActivity
+import com.example.alne.viewmodel.MyPageViewModel
 import com.kakao.sdk.user.UserApiClient
 
 class MyPageFragment : Fragment() {
     lateinit var binding: FragmentMyPageBinding
+    lateinit var viewModel: MyPageViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentMyPageBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(this).get(MyPageViewModel::class.java)
 
-        binding.signUp.setOnClickListener {
-            startActivity(Intent(requireContext(), SignUpActivity::class.java))
-        }
-
-        binding.login.setOnClickListener {
-            startActivity(Intent(requireContext(), LoginActivity::class.java))
-        }
-
-        binding.logOut.setOnClickListener {
-            UserApiClient.instance.logout { error ->
-                if (error != null) {
-                    Log.e("logout", "로그아웃 실패. SDK에서 토큰 삭제됨", error)
-                    deleteAutoLogin()
-                    startActivity(Intent(requireContext(), StartActivity::class.java))
+        viewModel.authStateRespond.observe(viewLifecycleOwner, Observer { state ->
+            if(state){
+                binding.login.text = "로그아웃"
+                binding.login.setOnClickListener {
+                    LogoutCustomDialog().show(requireActivity().supportFragmentManager, LogoutCustomDialog.TAG)
                 }
-                else {
-                    startActivity(Intent(requireContext(), StartActivity::class.java))
-                    Log.i("logout", "로그아웃 성공. SDK에서 토큰 삭제됨")
-                }
+            }else{
+                binding.login.text = "로그인"
             }
-        }
-        return binding.root
-    }
+        })
 
-    fun deleteAutoLogin(){
-        val sharedPreferences1 = requireContext().getSharedPreferences("login_setting", AppCompatActivity.MODE_PRIVATE)
-        val sharedPreferences = requireContext().getSharedPreferences("user_info", AppCompatActivity.MODE_PRIVATE)
-        val edit = sharedPreferences.edit()
-        var edit1 = sharedPreferences1.edit()
-        edit.clear()
-        edit1.commit()
-        edit1.commit()
-        edit.commit()
+        binding.myPageUserProfileLinear.setOnClickListener {
+            startActivity(Intent(context, UserProfileActivity::class.java))
+        }
+
+
+//        binding.login.setOnClickListener {
+//            startActivity(Intent(requireContext(), LoginActivity::class.java))
+//        }
+//
+        return binding.root
     }
 }

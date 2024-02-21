@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.alne.R
 import com.example.alne.databinding.ActivityRecipeDetailBinding
 import com.example.alne.model.Recipe
+import com.example.alne.room.model.recipe
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 
@@ -27,17 +28,17 @@ class RecipeDetailActivity : AppCompatActivity() {
         setOnClickListener()
     }
     private fun init(){
-        var recipe: Recipe = Gson().fromJson(intent.getStringExtra("recipe"), Recipe::class.java)
+        var jsonRecipe = intent.getStringExtra("recipe")
+        var recipe: recipe = Gson().fromJson(jsonRecipe, recipe::class.java)
         binding.recipeDetailTitleTv.text = recipe.name
         binding.recipeDetailChefTv.text = recipe.difficulty
         binding.recipeDetailIntroduceTv.text = recipe.introduce
         binding.recipeDetailCategoryTv1.text = "#" + recipe.classification
         binding.recipeDetailTimeTv.text = "약 " + recipe.time + "분"
         binding.recipeDetailKcalTv.text = recipe.calorie.toString() + "kcal"
-        Glide.with(this@RecipeDetailActivity).load(recipe.imageURL).into(binding.recipeDetailFoodIv)
+        Glide.with(this@RecipeDetailActivity).load(recipe.imageurl).into(binding.recipeDetailFoodIv)
 
-
-        val recipeAdapter = RecipeDetailVPAdapter(this@RecipeDetailActivity)
+        val recipeAdapter = RecipeDetailVPAdapter(this@RecipeDetailActivity, recipe)
         binding.recipeDetailVp.adapter = recipeAdapter
         TabLayoutMediator(binding.recipeDetailTl, binding.recipeDetailVp){ tab, position ->
             tab.text = information[position]
@@ -45,13 +46,10 @@ class RecipeDetailActivity : AppCompatActivity() {
     }
 
     private fun setOnClickListener(){
-
-
         binding.recipeDetailTb.setNavigationOnClickListener(object: View.OnClickListener{
             override fun onClick(p0: View?) {
                 onBackPressed()
             }
-
         })
     }
 }

@@ -90,7 +90,8 @@ class CustomDialogAdd(context: Context, val jwt: Jwt, myCustomDialogInterface: M
         var addDate = date + " " + time
         Log.d("addDate", addDate.toString())
 
-                binding.foodImageIv.setOnClickListener{
+        // 이미지 선택
+        binding.foodImageIv.setOnClickListener{
             showDialog()
         }
         spinnerSetting()
@@ -105,6 +106,17 @@ class CustomDialogAdd(context: Context, val jwt: Jwt, myCustomDialogInterface: M
 
         binding.cancelBt.setOnClickListener {
             dismiss()
+        }
+
+        binding.foodTitleEt.setOnClickListener{
+            val dialog = IngredientChoice()
+            dialog.setCallback(object: IngredientChoice.OnSendFromBottomSheetDialog {
+                override fun sendValue(value: String) {
+                    binding.foodTitleEt.text = value
+                }
+            })
+            dialog.show(requireActivity().supportFragmentManager, "")
+
         }
 
 
@@ -274,8 +286,11 @@ class CustomDialogAdd(context: Context, val jwt: Jwt, myCustomDialogInterface: M
                 val decode= ImageDecoder.createSource(requireContext().contentResolver,
                     Uri.fromFile(photoFile!!.absoluteFile))
                 bitmap= ImageDecoder.decodeBitmap(decode)
+                binding.foodImageDetailIv.visibility = View.VISIBLE
                 binding.foodImageDetailIv.setImageBitmap(bitmap)
                 binding.foodImageDetailIv.scaleType = ImageView.ScaleType.FIT_XY
+                binding.foodImageDefaultIv.visibility = View.GONE
+
 
                 if(bitmap != null){
                     saveImageFile(photoFile!!.name,getExtension(photoFile!!.name),bitmap)

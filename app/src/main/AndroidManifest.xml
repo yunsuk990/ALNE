@@ -9,8 +9,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -25,6 +25,12 @@
         android:theme="@style/Theme.ALNE"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".view.MyPage.UserProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.Recipe.viewpage.review.viewpage.UserReview"
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -51,9 +57,7 @@
         <activity
             android:name=".view.Splash.SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.Start">
-
-        </activity>
+            android:theme="@style/Theme.Start" />
         <activity
             android:name=".view.SignUp.SignUpActivity"
             android:exported="false" />
@@ -63,18 +67,19 @@
         <activity
             android:name=".view.Splash.StartActivity"
             android:exported="false" />
-
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
-                <data android:host="oauth"
-                    android:scheme="kakaoee52fc7baab1b48b61bcf3e7f3b617f0"/>
+                <data
+                    android:host="oauth"
+                    android:scheme="kakaoee52fc7baab1b48b61bcf3e7f3b617f0" />
             </intent-filter>
         </activity>
     </application>

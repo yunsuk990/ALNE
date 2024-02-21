@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.alne.GlobalApplication
 import com.example.alne.MainActivity
 import com.example.alne.R
 import com.example.alne.databinding.ActivityLoginBinding
@@ -30,6 +31,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import kotlin.math.log
 
 
 class LoginActivity : AppCompatActivity() {
@@ -53,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
             when(res?.status) {
                 200 -> {
                     Toast.makeText(this@LoginActivity, "로그인", Toast.LENGTH_LONG).show()
-                    saveJwt(res.data!!)
+                    GlobalApplication.prefManager.saveJwt(res.data!!)
                     Log.d("loginRespond", res.data.toString())
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                 }
@@ -127,7 +129,9 @@ class LoginActivity : AppCompatActivity() {
     }
     override fun onResume() {
         super.onResume()
-        getLoginSetting()
+        var loginsetting = GlobalApplication.prefManager.getLoginSetting()
+        saveId = loginsetting[0]
+        autoLogin = loginsetting[1]
         if(autoLogin){
             binding.loginAutoLoginIb.setImageResource(R.drawable.checked)
         }else{
@@ -142,29 +146,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        saveLoginSetting()
+        GlobalApplication.prefManager.saveLoginSetting(saveId, autoLogin)
     }
 
-    fun saveJwt(data: Jwt){
-        Log.d("jwt" , data.toString())
-        val sharedPreferences = getSharedPreferences("user_info", AppCompatActivity.MODE_PRIVATE)
-        val edit = sharedPreferences.edit()
-        edit.putString("jwt", Gson().toJson(data))
-        edit.commit()
-    }
-
-    // 자동로그인, 아이디기록 여부 저장
-    fun saveLoginSetting(){
-        val sharedPreferences = getSharedPreferences("login_setting", MODE_PRIVATE)
-        val edit = sharedPreferences.edit()
-        edit.putBoolean("saveId", saveId)
-        edit.putBoolean("autoLogin", autoLogin)
-        edit.commit()
-    }
-
-    fun getLoginSetting(){
-        val sharedPreferences = getSharedPreferences("login_setting", MODE_PRIVATE)
-        saveId = sharedPreferences.getBoolean("saveId", false)
-        autoLogin = sharedPreferences.getBoolean("autoLogin", false)
-    }
 }

@@ -25,7 +25,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:visibility="gone"
             android:src="@drawable/add_black" />
+
+        <ImageView
+            android:id="@+id/food_image_default_iv"
+            android:src="@drawable/add_black"
+            android:padding="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -40,31 +48,22 @@
         app:layout_constraintStart_toEndOf="@+id/food_image_iv"
         app:layout_constraintTop_toTopOf="@+id/food_image_iv" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/food_food_name_tl"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+    <TextView
+        android:id="@+id/food_title_et"
+        android:background="@drawable/spinner_background"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:clickable="false"
+        android:editable="false"
+        android:text="재료 선택"
+        android:textColor="@color/black"
+        android:textSize="15sp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
-        app:boxCornerRadiusBottomEnd="5dp"
-        app:boxCornerRadiusBottomStart="5dp"
-        app:boxCornerRadiusTopEnd="5dp"
-        app:boxCornerRadiusTopStart="5dp"
-        app:boxStrokeColor="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/food_name_title_tv"
-        app:layout_constraintTop_toBottomOf="@+id/food_name_title_tv">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/food_title_et"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:text="소고기"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/food_name_title_tv"/>
 
     <TextView
         android:id="@+id/food_memo_title_tv"
@@ -112,7 +111,7 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/food_food_name_tl"
+        app:layout_constraintEnd_toEndOf="@+id/food_title_et"
         app:layout_constraintTop_toTopOf="@+id/food_memo_title_tv" />
 
     <Spinner
@@ -222,7 +221,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/food_food_name_tl"
+        app:layout_constraintEnd_toEndOf="@+id/food_title_et"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/cancel_bt"
         app:layout_constraintTop_toBottomOf="@+id/food_add_timepicker_linear" />

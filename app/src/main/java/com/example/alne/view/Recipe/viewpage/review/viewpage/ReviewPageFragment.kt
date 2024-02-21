@@ -1,5 +1,6 @@
 package com.example.alne.view.Recipe.viewpage.review.viewpage
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,8 +10,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.alne.databinding.FragmentReviewPageBinding
 import com.example.alne.model.Review
+import com.example.alne.room.model.recipe
+import com.google.gson.Gson
 
-class ReviewPageFragment : Fragment() {
+class ReviewPageFragment(val recipe: recipe) : Fragment() {
 
     lateinit var binding: FragmentReviewPageBinding
 
@@ -28,6 +31,13 @@ class ReviewPageFragment : Fragment() {
         item.add(Review("신해철","맛있습니다","2023.11.10"))
         binding.reviewPageRv.adapter = ReviewPageRVAdapter(item)
         binding.reviewPageRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+
+        binding.reviewPageReviewBt.setOnClickListener {
+            var intent = Intent(context, UserReview::class.java)
+            intent.putExtra("recipe", Gson().toJson(recipe))
+            startActivity(intent)
+        }
 
         return binding.root
     }

@@ -25,7 +25,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:visibility="gone"
             android:src="@drawable/add_black" />
+
+        <ImageView
+            android:id="@+id/item_food_detail_default_iv"
+            android:src="@drawable/add_black"
+            android:padding="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </androidx.cardview.widget.CardView>
 
     <TextView

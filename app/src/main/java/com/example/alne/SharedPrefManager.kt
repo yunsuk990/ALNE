@@ -14,6 +14,8 @@ class SharedPrefManager(val context: Context) {
     private val USER_INFO = "user_info"
     private val KEY_USER_INFO = "jwt"
 
+    private val LOGIN_SETTING = "login_setting"
+
 
 //    // 검색 목록을 저장
 //    fun storeSearchHistoryList(searchHistoryList: MutableList<SearchData>){
@@ -49,11 +51,44 @@ class SharedPrefManager(val context: Context) {
 //        editor.apply()
 //    }
 
+    fun saveJwt(data: Jwt){
+        Log.d("jwt" , data.toString())
+        val sharedPreferences = context?.getSharedPreferences(USER_INFO, AppCompatActivity.MODE_PRIVATE)!!
+        val edit = sharedPreferences.edit()
+        edit.putString(KEY_USER_INFO, Gson().toJson(data))
+        edit.commit()
+    }
     fun getUserToken(): Jwt {
         val sharedPreferences = context?.getSharedPreferences(USER_INFO, AppCompatActivity.MODE_PRIVATE)
         val userJwt = Gson().fromJson(sharedPreferences?.getString(KEY_USER_INFO,null), Jwt::class.java)
         Log.d("getjwt", userJwt.toString())
         return userJwt
+    }
+
+    // 자동로그인, 아이디기록 여부 저장
+    fun saveLoginSetting(saveId: Boolean, autoLogin: Boolean){
+        val sharedPreferences = context?.getSharedPreferences(LOGIN_SETTING, AppCompatActivity.MODE_PRIVATE)
+        val edit = sharedPreferences?.edit()!!
+        edit.putBoolean("saveId", saveId)
+        edit.putBoolean("autoLogin", autoLogin)
+        edit.commit()
+    }
+
+    fun getLoginSetting(): ArrayList<Boolean> {
+        val sharedPreferences = context?.getSharedPreferences(LOGIN_SETTING, AppCompatActivity.MODE_PRIVATE)!!
+        return arrayListOf(sharedPreferences.getBoolean("saveId", false), sharedPreferences.getBoolean("autoLogin", false))
+    }
+
+    // 정보 삭제
+    fun deleteAutoLogin(){
+        val sharedPreferences1 = context?.getSharedPreferences(LOGIN_SETTING, AppCompatActivity.MODE_PRIVATE)!!
+        val sharedPreferences = context?.getSharedPreferences(USER_INFO, AppCompatActivity.MODE_PRIVATE)!!
+        val edit = sharedPreferences.edit()
+        var edit1 = sharedPreferences1.edit()
+        edit.clear()
+        edit1.commit()
+        edit1.commit()
+        edit.commit()
     }
 
 

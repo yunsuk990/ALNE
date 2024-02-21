@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.alne.R
 import com.example.alne.databinding.ItemFridgeBinding
 import com.example.alne.model.Food
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.time.Year
 
@@ -43,11 +44,14 @@ class FridgeAdapter(val context: Context,  val items: ArrayList<Food>): Recycler
             var date = food.exp!!.split(" ")
             var sfp = SimpleDateFormat("yyyy.MM.dd")
             var da = sfp.parse(date[0])
-            var diff: Long = ((da.time - calendar.time.time)/ (60 * 60 * 24 * 1000))
+            var diff = ((da.time - calendar.time.time))/ (60 * 60 * 24 * 1000)
             Log.d("diff", diff.toString())
 
+            var startd = food.addDate!!.split(" ")
+            var startDate = sfp.parse(startd[0])
+
             // 유효날짜 - 등록 날짜
-            var startExp = 7.0
+            var startExp = (da.time - startDate.time)/ (60 * 60 * 24 * 1000)
 
             binding.itemFridgeTitleTv.text = food.name
             binding.itemFridgeExpireTv.text = date[0]+" 까지"
@@ -59,23 +63,36 @@ class FridgeAdapter(val context: Context,  val items: ArrayList<Food>): Recycler
                 binding.itemFridgeStorageTv.text = "냉장"
             }
 
-            var progress: Double = (startExp - diff) / startExp
-            var scale = progress*100
+            var progress: Long = 0
+            var scale = 0.0
+            try{
+                progress = (startExp - diff) / startExp
+            }catch (e: Exception){
+                if(startExp.toInt() == 0){
+                    startExp = 100
+                    progress = 100
+                    scale = 100.0
+                }
+            }
+            scale = ((progress*100).toDouble())
+
+
+            Log.d("fridge:startExp", startExp.toString())
             Log.d("fridge:progress", progress.toString())
             Log.d("fridge:diff", diff.toString())
             Log.d("fridge:scale", scale.toString())
-            if(scale in 0.0..20.0){
+            if(diff > 15){
                 binding.itemFridgeExpireInfoTv.setTextColor(Color.parseColor("#00FF1A"))
                 binding.itemFridgePb.progressDrawable = ContextCompat.getDrawable(context, R.drawable.progressbar_border_low)
                 binding.itemFridgePb.max = startExp.toInt()
                 binding.itemFridgePb.progress = (progress * startExp).toInt()
-            }else if(scale in 21.0..50.0){
+            }else if(diff in 8..14){
                 binding.itemFridgeExpireInfoTv.setTextColor(Color.parseColor("#FFD500"))
                 binding.itemFridgePb.progressDrawable = ContextCompat.getDrawable(context, R.drawable.progressbar_border_low_high)
                 binding.itemFridgePb.max = startExp.toInt()
                 binding.itemFridgePb.progress = (progress * startExp).toInt()
             }
-            else if(scale in 51.0..80.0){
+            else if(diff in 4..7){
                 binding.itemFridgeExpireInfoTv.setTextColor(Color.parseColor("#FF9900"))
                 binding.itemFridgePb.progressDrawable = ContextCompat.getDrawable(context, R.drawable.progressbar_border_high_low)
                 binding.itemFridgePb.max = startExp.toInt()
@@ -86,6 +103,8 @@ class FridgeAdapter(val context: Context,  val items: ArrayList<Food>): Recycler
                 binding.itemFridgePb.max = startExp.toInt()
                 binding.itemFridgePb.progress = (progress * startExp).toInt()
             }
+
+
         }
     }
 

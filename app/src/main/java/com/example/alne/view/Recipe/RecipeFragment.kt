@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.alne.databinding.FragmentRecipeBinding
-import com.example.alne.model.Recipe
+import com.example.alne.room.model.recipe
 import com.example.alne.viewmodel.RecipeViewModel
 import com.google.gson.Gson
 
@@ -26,8 +26,6 @@ class RecipeFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(RecipeViewModel::class.java)
 
-        viewModel.getAllRecipe()
-
         binding.recipeMenuAllTv.requestFocus()
 
 //        binding.recipeDjIb.setOnClickListener {
@@ -41,7 +39,7 @@ class RecipeFragment : Fragment() {
             gridAdapter.addItems(data)
         })
         gridAdapter.setMyItemClickListener(object: RecipeGVAdapter.setOnClickListener{
-            override fun clickItem(recipe: Recipe) {
+            override fun clickItem(recipe: recipe) {
                 var intent = Intent(requireContext(), RecipeDetailActivity::class.java)
                 intent.putExtra("recipe", Gson().toJson(recipe))
                 startActivity(intent)

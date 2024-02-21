@@ -21,6 +21,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.alne.GlobalApplication
 import com.example.alne.R
@@ -31,6 +32,7 @@ import com.example.alne.model.Jwt
 import com.example.alne.model.UserId
 import com.example.alne.viewmodel.FridgeViewModel
 import com.google.gson.Gson
+import kotlinx.coroutines.launch
 
 
 class FridgeAllFragment : Fragment(), MyCustomDialogDetailInterface {
@@ -45,6 +47,7 @@ class FridgeAllFragment : Fragment(), MyCustomDialogDetailInterface {
         binding = FragmentFridgeAllBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireActivity()).get(FridgeViewModel::class.java)
         Log.d("FridgeAllFragment", "onCreateView")
+
         return binding.root
     }
 
