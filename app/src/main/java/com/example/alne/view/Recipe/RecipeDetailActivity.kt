@@ -3,33 +3,37 @@ package com.example.alne.view.Recipe
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
-import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.alne.R
 import com.example.alne.databinding.ActivityRecipeDetailBinding
-import com.example.alne.model.Recipe
+import com.example.alne.model.DeleteFavorite
 import com.example.alne.room.model.recipe
+import com.example.alne.viewmodel.RecipeDetailViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 
 class RecipeDetailActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityRecipeDetailBinding
+    lateinit var viewModel: RecipeDetailViewModel
     private val information = arrayListOf("순서 및 후기", "재료","참고 영상")
+    var favorite: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRecipeDetailBinding.inflate(layoutInflater)
-        binding.recipeDetailTb.bringToFront()
         setContentView(binding.root)
-        init()
+        binding.recipeDetailTb.bringToFront()
+        var recipe: recipe = Gson().fromJson(intent.getStringExtra("recipe"), recipe::class.java)
+        Log.d("RecipeDetailActivity_recipe", recipe.toString())
+        viewModel = ViewModelProvider(this).get(RecipeDetailViewModel::class.java)
+
+        init(recipe)
         setOnClickListener()
     }
-    private fun init(){
-        var jsonRecipe = intent.getStringExtra("recipe")
-        var recipe: recipe = Gson().fromJson(jsonRecipe, recipe::class.java)
+
+    private fun init(recipe: recipe){
         binding.recipeDetailTitleTv.text = recipe.name
         binding.recipeDetailChefTv.text = recipe.difficulty
         binding.recipeDetailIntroduceTv.text = recipe.introduce
@@ -43,6 +47,20 @@ class RecipeDetailActivity : AppCompatActivity() {
         TabLayoutMediator(binding.recipeDetailTl, binding.recipeDetailVp){ tab, position ->
             tab.text = information[position]
         }.attach()
+
+        binding.like.setOnClickListener {
+            if(favorite){
+                binding.like.setImageResource(R.drawable.like_off)
+                favorite = false
+//                viewModel.deleteRecipeFavorite(DeleteFavorite)
+            }else{
+                binding.like.setImageResource(R.drawable.like_on)
+                favorite = true
+                viewModel.addRecipeFavorite(recipe.recipe_code)
+            }
+        }
+
+
     }
 
     private fun setOnClickListener(){

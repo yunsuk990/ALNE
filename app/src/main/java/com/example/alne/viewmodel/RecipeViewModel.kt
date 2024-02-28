@@ -12,7 +12,7 @@ import com.example.alne.model.Recipe
 import com.example.alne.repository.recipeRepository
 import com.example.alne.repository.repository
 import com.example.alne.room.model.recipe
-import com.example.flo.Network.RecipeResponse
+import com.example.alne.Network.RecipeResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call

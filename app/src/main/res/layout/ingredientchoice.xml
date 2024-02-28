@@ -6,36 +6,48 @@
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+<!--    <LinearLayout-->
+<!--        android:id="@+id/ingredient_choice_sv"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:background="@drawable/ingredient_choice_scrollview_bg"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="20dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/ingredient_choice_et"-->
+<!--            android:layout_weight="2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@null"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="18sp"-->
+<!--            android:inputType="text"-->
+<!--            android:textColorHint="@color/gray"-->
+<!--            android:hint="재료명을 입력해 검색해보세요."-->
+<!--            android:padding="10dp" />-->
+
+<!--        <ImageView-->
+<!--            android:layout_weight="1"-->
+<!--            android:src="@drawable/search"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="30dp"/>-->
+<!--    </LinearLayout>-->
+
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/ingredient_choice_sv"
-        android:orientation="horizontal"
         android:background="@drawable/ingredient_choice_scrollview_bg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        app:queryHint="재료명을 입력해 검색해보세요."
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
-            android:layout_weight="2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:inputType="text"
-            android:textColorHint="@color/gray"
-            android:hint="재료명을 입력해 검색해보세요."
-            android:padding="10dp" />
-
-        <ImageView
-            android:layout_weight="1"
-            android:src="@drawable/search"
-            android:layout_gravity="center_vertical"
-            android:layout_width="0dp"
-            android:layout_height="30dp"/>
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ingredient_choice_rv"

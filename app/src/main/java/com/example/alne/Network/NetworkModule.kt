@@ -1,4 +1,4 @@
-package com.example.flo.Network
+package com.example.alne.Network
 import okhttp3.ResponseBody
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -12,7 +12,7 @@ const val BASE_URL = "http://10.0.2.2:8080"
 fun getRetrofit(): Retrofit {
     val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .addConverterFactory(nullOnEmptyConverterFactory)
+//        .addConverterFactory(nullOnEmptyConverterFactory)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     return retrofit

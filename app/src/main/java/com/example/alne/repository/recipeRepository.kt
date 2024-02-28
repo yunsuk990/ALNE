@@ -1,14 +1,27 @@
 package com.example.alne.repository
 
 import com.example.alne.GlobalApplication
-import com.example.alne.Network.FridgeApi
+import com.example.alne.model.Comment
+import com.example.alne.model.DeleteFavorite
+import com.example.alne.model.UserId
 import com.example.alne.room.model.recipe
-import com.example.flo.Network.RecipeApi
-import com.example.flo.Network.getRetrofit
+import com.example.alne.Network.RecipeApi
+import com.example.alne.Network.getRetrofit
 
 class recipeRepository {
 
     private val recipeService = getRetrofit().create(RecipeApi::class.java)
 
     fun getAllRecipe(): ArrayList<recipe> = GlobalApplication.appDatabase.recipeDao().getAll() as ArrayList<recipe>
+
+
+
+//    fun getUsersComments(): Arra
+    fun addUserComment(comment: Comment) = recipeService.addUserComment(comment)
+
+    fun getRecipeProcess(recipeCode: Int) = recipeService.getRecipeProcess(recipeCode)
+
+    fun addRecipeFavorite(recipeCode: Int,userId: UserId) = recipeService.addRecipeFavorite(recipeCode,userId)
+
+    fun deleteRecipeFavorite(delete: DeleteFavorite) = recipeService.deleteRecipeFavorite(delete)
 }

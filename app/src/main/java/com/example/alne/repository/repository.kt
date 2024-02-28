@@ -1,24 +1,12 @@
 package com.example.alne.repository
 
 import android.app.Application
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.alne.Network.FridgeApi
-import com.example.alne.Network.FridgeGetResponse
-import com.example.alne.model.Food
-import com.example.alne.model.Jwt
+import com.example.alne.Network.AuthApi
+import com.example.alne.Network.RecipeApi
+import com.example.alne.Network.getRetrofit
 import com.example.alne.model.KakaoUser
-import com.example.alne.model.UserId
-import com.example.flo.Network.AuthApi
-import com.example.flo.Network.RecipeApi
-import com.example.flo.Network.getRetrofit
-import com.example.flo.model.User
-import com.google.gson.Gson
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.alne.model.User
+
 
 class repository(val application: Application) {
 

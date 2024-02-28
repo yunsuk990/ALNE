@@ -11,5 +11,22 @@ data class Recipe(
     val difficulty: String,
     val imageURL: String,
     val calorie: Int,
-    val favoritedByUser: Array<Int>
+    val favoritedByUser: List<Int>,
+    val likedByUser: List<Int>
+)
+
+data class RecipeProcessRespond(
+    val status: Int,
+    val data: RecipeProcess
+)
+
+data class RecipeProcess (
+    val recipe: Recipe,
+    val recipeProcess: List<Process>
+)
+
+data class Process(
+    val id: Int,
+    val orderNum: Int,
+    val detail: String
 )

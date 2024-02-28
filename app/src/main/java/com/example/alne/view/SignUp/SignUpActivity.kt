@@ -3,21 +3,13 @@ package com.example.alne.view.SignUp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.alne.databinding.ActivitySignUpBinding
 import com.example.alne.view.Login.LoginActivity
 import com.example.alne.viewmodel.SignUpViewModel
-import com.example.flo.Network.AuthApi
-import com.example.flo.Network.AuthResponse
-import com.example.flo.Network.getRetrofit
-import com.example.flo.model.User
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
+import com.example.alne.model.User
 
 class SignUpActivity : AppCompatActivity() {
 

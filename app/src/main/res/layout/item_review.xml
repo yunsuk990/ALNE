@@ -28,47 +28,22 @@
         app:layout_constraintStart_toEndOf="@+id/item_review_iv"
         app:layout_constraintTop_toTopOf="@+id/item_review_iv"/>
 
-    <ImageView
-        android:id="@+id/item_review_start1"
-        android:src="@drawable/star"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+    <com.willy.ratingbar.BaseRatingBar
+        android:id="@+id/item_review_ratingbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
+        app:srb_drawableEmpty="@drawable/star_empty"
+        app:srb_drawableFilled="@drawable/star"
+        app:srb_minimumStars="1"
+        app:srb_numStars="5"
+        app:srb_starHeight="15dp"
+        app:srb_starWidth="15dp"
+        app:srb_stepSize="1"
+        app:srb_starPadding="1px"
         app:layout_constraintStart_toEndOf="@+id/item_review_nickname"
         app:layout_constraintTop_toTopOf="@+id/item_review_nickname"
         app:layout_constraintBottom_toBottomOf="@+id/item_review_nickname"/>
-    <ImageView
-        android:id="@+id/item_review_start2"
-        android:src="@drawable/star"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        app:layout_constraintStart_toEndOf="@+id/item_review_start1"
-        app:layout_constraintTop_toTopOf="@+id/item_review_start1"
-        app:layout_constraintBottom_toBottomOf="@+id/item_review_start1"/>
-    <ImageView
-        android:id="@+id/item_review_start3"
-        android:src="@drawable/star"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        app:layout_constraintStart_toEndOf="@+id/item_review_start2"
-        app:layout_constraintTop_toTopOf="@+id/item_review_start2"
-        app:layout_constraintBottom_toBottomOf="@+id/item_review_start2"/>
-    <ImageView
-        android:id="@+id/item_review_start4"
-        android:src="@drawable/star"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        app:layout_constraintStart_toEndOf="@+id/item_review_start3"
-        app:layout_constraintTop_toTopOf="@+id/item_review_start3"
-        app:layout_constraintBottom_toBottomOf="@+id/item_review_start3"/>
-    <ImageView
-        android:id="@+id/item_review_start5"
-        android:src="@drawable/star"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        app:layout_constraintStart_toEndOf="@+id/item_review_start4"
-        app:layout_constraintTop_toTopOf="@+id/item_review_start4"
-        app:layout_constraintBottom_toBottomOf="@+id/item_review_start4"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -77,9 +52,9 @@
         android:layout_marginStart="3dp"
         android:textSize="12sp"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/item_review_start5"
-        app:layout_constraintStart_toEndOf="@+id/item_review_start5"
-        app:layout_constraintTop_toTopOf="@+id/item_review_start5" />
+        app:layout_constraintBottom_toBottomOf="@+id/item_review_ratingbar"
+        app:layout_constraintStart_toEndOf="@+id/item_review_ratingbar"
+        app:layout_constraintTop_toTopOf="@+id/item_review_ratingbar" />
 
     <TextView
         android:id="@+id/item_review_summary"

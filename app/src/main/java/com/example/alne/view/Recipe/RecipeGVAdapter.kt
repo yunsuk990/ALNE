@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -13,9 +15,11 @@ import com.example.alne.R
 import com.example.alne.model.Recipe
 import com.example.alne.room.model.recipe
 
-class RecipeGVAdapter(val context: Context): BaseAdapter() {
+class RecipeGVAdapter(val context: Context): BaseAdapter(), Filterable {
 
-    val items: ArrayList<recipe> = ArrayList()
+    var items: ArrayList<recipe> = ArrayList()
+    var itemsFilter: ArrayList<recipe> = ArrayList()
+
 
     interface setOnClickListener {
         fun clickItem(recipe: recipe)
@@ -52,7 +56,36 @@ class RecipeGVAdapter(val context: Context): BaseAdapter() {
     fun addItems(item: ArrayList<recipe>){
         items.clear()
         items.addAll(item)
+        itemsFilter.addAll(item)
         notifyDataSetChanged()
         Log.d("items", items.toString())
+    }
+
+    override fun getFilter(): Filter {
+        var filter  = object: Filter(){
+            override fun performFiltering(p0: CharSequence?): FilterResults {
+                var filterResults: FilterResults = FilterResults()
+                if(p0?.isEmpty()!! || p0 == null){
+                    filterResults.count = itemsFilter.size
+                    filterResults.values = itemsFilter
+                }else{
+                    var searchResult: ArrayList<recipe> = ArrayList()
+                    for(recipe in itemsFilter){
+                        if(recipe.name.contains(p0)){
+                            searchResult.add(recipe)
+                        }
+                    }
+                    filterResults.count = searchResult.size
+                    filterResults.values = searchResult
+                }
+                return filterResults
+            }
+
+            override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+                items = p1?.values as ArrayList<recipe>
+                notifyDataSetChanged()
+            }
+        }
+        return filter
     }
 }

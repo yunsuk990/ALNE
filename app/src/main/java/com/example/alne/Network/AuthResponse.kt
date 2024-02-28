@@ -1,4 +1,4 @@
-package com.example.flo.Network
+package com.example.alne.Network
 
 import com.example.alne.model.Jwt
 import com.google.gson.annotations.SerializedName

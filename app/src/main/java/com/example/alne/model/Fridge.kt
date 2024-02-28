@@ -1,7 +1,5 @@
 package com.example.alne.model
 
-import com.example.flo.model.User
-
 data class Fridge(
     val ingredient: Ingredient,
     val exp: String,

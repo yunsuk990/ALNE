@@ -11,4 +11,7 @@ interface RecipeDao {
 
     @Query("SELECT * FROM recipe")
     fun getAll(): List<recipe>
+
+//    @Query("SELECT * FROM recipe WHERE category=:")
+//    fun getRecipeCategory(category: String)
 }

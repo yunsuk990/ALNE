@@ -5,10 +5,9 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.alne.Network.AuthResponse
+import com.example.alne.model.User
 import com.example.alne.repository.repository
-import com.example.flo.Network.AuthResponse
-import com.example.flo.model.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

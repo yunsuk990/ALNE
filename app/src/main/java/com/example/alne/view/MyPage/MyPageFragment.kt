@@ -39,7 +39,7 @@ class MyPageFragment : Fragment() {
             }
         })
 
-        binding.myPageUserProfileLinear.setOnClickListener {
+        binding.myPageProfileSettingCv.setOnClickListener {
             startActivity(Intent(context, UserProfileActivity::class.java))
         }
 

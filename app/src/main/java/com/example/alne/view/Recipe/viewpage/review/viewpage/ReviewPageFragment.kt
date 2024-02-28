@@ -34,7 +34,7 @@ class ReviewPageFragment(val recipe: recipe) : Fragment() {
 
 
         binding.reviewPageReviewBt.setOnClickListener {
-            var intent = Intent(context, UserReview::class.java)
+            var intent = Intent(context, UserReviewActivity::class.java)
             intent.putExtra("recipe", Gson().toJson(recipe))
             startActivity(intent)
         }

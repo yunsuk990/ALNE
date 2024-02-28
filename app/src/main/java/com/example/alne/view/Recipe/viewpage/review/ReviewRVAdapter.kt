@@ -4,8 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.alne.databinding.ItemOrderBinding
+import com.example.alne.model.Process
 
-class ReviewRVAdapter(val items: ArrayList<String>): RecyclerView.Adapter<ReviewRVAdapter.ViewHolder>() {
+class ReviewRVAdapter(val items: ArrayList<Process>): RecyclerView.Adapter<ReviewRVAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemOrderBinding): RecyclerView.ViewHolder(binding.root){}
 
@@ -17,8 +18,8 @@ class ReviewRVAdapter(val items: ArrayList<String>): RecyclerView.Adapter<Review
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.itemOrderTitle.text = "Step 0"+(position+1)
-        holder.binding.itemOrderTv.text = items[position]
+        holder.binding.itemOrderTitle.text = "Step " + String.format("%02d", items[position].orderNum)
+        holder.binding.itemOrderTv.text = items[position].detail
     }
 
 }

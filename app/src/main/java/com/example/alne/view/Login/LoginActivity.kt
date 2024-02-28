@@ -12,27 +12,9 @@ import com.example.alne.GlobalApplication
 import com.example.alne.MainActivity
 import com.example.alne.R
 import com.example.alne.databinding.ActivityLoginBinding
-import com.example.alne.model.Jwt
-import com.example.alne.model.Token
+import com.example.alne.model.User
 import com.example.alne.view.SignUp.SignUpActivity
 import com.example.alne.viewmodel.LoginViewModel
-import com.example.alne.viewmodel.SignUpViewModel
-import com.example.flo.Network.AuthApi
-import com.example.flo.Network.AuthResponse
-import com.example.flo.Network.getRetrofit
-import com.example.flo.model.User
-import com.google.gson.Gson
-import com.kakao.sdk.auth.model.OAuthToken
-import com.kakao.sdk.common.model.ClientError
-import com.kakao.sdk.common.model.ClientErrorCause
-import com.kakao.sdk.common.util.Utility
-import com.kakao.sdk.user.UserApiClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import kotlin.math.log
-
 
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding

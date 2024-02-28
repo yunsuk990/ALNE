@@ -31,7 +31,7 @@ class FridgeViewModel(private val application: Application) : AndroidViewModel(a
 
     init {
         if(getUserToken() != null){
-            getFridgeFood(getUserToken().accessToken!!, UserId(getUserToken().userId, null))
+            getFridgeFood(getUserToken()?.accessToken!!, UserId(getUserToken()?.userId!!, null))
         }
     }
 
@@ -49,7 +49,7 @@ class FridgeViewModel(private val application: Application) : AndroidViewModel(a
                         200 -> {
                             Log.d("addFridgeData", "재료 등록 성공")
                             Log.d("addFridgeData", response.body()?.data.toString())
-                            getFridgeFood(getUserToken().accessToken!!, UserId(getUserToken().userId, null))
+                            getFridgeFood(getUserToken()?.accessToken!!, UserId(getUserToken()?.userId!!, null))
 
                         }
                         401 -> {
@@ -115,7 +115,7 @@ class FridgeViewModel(private val application: Application) : AndroidViewModel(a
                 if(response.isSuccessful){
                     when(res?.status){
                         200 -> {
-                            getFridgeFood(getUserToken().accessToken!!, UserId(getUserToken().userId, null))
+                            getFridgeFood(getUserToken()?.accessToken!!, UserId(getUserToken()?.userId!!, null))
                         }
                         else -> {
 

@@ -5,7 +5,7 @@ import com.example.alne.Network.FridgeApi
 import com.example.alne.model.Food
 import com.example.alne.model.UserId
 import com.example.alne.room.model.food
-import com.example.flo.Network.getRetrofit
+import com.example.alne.Network.getRetrofit
 
 class fridgeRepository() {
 

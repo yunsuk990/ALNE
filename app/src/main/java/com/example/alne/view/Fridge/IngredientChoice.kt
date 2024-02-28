@@ -7,6 +7,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +25,7 @@ class IngredientChoice: BottomSheetDialogFragment() {
     lateinit var binding: IngredientchoiceBinding
     lateinit var viewModel: IngredientChoiceViewModel
     private var listener: OnSendFromBottomSheetDialog? = null
+    var adapter: IngredientChoiceAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,8 +36,8 @@ class IngredientChoice: BottomSheetDialogFragment() {
         viewModel = ViewModelProvider(this).get(IngredientChoiceViewModel::class.java)
 
         viewModel.getFridgeLiveData.observe(viewLifecycleOwner, Observer { items ->
-            val adapter = IngredientChoiceAdapter(items)
-            adapter.setMyItemClickListener(object: IngredientChoiceAdapter.MyItemClickListener{
+            adapter = IngredientChoiceAdapter(items)
+            adapter!!.setMyItemClickListener(object: IngredientChoiceAdapter.MyItemClickListener{
                 override fun onItemClick(name: String) {
                     listener?.sendValue(name)
                     dismiss()
@@ -41,6 +45,17 @@ class IngredientChoice: BottomSheetDialogFragment() {
             })
             binding.ingredientChoiceRv.adapter = adapter
             binding.ingredientChoiceRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        })
+
+        binding.ingredientChoiceSv.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
         })
 
         return binding.root
@@ -53,4 +68,16 @@ class IngredientChoice: BottomSheetDialogFragment() {
     fun setCallback(listener: OnSendFromBottomSheetDialog) {
         this.listener = listener
     }
+
+//    override fun getFilter(): Filter {
+//        var filter = object: Filter(){
+//            override fun performFiltering(p0: CharSequence?): FilterResults {
+//
+//            }
+//
+//            override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+//
+//            }
+//        }
+//    }
 }

@@ -52,16 +52,17 @@ class SharedPrefManager(val context: Context) {
 //    }
 
     fun saveJwt(data: Jwt){
-        Log.d("jwt" , data.toString())
         val sharedPreferences = context?.getSharedPreferences(USER_INFO, AppCompatActivity.MODE_PRIVATE)!!
         val edit = sharedPreferences.edit()
         edit.putString(KEY_USER_INFO, Gson().toJson(data))
         edit.commit()
     }
-    fun getUserToken(): Jwt {
+
+    //userId, Jwt 토큰
+    fun getUserToken(): Jwt? {
         val sharedPreferences = context?.getSharedPreferences(USER_INFO, AppCompatActivity.MODE_PRIVATE)
         val userJwt = Gson().fromJson(sharedPreferences?.getString(KEY_USER_INFO,null), Jwt::class.java)
-        Log.d("getjwt", userJwt.toString())
+        Log.d("userJwt", userJwt.toString())
         return userJwt
     }
 

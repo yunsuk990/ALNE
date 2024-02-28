@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.Recipe.viewpage.review.viewpage.UserReview">
+    tools:context=".view.Recipe.viewpage.review.viewpage.UserReviewActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/user_review_tb"
@@ -228,6 +228,7 @@
         app:layout_constraintTop_toBottomOf="@+id/usr_review_food_cv">
 
         <EditText
+            android:id="@+id/user_review_comment_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"

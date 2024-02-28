@@ -1,24 +1,15 @@
 package com.example.alne.viewmodel
 
 import android.app.Application
-import android.content.Intent
 import android.util.Log
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.alne.GlobalApplication
-import com.example.alne.MainActivity
-import com.example.alne.model.Jwt
+import com.example.alne.Network.AuthResponse
+import com.example.alne.Network.LoginResponse
 import com.example.alne.model.KakaoUser
-import com.example.alne.model.Token
+import com.example.alne.model.User
 import com.example.alne.repository.repository
-import com.example.flo.Network.AuthResponse
-import com.example.flo.Network.LoginResponse
-import com.example.flo.model.User
-import com.google.gson.Gson
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause

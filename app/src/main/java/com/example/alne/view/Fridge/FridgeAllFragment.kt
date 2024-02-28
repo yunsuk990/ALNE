@@ -66,7 +66,8 @@ class FridgeAllFragment : Fragment(), MyCustomDialogDetailInterface {
 
                 // 보유재료 삭제 기능
                 override fun onInfoClick(view: View, position: Int) {
-                    viewModel.deleteFridgeFood(UserId( getUserToken().userId,
+                    viewModel.deleteFridgeFood(UserId(
+                        getUserToken()?.userId!!,
                         fridgeadapter.items[position].userId!!
                     ))
                 }
@@ -75,7 +76,7 @@ class FridgeAllFragment : Fragment(), MyCustomDialogDetailInterface {
     }
 
     private fun getCustomDialog(food: Food){
-        CustomDialogDetail(requireContext(),getUserToken(),food, this).show(requireActivity().supportFragmentManager, "CustomDialog")
+        CustomDialogDetail(requireContext(), getUserToken()!!,food, this).show(requireActivity().supportFragmentManager, "CustomDialog")
     }
 
     fun getUserToken() = GlobalApplication.prefManager.getUserToken()
@@ -83,7 +84,7 @@ class FridgeAllFragment : Fragment(), MyCustomDialogDetailInterface {
     // 재료 수정하기(편집)
     override fun onSubmitBtnDetailClicked(food: Food) {
         Log.d("onSubmitBtnDetailClicked", "launch")
-        viewModel.addFridgeData(getUserToken().accessToken!!, food)
+        viewModel.addFridgeData(getUserToken()?.accessToken!!, food)
     }
 
 }

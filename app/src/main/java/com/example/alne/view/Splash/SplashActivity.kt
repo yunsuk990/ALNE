@@ -11,10 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.alne.MainActivity
 import com.example.alne.databinding.ActivitySplashBinding
-import com.example.alne.model.KakaoUser
-import com.example.alne.repository.repository
 import com.example.alne.viewmodel.SplashViewModel
-import com.example.flo.Network.getRetrofit
+import com.example.alne.Network.getRetrofit
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.common.model.KakaoSdkError
 import com.kakao.sdk.user.UserApiClient
@@ -72,6 +70,7 @@ class SplashActivity : AppCompatActivity() {
                 }
             }
         }else {
+
             //로그인 필요
             if(autoLogin()){
                 startActivity(Intent(this, MainActivity::class.java))

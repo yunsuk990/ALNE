@@ -1,8 +1,8 @@
-package com.example.flo.Network
+package com.example.alne.Network
 
 import com.example.alne.model.KakaoUser
-import com.example.alne.model.Token
-import com.example.flo.model.User
+import com.example.alne.model.User
+import com.example.alne.Network.AuthResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
