@@ -3,13 +3,14 @@ package com.example.alne.view.Fridge
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
-import androidx.appcompat.widget.SearchView
+import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,6 +34,9 @@ class IngredientChoice: BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = IngredientchoiceBinding.inflate(layoutInflater)
+        binding.ingredientChoiceSv.queryHint = Html.fromHtml("<font color = #000000>" + "재료명을 입력해 검색해보세요." + "</font>")
+
+
         viewModel = ViewModelProvider(this).get(IngredientChoiceViewModel::class.java)
 
         viewModel.getFridgeLiveData.observe(viewLifecycleOwner, Observer { items ->
@@ -53,6 +57,7 @@ class IngredientChoice: BottomSheetDialogFragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                adapter?.filter?.filter(newText)
                 return false
             }
 
@@ -69,15 +74,4 @@ class IngredientChoice: BottomSheetDialogFragment() {
         this.listener = listener
     }
 
-//    override fun getFilter(): Filter {
-//        var filter = object: Filter(){
-//            override fun performFiltering(p0: CharSequence?): FilterResults {
-//
-//            }
-//
-//            override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
-//
-//            }
-//        }
-//    }
 }

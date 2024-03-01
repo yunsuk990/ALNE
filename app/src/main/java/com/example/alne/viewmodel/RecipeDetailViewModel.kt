@@ -42,7 +42,6 @@ class RecipeDetailViewModel: ViewModel() {
     private val _deleteRecipeFavoriteLiveData = MutableLiveData<Boolean>()
     val deleteRecipeFavoriteLiveData: LiveData<Boolean> = _deleteRecipeFavoriteLiveData
 
-
     fun addUserComment(comment: Comment) = repository.addUserComment(comment).enqueue(object: Callback<AuthResponse>{
         override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
             var res = response.body()

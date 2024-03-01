@@ -4,15 +4,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.alne.databinding.ItemReviewBinding
+import com.example.alne.model.Comments
 import com.example.alne.model.Review
 
-class ReviewPageRVAdapter(val items: ArrayList<Review>): RecyclerView.Adapter<ReviewPageRVAdapter.ViewHolder>() {
+class ReviewPageRVAdapter(val items: List<Comments>): RecyclerView.Adapter<ReviewPageRVAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemReviewBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(review: Review){
-            binding.itemReviewNickname.text = review.nickname
-            binding.itemReviewSummary.text = review.text
-            binding.itemReviewDate.text = review.date
+        fun bind(comment: Comments){
+            binding.itemReviewNickname.text = comment.user.name
+            binding.itemReviewSummary.text = comment.detail
+//            binding.itemReviewDate.text = review.date
+            binding.itemReviewRatingbar.rating = comment.grade.toFloat()
         }
 
     }

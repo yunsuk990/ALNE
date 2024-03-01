@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.alne.R
 import com.example.alne.databinding.ActivityRecipeDetailBinding
 import com.example.alne.model.DeleteFavorite
+import com.example.alne.model.Process
 import com.example.alne.room.model.recipe
+import com.example.alne.view.Recipe.viewpage.review.ReviewRVAdapter
 import com.example.alne.viewmodel.RecipeDetailViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
@@ -34,6 +37,7 @@ class RecipeDetailActivity : AppCompatActivity() {
     }
 
     private fun init(recipe: recipe){
+        viewModel.getRecipeProcess(recipe.recipe_code)
         binding.recipeDetailTitleTv.text = recipe.name
         binding.recipeDetailChefTv.text = recipe.difficulty
         binding.recipeDetailIntroduceTv.text = recipe.introduce

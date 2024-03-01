@@ -7,15 +7,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.alne.databinding.FragmentReviewPageBinding
-import com.example.alne.model.Review
 import com.example.alne.room.model.recipe
+import com.example.alne.viewmodel.RecipeDetailViewModel
 import com.google.gson.Gson
 
 class ReviewPageFragment(val recipe: recipe) : Fragment() {
 
     lateinit var binding: FragmentReviewPageBinding
+    lateinit var viewModel: RecipeDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,15 +26,15 @@ class ReviewPageFragment(val recipe: recipe) : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentReviewPageBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(requireActivity()).get(RecipeDetailViewModel::class.java)
         Log.d("ReviewPageFragment", "onCreateView")
-        val item = ArrayList<Review>()
-        item.add(Review("최윤석","맛있습니다","2023.11.7"))
-        item.add(Review("전승규","맛있습니다","2023.11.8"))
-        item.add(Review("노영권","맛있습니다","2023.11.9"))
-        item.add(Review("신해철","맛있습니다","2023.11.10"))
-        binding.reviewPageRv.adapter = ReviewPageRVAdapter(item)
-        binding.reviewPageRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
+
+        viewModel.getRecipeProcessLiveData.observe(viewLifecycleOwner, Observer{
+            binding.reviewPageRv.adapter = ReviewPageRVAdapter(it.comments)
+            binding.reviewPageRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+        })
 
         binding.reviewPageReviewBt.setOnClickListener {
             var intent = Intent(context, UserReviewActivity::class.java)

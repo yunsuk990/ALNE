@@ -26,7 +26,7 @@ class ReviewFragment(val recipe: recipe): Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentReviewBinding.inflate(layoutInflater)
-        viewModel = ViewModelProvider(this@ReviewFragment).get(RecipeDetailViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(RecipeDetailViewModel::class.java)
         Log.d("ReviewFragment", recipe.toString())
 
         var starView = layoutInflater.inflate(R.layout.layout_tab_star, null)
@@ -42,13 +42,12 @@ class ReviewFragment(val recipe: recipe): Fragment() {
             tap.customView = list[position]
         }.attach()
 
-        viewModel.getRecipeProcess(recipe.recipe_code)
 
         viewModel.getRecipeProcessLiveData.observe(viewLifecycleOwner, Observer { recipeProcess ->
-            val items: ArrayList<Process> = ArrayList()
-            items.addAll(recipeProcess.recipeProcess)
-            binding.recipeReviewRv.adapter = ReviewRVAdapter(items)
-            binding.recipeReviewRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+//            val items: ArrayList<Process> = ArrayList()
+//            items.addAll(recipeProcess.recipeProcess)
+//            binding.recipeReviewRv.adapter = ReviewRVAdapter(items)
+//            binding.recipeReviewRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         })
         return binding.root

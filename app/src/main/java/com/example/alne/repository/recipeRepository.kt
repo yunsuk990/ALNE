@@ -19,6 +19,7 @@ class recipeRepository {
 //    fun getUsersComments(): Arra
     fun addUserComment(comment: Comment) = recipeService.addUserComment(comment)
 
+    //특정 레시피 조회
     fun getRecipeProcess(recipeCode: Int) = recipeService.getRecipeProcess(recipeCode)
 
     fun addRecipeFavorite(recipeCode: Int,userId: UserId) = recipeService.addRecipeFavorite(recipeCode,userId)
