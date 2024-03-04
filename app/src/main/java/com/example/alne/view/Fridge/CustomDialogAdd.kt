@@ -323,6 +323,17 @@ class CustomDialogAdd(context: Context, val jwt: Jwt, myCustomDialogInterface: M
             })
         builder.show()
     }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("CustomDialog_Pause", "OnPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("CustomDialog_Stop", "onStop")
+
+    }
 }
 
 interface MyCustomDialogInterface {

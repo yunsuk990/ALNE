@@ -10,8 +10,12 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.alne.GlobalApplication
 import com.example.alne.databinding.FragmentReviewPageBinding
+import com.example.alne.model.Comments
+import com.example.alne.model.requestComment
 import com.example.alne.room.model.recipe
+import com.example.alne.view.Fridge.IngredientChoice
 import com.example.alne.viewmodel.RecipeDetailViewModel
 import com.google.gson.Gson
 
@@ -31,16 +35,27 @@ class ReviewPageFragment(val recipe: recipe) : Fragment() {
 
 
         viewModel.getRecipeProcessLiveData.observe(viewLifecycleOwner, Observer{
-            binding.reviewPageRv.adapter = ReviewPageRVAdapter(it.comments)
+            var adapter = ReviewPageRVAdapter(it.comments as ArrayList<Comments>)
+            adapter.setMyItemClickListener(object: ReviewPageRVAdapter.MyItemClickListener{
+                override fun deleteComment(position: Int) {
+                    viewModel.deleteUserComment(requestComment(GlobalApplication.prefManager.getUserToken()?.userId!!, recipe.recipe_code))
+                    adapter.removeItem(position)
+                }
+            })
+            binding.reviewPageRv.adapter = adapter
             binding.reviewPageRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         })
 
         binding.reviewPageReviewBt.setOnClickListener {
-            var intent = Intent(context, UserReviewActivity::class.java)
-            intent.putExtra("recipe", Gson().toJson(recipe))
-            startActivity(intent)
+            Log.d("reviewPageReviewBt", "clicked")
+            val dialog = UserReviewBottomSheetDialog()
+            var bundle: Bundle = Bundle()
+            bundle.putString("recipe", Gson().toJson(recipe))
+            dialog.arguments = bundle
+            dialog.show(requireActivity().supportFragmentManager, "")
         }
+
 
         return binding.root
     }

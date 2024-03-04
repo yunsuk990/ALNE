@@ -1,6 +1,7 @@
 package com.example.alne.viewmodel
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,6 +15,7 @@ import com.example.alne.model.Status
 import com.example.alne.model.UserId
 import com.example.alne.repository.recipeRepository
 import com.example.alne.Network.AuthResponse
+import com.example.alne.model.requestComment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,7 +32,7 @@ class RecipeDetailViewModel: ViewModel() {
     private val _addUserCommentLiveData = MutableLiveData<Boolean>()
     val addUserCommentLiveData: LiveData<Boolean> = _addUserCommentLiveData
 
-    //레시피 순서 조회
+    //특정 레시프 조회
     private val _getRecipeProcessLiveData = MutableLiveData<RecipeProcess>()
     val getRecipeProcessLiveData: LiveData<RecipeProcess> = _getRecipeProcessLiveData
 
@@ -63,6 +65,8 @@ class RecipeDetailViewModel: ViewModel() {
         }
     })
 
+
+    //특정 레시피 조회
     fun getRecipeProcess(recipeCode: Int) = repository.getRecipeProcess(recipeCode).enqueue(object: Callback<RecipeProcessRespond>{
         override fun onResponse(
             call: Call<RecipeProcessRespond>,
@@ -124,6 +128,27 @@ class RecipeDetailViewModel: ViewModel() {
         override fun onFailure(call: Call<Status>, t: Throwable) {
             _deleteRecipeFavoriteLiveData.postValue(false)
             Log.d("deleteRecipeFavorite_onFailure", t.message.toString())
+        }
+
+    })
+
+    fun deleteUserComment(requestComment: requestComment) = repository.deleteUserComment(requestComment).enqueue(object: Callback<AuthResponse>{
+        override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
+            val res = response.body()
+            when(res?.status){
+                200 -> {
+                    Log.d("deleteUserComment", "Success")
+                    getRecipeProcess(requestComment.data)
+
+                }
+                else -> {
+                    Log.d("deleteUserComment", "Fail")
+                }
+            }
+        }
+
+        override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
+            Log.d("deleteUserComment_onFailure", t.message.toString())
         }
 
     })

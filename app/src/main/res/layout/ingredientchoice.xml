@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
@@ -38,30 +38,31 @@
 <!--            android:layout_height="30dp"/>-->
 <!--    </LinearLayout>-->
 
-    <SearchView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/ingredient_choice_sv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_marginTop="16dp"
-        android:queryBackground="@null"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/ingredient_choice_scrollview_bg"
-        app:iconifiedByDefault="false"
-        android:searchIcon="@drawable/search_icon"
+        android:inputType="text"
+        android:queryBackground="@null"
         android:searchHintIcon="@drawable/search_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:searchIcon="@drawable/search_icon"
+        app:iconifiedByDefault="false"
         app:queryHint="재료명을 입력해 검색해보세요." />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ingredient_choice_rv"
         android:layout_width="0dp"
-        android:layout_height="540dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/ingredient_choice_sv"
-        app:layout_constraintStart_toStartOf="@+id/ingredient_choice_sv"
-        app:layout_constraintTop_toBottomOf="@+id/ingredient_choice_sv"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ingredient_choice_sv"
+        android:layout_alignStart="@+id/ingredient_choice_sv"
+        android:layout_alignEnd="@+id/ingredient_choice_sv"
         tools:listitem="@layout/item_choice_ingredient" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

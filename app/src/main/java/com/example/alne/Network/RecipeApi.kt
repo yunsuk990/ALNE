@@ -6,6 +6,7 @@ import com.example.alne.model.FavoriteRespond
 import com.example.alne.model.RecipeProcessRespond
 import com.example.alne.model.UserId
 import com.example.alne.model.Status
+import com.example.alne.model.requestComment
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -44,6 +45,11 @@ interface RecipeApi {
         @Path("recipeCode") recipeCode: Int,
         @Body userid: UserId
     )
+
+    @POST("/delComment")
+    fun deleteUserComment(
+        @Body requestComment: requestComment
+    ): Call<AuthResponse>
 
 
 

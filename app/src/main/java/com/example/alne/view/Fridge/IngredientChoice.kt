@@ -1,23 +1,15 @@
 package com.example.alne.view.Fridge
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Html
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.alne.GlobalApplication
-import com.example.alne.R
 import com.example.alne.databinding.IngredientchoiceBinding
-import com.example.alne.room.model.food
 import com.example.alne.viewmodelprivate.IngredientChoiceViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 

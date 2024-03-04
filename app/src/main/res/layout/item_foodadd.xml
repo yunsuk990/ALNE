@@ -50,20 +50,21 @@
 
     <TextView
         android:id="@+id/food_title_et"
-        android:background="@drawable/spinner_background"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/blue_border"
         android:clickable="false"
         android:editable="false"
+        android:padding="10dp"
         android:text="재료 선택"
         android:textColor="@color/black"
         android:textSize="15sp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/food_name_title_tv"
-        app:layout_constraintTop_toBottomOf="@+id/food_name_title_tv"/>
+        app:layout_constraintTop_toBottomOf="@+id/food_name_title_tv" />
 
     <TextView
         android:id="@+id/food_memo_title_tv"
@@ -116,7 +117,7 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/spinner_background"
         android:spinnerMode="dropdown"
@@ -150,7 +151,7 @@
         app:layout_constraintTop_toBottomOf="@+id/food_expire_title_tv" />
     <LinearLayout
         android:id="@+id/food_add_datepicker_linear"
-        android:layout_width="110dp"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:background="@drawable/spinner_background"
         android:orientation="horizontal"
@@ -165,12 +166,6 @@
             android:layout_height="wrap_content"
             android:text="2023.11.30"
             android:textSize="15sp" />
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="2dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/expand" />
     </LinearLayout>
     <TextView
         android:id="@+id/textView3"
@@ -185,7 +180,7 @@
         app:layout_constraintTop_toTopOf="@+id/food_add_timepicker_linear" />
     <LinearLayout
         android:id="@+id/food_add_timepicker_linear"
-        android:layout_width="80dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:background="@drawable/spinner_background"
         android:orientation="horizontal"
@@ -196,16 +191,10 @@
         app:layout_constraintTop_toTopOf="@+id/food_add_datepicker_linear">
         <TextView
             android:id="@+id/food_add_time_picker"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="12:50"
             android:textSize="15sp" />
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="2dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/expand" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton

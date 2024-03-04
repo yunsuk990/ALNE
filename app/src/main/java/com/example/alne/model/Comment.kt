@@ -9,3 +9,8 @@ data class Comment(
     @SerializedName("grade") val grade: Int,
     @SerializedName("imageURL") val imageURL: String
 )
+
+data class requestComment(
+    val userId: Int,
+    val data: Int
+)

@@ -7,6 +7,7 @@ import com.example.alne.model.UserId
 import com.example.alne.room.model.recipe
 import com.example.alne.Network.RecipeApi
 import com.example.alne.Network.getRetrofit
+import com.example.alne.model.requestComment
 
 class recipeRepository {
 
@@ -18,6 +19,8 @@ class recipeRepository {
 
 //    fun getUsersComments(): Arra
     fun addUserComment(comment: Comment) = recipeService.addUserComment(comment)
+
+    fun deleteUserComment(requestComment: requestComment) = recipeService.deleteUserComment(requestComment)
 
     //특정 레시피 조회
     fun getRecipeProcess(recipeCode: Int) = recipeService.getRecipeProcess(recipeCode)

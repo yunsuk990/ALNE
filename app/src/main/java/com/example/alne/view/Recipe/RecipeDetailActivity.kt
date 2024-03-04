@@ -4,15 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.alne.R
 import com.example.alne.databinding.ActivityRecipeDetailBinding
-import com.example.alne.model.DeleteFavorite
-import com.example.alne.model.Process
 import com.example.alne.room.model.recipe
-import com.example.alne.view.Recipe.viewpage.review.ReviewRVAdapter
 import com.example.alne.viewmodel.RecipeDetailViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
@@ -23,17 +20,35 @@ class RecipeDetailActivity : AppCompatActivity() {
     lateinit var viewModel: RecipeDetailViewModel
     private val information = arrayListOf("순서 및 후기", "재료","참고 영상")
     var favorite: Boolean = false
+    var globalrecipe: recipe? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRecipeDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.recipeDetailTb.bringToFront()
-        var recipe: recipe = Gson().fromJson(intent.getStringExtra("recipe"), recipe::class.java)
-        Log.d("RecipeDetailActivity_recipe", recipe.toString())
+        globalrecipe = Gson().fromJson(intent.getStringExtra("recipe"), recipe::class.java)
+        Log.d("RecipeDetailActivity_recipe", globalrecipe.toString())
         viewModel = ViewModelProvider(this).get(RecipeDetailViewModel::class.java)
 
-        init(recipe)
-        setOnClickListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("RecipeDetailActivity", "onResume")
+        init(globalrecipe!!)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("RecipeDetailActivity", "onResume")
+
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("RecipeDetailActivity", "onPause")
+
     }
 
     private fun init(recipe: recipe){
@@ -63,6 +78,8 @@ class RecipeDetailActivity : AppCompatActivity() {
                 viewModel.addRecipeFavorite(recipe.recipe_code)
             }
         }
+
+        setOnClickListener()
 
 
     }

@@ -44,10 +44,9 @@ class ReviewFragment(val recipe: recipe): Fragment() {
 
 
         viewModel.getRecipeProcessLiveData.observe(viewLifecycleOwner, Observer { recipeProcess ->
-//            val items: ArrayList<Process> = ArrayList()
-//            items.addAll(recipeProcess.recipeProcess)
-//            binding.recipeReviewRv.adapter = ReviewRVAdapter(items)
-//            binding.recipeReviewRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            binding.recipeReviewRv.adapter = ReviewRVAdapter(recipeProcess.recipeProcess as ArrayList<Process>)
+            binding.recipeReviewRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            reviewView.findViewById<TextView>(R.id.recipe_review_tv).text = recipeProcess.comments.size.toString()
 
         })
         return binding.root
