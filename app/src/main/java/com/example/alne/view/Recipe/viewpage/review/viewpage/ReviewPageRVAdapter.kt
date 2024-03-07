@@ -9,10 +9,20 @@ import com.example.alne.databinding.ItemReviewBinding
 import com.example.alne.model.Comments
 import com.example.alne.model.Review
 
-class ReviewPageRVAdapter(var items: ArrayList<Comments>): RecyclerView.Adapter<ReviewPageRVAdapter.ViewHolder>() {
+class ReviewPageRVAdapter(): RecyclerView.Adapter<ReviewPageRVAdapter.ViewHolder>() {
 
+    private var items: ArrayList<Comments> = ArrayList()
     interface MyItemClickListener {
         fun deleteComment(position: Int)
+        fun patchComment(comment: Comments)
+
+        fun initUi(bool: Boolean)
+    }
+
+    fun addAllItem(items: ArrayList<Comments>){
+        this.items.clear()
+        this.items.addAll(items)
+        notifyDataSetChanged()
     }
 
     fun removeItem(position: Int){
@@ -32,10 +42,16 @@ class ReviewPageRVAdapter(var items: ArrayList<Comments>): RecyclerView.Adapter<
             binding.itemReviewSummary.text = comment.detail
 //            binding.itemReviewDate.text = review.date
             binding.itemReviewRatingbar.rating = comment.grade.toFloat()
+            binding.itemReviewRatingTv.text = comment.grade.toString()
             if(comment.user.id == GlobalApplication.prefManager.getUserToken()?.userId){
                 binding.itemReviewInfo.visibility = View.VISIBLE
+                binding.itemReviewRecomment.setOnClickListener {
+                    myItemClickListener.patchComment(comment)
+                }
+                myItemClickListener.initUi(true)
             }else{
                 binding.itemReviewInfo.visibility = View.INVISIBLE
+                myItemClickListener.initUi(false)
             }
         }
 

@@ -4,17 +4,30 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="10dp">
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp">
 
-    <ImageView
-        android:id="@+id/item_review_iv"
-        android:src="@drawable/user"
-        android:background="@drawable/food_image_border"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:padding="10dp"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/item_review_cv"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        app:cardCornerRadius="100dp"
+        app:cardElevation="0.5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/item_review_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/food_image_border"
+            android:padding="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/user" />
+
+    </com.google.android.material.card.MaterialCardView>
+
 
     <TextView
         android:id="@+id/item_review_nickname"
@@ -25,8 +38,8 @@
         android:textSize="14sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/item_review_iv"
-        app:layout_constraintTop_toTopOf="@+id/item_review_iv"/>
+        app:layout_constraintStart_toEndOf="@+id/item_review_cv"
+        app:layout_constraintTop_toTopOf="@+id/item_review_cv"/>
 
     <com.willy.ratingbar.BaseRatingBar
         android:id="@+id/item_review_ratingbar"
@@ -46,7 +59,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/item_review_nickname"/>
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/item_review_rating_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
@@ -59,25 +72,26 @@
 
     <TextView
         android:id="@+id/item_review_summary"
-        android:text="너무 맛있었어요"
-        android:textSize="12sp"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="너무 맛있었어요"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_review_cv"
         app:layout_constraintStart_toStartOf="@+id/item_review_nickname"
-        app:layout_constraintTop_toBottomOf="@+id/item_review_nickname"/>
+        app:layout_constraintTop_toBottomOf="@+id/item_review_nickname" />
 
     <TextView
         android:id="@+id/item_review_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="23.11.27"
+        android:layout_marginTop="5dp"
         android:textColor="@color/black"
         android:textSize="12sp"
-        android:layout_marginTop="8dp"
-        android:text="23.11.27"
-        app:layout_constraintStart_toStartOf="@+id/item_review_summary"
-        app:layout_constraintTop_toBottomOf="@+id/item_review_summary" />
+        app:layout_constraintEnd_toEndOf="@+id/item_review_info"
+        app:layout_constraintTop_toBottomOf="@+id/item_review_info" />
 
 <!--    <androidx.cardview.widget.CardView-->
 <!--        android:layout_width="60dp"-->
@@ -106,9 +120,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/item_review_iv">
+        app:layout_constraintTop_toTopOf="@+id/item_review_cv">
 
         <TextView
             android:id="@+id/item_review_recomment"
@@ -129,8 +143,15 @@
             android:layout_height="wrap_content"
             android:text="삭제"
             android:textSize="12sp" />
-
-
     </LinearLayout>
+
+    <View
+        android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_review_cv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

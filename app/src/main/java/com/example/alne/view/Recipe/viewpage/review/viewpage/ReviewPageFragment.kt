@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +24,7 @@ class ReviewPageFragment(val recipe: recipe) : Fragment() {
 
     lateinit var binding: FragmentReviewPageBinding
     lateinit var viewModel: RecipeDetailViewModel
+    lateinit var adapter: ReviewPageRVAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,31 +35,69 @@ class ReviewPageFragment(val recipe: recipe) : Fragment() {
         viewModel = ViewModelProvider(requireActivity()).get(RecipeDetailViewModel::class.java)
         Log.d("ReviewPageFragment", "onCreateView")
 
+        initAdapter()
 
         viewModel.getRecipeProcessLiveData.observe(viewLifecycleOwner, Observer{
-            var adapter = ReviewPageRVAdapter(it.comments as ArrayList<Comments>)
-            adapter.setMyItemClickListener(object: ReviewPageRVAdapter.MyItemClickListener{
-                override fun deleteComment(position: Int) {
-                    viewModel.deleteUserComment(requestComment(GlobalApplication.prefManager.getUserToken()?.userId!!, recipe.recipe_code))
-                    adapter.removeItem(position)
-                }
-            })
-            binding.reviewPageRv.adapter = adapter
-            binding.reviewPageRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            adapter.addAllItem(it.comments as ArrayList<Comments>)
+        })
 
+        viewModel.addUserCommentLiveData.observe(this, Observer { it ->
+            if(!it){
+                Toast.makeText(requireContext(), "리뷰 작성에 실패했습니다.", Toast.LENGTH_SHORT).show()
+            }else{
+                viewModel.getRecipeProcess(recipe.recipe_code)
+                setUi(it)
+            }
+        })
+
+        viewModel.delUserCommentLiveData.observe(viewLifecycleOwner, Observer {
+            setUi(!it)
         })
 
         binding.reviewPageReviewBt.setOnClickListener {
-            Log.d("reviewPageReviewBt", "clicked")
-            val dialog = UserReviewBottomSheetDialog()
             var bundle: Bundle = Bundle()
             bundle.putString("recipe", Gson().toJson(recipe))
-            dialog.arguments = bundle
-            dialog.show(requireActivity().supportFragmentManager, "")
+            startUserReviewBottomSheetDialog(bundle)
         }
 
-
         return binding.root
+    }
+
+    private fun initAdapter() {
+        adapter = ReviewPageRVAdapter()
+        adapter.setMyItemClickListener(object: ReviewPageRVAdapter.MyItemClickListener{
+            override fun deleteComment(position: Int) {
+                viewModel.deleteUserComment(requestComment(GlobalApplication.prefManager.getUserToken()?.userId!!, recipe.recipe_code))
+                adapter.removeItem(position)
+            }
+            override fun patchComment(comment: Comments) {
+                var bundle: Bundle = Bundle()
+                bundle.putString("recipe", Gson().toJson(recipe))
+                bundle.putString("comment", Gson().toJson(comment))
+                startUserReviewBottomSheetDialog(bundle)
+            }
+
+            override fun initUi(bool: Boolean) {
+                setUi(bool)
+            }
+        })
+        binding.reviewPageRv.adapter = adapter
+        binding.reviewPageRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+    }
+
+    private fun setUi(bool: Boolean){
+        if(bool){
+            binding.reviewPageReviewBt.visibility = View.GONE
+        }else{
+            binding.reviewPageReviewBt.visibility = View.VISIBLE
+        }
+    }
+
+    private fun startUserReviewBottomSheetDialog(bundle: Bundle){
+        val dialog = UserReviewBottomSheetDialog()
+        dialog.arguments = bundle
+        dialog.show(childFragmentManager, "")
+        Log.d("reviewPageReviewBt", bundle.toString())
     }
 
     override fun onResume() {

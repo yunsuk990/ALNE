@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.example.alne.GlobalApplication
 import com.example.alne.databinding.UserReviewDialogBinding
 import com.example.alne.model.Comment
+import com.example.alne.model.Comments
 import com.example.alne.room.model.recipe
 import com.example.alne.viewmodel.RecipeDetailViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -32,7 +33,10 @@ class UserReviewBottomSheetDialog: BottomSheetDialogFragment() {
         viewModel = ViewModelProvider(requireActivity()).get(RecipeDetailViewModel::class.java)
 
         var recipe = Gson().fromJson(arguments?.getString("recipe"), recipe::class.java)
-        init(recipe)
+        var comment = Gson().fromJson(arguments?.getString("comment"), Comments::class.java)
+
+
+        init(recipe, comment)
 
 
         binding.userReviewCancelBt.setOnClickListener {
@@ -45,23 +49,22 @@ class UserReviewBottomSheetDialog: BottomSheetDialogFragment() {
             Log.d("editText", binding.userReviewCommentEt.text.toString())
             // 댓글 정보 서버로 보내기
             viewModel.addUserComment(Comment(recipe.recipe_code, userId, binding.userReviewCommentEt.text.toString(), binding.baseRatingBar.rating.toInt(), "url"))
+            dismiss()
         }
 
-        viewModel.addUserCommentLiveData.observe(this, Observer { it ->
-            if(!it){
-                Toast.makeText(requireContext(), "리뷰 작성에 실패했습니다.", Toast.LENGTH_SHORT).show()
-            }else{
-                viewModel.getRecipeProcess(recipe.recipe_code)
-            }
-            dismiss()
-        })
 
 
         return binding.root
     }
 
-    private fun init(recipe: recipe?){
+    private fun init(recipe: recipe?, comment: Comments?){
         Glide.with(this).load(recipe?.imageurl).into(binding.userReviewMainFoodIv)
+        if(comment != null) {
+            binding.userReviewSubmitBt.text = "수정"
+            binding.userReviewCommentEt.setText(comment.detail)
+            binding.baseRatingBar.rating = comment.grade.toFloat()
+            binding.itemReviewDialogIdTv.text = comment.user.name
+        }
     }
 
     interface OnSendFromBottomSheetDialog {

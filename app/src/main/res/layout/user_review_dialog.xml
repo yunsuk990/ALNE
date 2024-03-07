@@ -33,6 +33,7 @@
             android:layout_height="1dp"/>
 
         <TextView
+            android:id="@+id/item_review_dialog_id_tv"
             android:text="yunsuk990"
             android:textColor="@color/black"
             android:textSize="16sp"

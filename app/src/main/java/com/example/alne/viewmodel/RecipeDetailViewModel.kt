@@ -32,6 +32,10 @@ class RecipeDetailViewModel: ViewModel() {
     private val _addUserCommentLiveData = MutableLiveData<Boolean>()
     val addUserCommentLiveData: LiveData<Boolean> = _addUserCommentLiveData
 
+    //댓글 삭제
+    private val _delUserCommentLiveData = MutableLiveData<Boolean>()
+    val delUserCommentLiveData: LiveData<Boolean> = _delUserCommentLiveData
+
     //특정 레시프 조회
     private val _getRecipeProcessLiveData = MutableLiveData<RecipeProcess>()
     val getRecipeProcessLiveData: LiveData<RecipeProcess> = _getRecipeProcessLiveData
@@ -139,15 +143,17 @@ class RecipeDetailViewModel: ViewModel() {
                 200 -> {
                     Log.d("deleteUserComment", "Success")
                     getRecipeProcess(requestComment.data)
-
+                    _delUserCommentLiveData.postValue(true)
                 }
                 else -> {
+                    _delUserCommentLiveData.postValue(false)
                     Log.d("deleteUserComment", "Fail")
                 }
             }
         }
 
         override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
+            _delUserCommentLiveData.postValue(false)
             Log.d("deleteUserComment_onFailure", t.message.toString())
         }
 
