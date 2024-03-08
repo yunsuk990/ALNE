@@ -56,7 +56,9 @@ class FridgeAdapter(val context: Context,  val items: ArrayList<Food>): Recycler
             binding.itemFridgeTitleTv.text = food.name
             binding.itemFridgeExpireTv.text = date[0]+" 까지"
             binding.itemFridgeExpireInfoTv.text = "유효기간 ${diff}일 남음"
-            binding.itemFridgeIv.setImageResource(R.drawable.bibimbap)
+            binding.itemFridgeIv.setImageResource(R.drawable.camera)
+
+
             if(food.storage == "FROZEN"){
                 binding.itemFridgeStorageTv.text = "냉동"
             }else{

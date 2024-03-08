@@ -32,7 +32,6 @@ class ReviewFragment(val recipe: recipe): Fragment() {
         var starView = layoutInflater.inflate(R.layout.layout_tab_star, null)
         var reviewView = layoutInflater.inflate(R.layout.layout_tab_review, null)
         var list = arrayListOf(reviewView, starView)
-        starView.findViewById<TextView>(R.id.recipe_star_title).text = "평점"
         binding.recipeReviewTl.addTab(binding.recipeReviewTl.newTab().setCustomView(starView))
         binding.recipeReviewTl.addTab(binding.recipeReviewTl.newTab().setCustomView(reviewView))
         reviewAdapter = ReviewVPAdapter(this, recipe)
@@ -47,8 +46,11 @@ class ReviewFragment(val recipe: recipe): Fragment() {
             binding.recipeReviewRv.adapter = ReviewRVAdapter(recipeProcess.recipeProcess as ArrayList<Process>)
             binding.recipeReviewRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             reviewView.findViewById<TextView>(R.id.recipe_review_tv).text = recipeProcess.comments.size.toString()
-
+            starView.findViewById<TextView>(R.id.recipe_star_title).text = "평점"
+            starView.findViewById<TextView>(R.id.recipe_star_tv).text = recipeProcess.gradeDto.average.toString()
         })
+
+
         return binding.root
     }
 }

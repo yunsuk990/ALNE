@@ -38,6 +38,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/star_page_average_star"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -47,38 +48,21 @@
                 android:textSize="38sp"
                 android:textStyle="bold" />
 
-            <LinearLayout
+            <com.willy.ratingbar.BaseRatingBar
+                android:id="@+id/start_page_ratingbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                app:srb_drawableEmpty="@drawable/star_empty"
+                app:srb_drawableFilled="@drawable/star"
                 android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                app:srb_minimumStars="1"
+                app:srb_numStars="5"
+                app:srb_starHeight="23dp"
+                app:srb_starWidth="23dp"
+                app:srb_stepSize="1"
+                app:srb_starPadding="1dp" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/star" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/star" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/star" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/star" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/star" />
-            </LinearLayout>
         </LinearLayout>
 
         <View
@@ -113,13 +97,27 @@
                 android:textStyle="bold" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/expire_progress_count_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="17"
+                    android:textSize="10sp"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/rating_count_background"
+                    app:layout_constraintBottom_toTopOf="@+id/expire_progress_pb"
+                    app:layout_constraintEnd_toEndOf="@+id/expire_progress_pb"
+                    app:layout_constraintStart_toStartOf="@+id/expire_progress_pb"/>
 
                 <ProgressBar
                     android:id="@+id/expire_progress_pb"
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="7dp"
+                    android:layout_width="8dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:max="100"
@@ -141,13 +139,27 @@
                     app:layout_constraintStart_toStartOf="@+id/expire_progress_pb"
                     app:layout_constraintTop_toBottomOf="@+id/expire_progress_pb" />
 
+
+                <TextView
+                    android:id="@+id/expire_progress_count_tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="17"
+                    android:textSize="10sp"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/rating_count_background"
+                    app:layout_constraintBottom_toTopOf="@+id/expire_progress_pb1"
+                    app:layout_constraintEnd_toEndOf="@+id/expire_progress_pb1"
+                    app:layout_constraintStart_toStartOf="@+id/expire_progress_pb1"/>
+
                 <ProgressBar
                     android:id="@+id/expire_progress_pb1"
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="7dp"
+                    android:layout_width="8dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="25dp"
+                    android:layout_marginStart="30dp"
                     android:max="100"
                     android:minHeight="0dp"
                     android:progress="80"
@@ -166,13 +178,27 @@
                     app:layout_constraintStart_toStartOf="@+id/expire_progress_pb1"
                     app:layout_constraintTop_toBottomOf="@+id/expire_progress_pb1" />
 
+
+                <TextView
+                    android:id="@+id/expire_progress_count_tv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="17"
+                    android:textSize="10sp"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/rating_count_background"
+                    app:layout_constraintBottom_toTopOf="@+id/expire_progress_pb2"
+                    app:layout_constraintEnd_toEndOf="@+id/expire_progress_pb2"
+                    app:layout_constraintStart_toStartOf="@+id/expire_progress_pb2"/>
+
                 <ProgressBar
                     android:id="@+id/expire_progress_pb2"
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="7dp"
+                    android:layout_width="8dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="25dp"
+                    android:layout_marginStart="30dp"
                     android:max="100"
                     android:minHeight="0dp"
                     android:progress="80"
@@ -191,13 +217,26 @@
                     app:layout_constraintStart_toStartOf="@+id/expire_progress_pb2"
                     app:layout_constraintTop_toBottomOf="@+id/expire_progress_pb2" />
 
+                <TextView
+                    android:id="@+id/expire_progress_count_tv3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="17"
+                    android:textSize="10sp"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/rating_count_background"
+                    app:layout_constraintBottom_toTopOf="@+id/expire_progress_pb3"
+                    app:layout_constraintEnd_toEndOf="@+id/expire_progress_pb3"
+                    app:layout_constraintStart_toStartOf="@+id/expire_progress_pb3"/>
+
                 <ProgressBar
                     android:id="@+id/expire_progress_pb3"
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="7dp"
+                    android:layout_width="8dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="25dp"
+                    android:layout_marginStart="30dp"
                     android:max="100"
                     android:minHeight="0dp"
                     android:progress="80"
@@ -216,13 +255,26 @@
                     app:layout_constraintStart_toStartOf="@+id/expire_progress_pb3"
                     app:layout_constraintTop_toBottomOf="@+id/expire_progress_pb3" />
 
+                <TextView
+                    android:id="@+id/expire_progress_count_tv4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="17"
+                    android:textSize="10sp"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/rating_count_background"
+                    app:layout_constraintBottom_toTopOf="@+id/expire_progress_pb4"
+                    app:layout_constraintEnd_toEndOf="@+id/expire_progress_pb4"
+                    app:layout_constraintStart_toStartOf="@+id/expire_progress_pb4"/>
+
                 <ProgressBar
                     android:id="@+id/expire_progress_pb4"
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="7dp"
+                    android:layout_width="8dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="25dp"
+                    android:layout_marginStart="30dp"
                     android:max="100"
                     android:minHeight="0dp"
                     android:progress="80"

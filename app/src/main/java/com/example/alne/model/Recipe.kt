@@ -23,7 +23,8 @@ data class RecipeProcessRespond(
 data class RecipeProcess (
     val recipe: Recipe,
     val recipeProcess: List<Process>,
-    val comments: List<Comments>
+    val comments: List<Comments>,
+    val gradeDto: Grade
 )
 
 data class Comments(
