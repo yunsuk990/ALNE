@@ -97,7 +97,7 @@ class CustomDialogAdd(context: Context, val jwt: Jwt, myCustomDialogInterface: M
         spinnerSetting()
 
         binding.submitBt.setOnClickListener {
-            val title = binding.foodTitleEt.text.toString()
+            val title = binding.itemFoodaddTitleTv.text.toString()
             Log.d("time",date + " " + time)
             myCustomDialogInterface?.onSubmitBtnClicked(Food(jwt.userId,title,date + " " + time, addDate, binding
                 .foodMemoTv.text.toString(),storage!!,null))
@@ -112,7 +112,7 @@ class CustomDialogAdd(context: Context, val jwt: Jwt, myCustomDialogInterface: M
             val dialog = IngredientChoice()
             dialog.setCallback(object: IngredientChoice.OnSendFromBottomSheetDialog {
                 override fun sendValue(value: String) {
-                    binding.foodTitleEt.text = value
+                    binding.itemFoodaddTitleTv.text = value
                 }
             })
             dialog.show(requireActivity().supportFragmentManager, "")

@@ -24,7 +24,9 @@ data class RecipeProcess (
     val recipe: Recipe,
     val recipeProcess: List<Process>,
     val comments: List<Comments>,
-    val gradeDto: Grade
+    val gradeDto: Grade,
+    val favorite: Boolean,
+    val like: Boolean
 )
 
 data class Comments(

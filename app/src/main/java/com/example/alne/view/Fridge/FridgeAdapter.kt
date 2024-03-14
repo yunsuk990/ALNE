@@ -19,15 +19,13 @@ import java.time.Year
 
 class FridgeAdapter(val context: Context,  val items: ArrayList<Food>): RecyclerView.Adapter<FridgeAdapter.ViewHolder>() {
 
-
     var calendar = Calendar.getInstance()
+    var sfp = SimpleDateFormat("yyyy.MM.dd")
     init {
-        Log.d("adapter", "create")
-        calendar.set(Calendar.HOUR, 0)
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
         calendar.set(Calendar.MINUTE, 0)
         calendar.set(Calendar.SECOND, 0)
         calendar.set(Calendar.MILLISECOND,0)
-        calendar.set(Calendar.MILLISECONDS_IN_DAY,0)
     }
 
     interface MyItemClickListener {
@@ -41,22 +39,34 @@ class FridgeAdapter(val context: Context,  val items: ArrayList<Food>): Recycler
 
     inner class ViewHolder(val binding: ItemFridgeBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(food: Food){
-            var date = food.exp!!.split(" ")
-            var sfp = SimpleDateFormat("yyyy.MM.dd")
-            var da = sfp.parse(date[0])
-            var diff = ((da.time - calendar.time.time))/ (60 * 60 * 24 * 1000)
-            Log.d("diff", diff.toString())
+            Log.d("food", food.toString())
+            // 마감 날짜
+            var expDate = sfp.parse(food.exp!!.split(" ")[0])
 
-            var startd = food.addDate!!.split(" ")
-            var startDate = sfp.parse(startd[0])
+            // 등록 날짜
+            var addDate = sfp.parse(food.addDate!!.split(" ")[0])
 
             // 유효날짜 - 등록 날짜
-            var startExp = (da.time - startDate.time)/ (60 * 60 * 24 * 1000)
+            var dateLength = (expDate.time - addDate.time)/ (60 * 60 * 24 * 1000)
+            Log.d("fridge:dateLength", dateLength.toString())
+            Log.d("fridge:time", (expDate.time/ (60 * 60 * 24 * 1000)).toString() + " : " + (addDate.time/ (60 * 60 * 24 * 1000)).toString())
+
+            // 유효기간까지 남음 시간
+            var needDiff = ((expDate.time - (calendar.time.time+1)))/ (60 * 60 * 24 * 1000)
+            Log.d("fridge:needDiff", needDiff.toString() + "calendar time: " + ((calendar.time.time+1)/ (60 * 60 * 24 * 1000)))
+
+            // 날짜 차이 (지난 시간)
+            var diff: Int = (dateLength - needDiff).toInt()
+            Log.d("fridge:diff", diff.toString())
 
             binding.itemFridgeTitleTv.text = food.name
-            binding.itemFridgeExpireTv.text = date[0]+" 까지"
-            binding.itemFridgeExpireInfoTv.text = "유효기간 ${diff}일 남음"
-            binding.itemFridgeIv.setImageResource(R.drawable.camera)
+            binding.itemFridgeExpireTv.text = food.exp!!.split(" ")[0] + " 까지"
+            if(needDiff < 0){
+                binding.itemFridgeExpireInfoTv.text = "유효기간 ${-needDiff}일 지남"
+            }else{
+                binding.itemFridgeExpireInfoTv.text = "유효기간 ${needDiff}일 남음"
+            }
+            binding.itemFridgeIv.setImageResource(R.drawable.camera )
 
 
             if(food.storage == "FROZEN"){
@@ -65,45 +75,31 @@ class FridgeAdapter(val context: Context,  val items: ArrayList<Food>): Recycler
                 binding.itemFridgeStorageTv.text = "냉장"
             }
 
-            var progress: Long = 0
-            var scale = 0.0
-            try{
-                progress = (startExp - diff) / startExp
-            }catch (e: Exception){
-                if(startExp.toInt() == 0){
-                    startExp = 100
-                    progress = 100
-                    scale = 100.0
-                }
-            }
-            scale = ((progress*100).toDouble())
-
-
-            Log.d("fridge:startExp", startExp.toString())
-            Log.d("fridge:progress", progress.toString())
-            Log.d("fridge:diff", diff.toString())
-            Log.d("fridge:scale", scale.toString())
-            if(diff > 15){
+            if(needDiff > 15){
                 binding.itemFridgeExpireInfoTv.setTextColor(Color.parseColor("#00FF1A"))
                 binding.itemFridgePb.progressDrawable = ContextCompat.getDrawable(context, R.drawable.progressbar_border_low)
-                binding.itemFridgePb.max = startExp.toInt()
-                binding.itemFridgePb.progress = (progress * startExp).toInt()
-            }else if(diff in 8..14){
+            }else if(needDiff in 8..14){
                 binding.itemFridgeExpireInfoTv.setTextColor(Color.parseColor("#FFD500"))
                 binding.itemFridgePb.progressDrawable = ContextCompat.getDrawable(context, R.drawable.progressbar_border_low_high)
-                binding.itemFridgePb.max = startExp.toInt()
-                binding.itemFridgePb.progress = (progress * startExp).toInt()
             }
-            else if(diff in 4..7){
+            else if(needDiff in 4..7){
                 binding.itemFridgeExpireInfoTv.setTextColor(Color.parseColor("#FF9900"))
                 binding.itemFridgePb.progressDrawable = ContextCompat.getDrawable(context, R.drawable.progressbar_border_high_low)
-                binding.itemFridgePb.max = startExp.toInt()
-                binding.itemFridgePb.progress = (progress * startExp).toInt()
             }else{
                 binding.itemFridgeExpireInfoTv.setTextColor(Color.RED)
                 binding.itemFridgePb.progressDrawable = ContextCompat.getDrawable(context, R.drawable.progressbar_border_high)
-                binding.itemFridgePb.max = startExp.toInt()
-                binding.itemFridgePb.progress = (progress * startExp).toInt()
+            }
+
+            if(dateLength <= 0){
+                binding.itemFridgePb.max = 100
+                binding.itemFridgePb.progress = 100
+            }else{
+                if(diff == 0){
+                    binding.itemFridgePb.progress = 1
+                }else{
+                    var mul: Int = (100 / dateLength).toInt()
+                    binding.itemFridgePb.progress = mul*diff
+                }
             }
 
 

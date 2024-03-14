@@ -23,9 +23,11 @@ class recipeRepository {
     fun deleteUserComment(requestComment: requestComment) = recipeService.deleteUserComment(requestComment)
 
     //특정 레시피 조회
-    fun getRecipeProcess(recipeCode: Int) = recipeService.getRecipeProcess(recipeCode)
+    fun getRecipeProcess(recipeCode: Int, userId: UserId) = recipeService.getRecipeProcess(recipeCode, userId)
 
     fun addRecipeFavorite(recipeCode: Int,userId: UserId) = recipeService.addRecipeFavorite(recipeCode,userId)
+
+    fun userLikeRecipe(recipeCode: Int, userId: UserId) = recipeService.likeRecipe(recipeCode,userId)
 
     fun deleteRecipeFavorite(delete: DeleteFavorite) = recipeService.deleteRecipeFavorite(delete)
 }

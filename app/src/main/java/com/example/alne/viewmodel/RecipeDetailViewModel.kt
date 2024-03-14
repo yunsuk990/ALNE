@@ -15,6 +15,7 @@ import com.example.alne.model.Status
 import com.example.alne.model.UserId
 import com.example.alne.repository.recipeRepository
 import com.example.alne.Network.AuthResponse
+import com.example.alne.model.LikeRespond
 import com.example.alne.model.requestComment
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,9 +45,10 @@ class RecipeDetailViewModel: ViewModel() {
     private val _addRecipeFavoriteLiveData = MutableLiveData<Boolean>()
     val addRecipeFavoriteLiveData: LiveData<Boolean> = _addRecipeFavoriteLiveData
 
-    //즐겨찾기 삭제
-    private val _deleteRecipeFavoriteLiveData = MutableLiveData<Boolean>()
-    val deleteRecipeFavoriteLiveData: LiveData<Boolean> = _deleteRecipeFavoriteLiveData
+    //좋아요 등록
+    private val _addRecipeLikeLiveData = MutableLiveData<Boolean>()
+    val addRecipeLikeLiveData: LiveData<Boolean> = _addRecipeLikeLiveData
+
 
     fun addUserComment(comment: Comment) = repository.addUserComment(comment).enqueue(object: Callback<AuthResponse>{
         override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
@@ -71,7 +73,7 @@ class RecipeDetailViewModel: ViewModel() {
 
 
     //특정 레시피 조회
-    fun getRecipeProcess(recipeCode: Int) = repository.getRecipeProcess(recipeCode).enqueue(object: Callback<RecipeProcessRespond>{
+    fun getRecipeProcess(recipeCode: Int, userId: UserId) = repository.getRecipeProcess(recipeCode, userId).enqueue(object: Callback<RecipeProcessRespond>{
         override fun onResponse(
             call: Call<RecipeProcessRespond>,
             response: Response<RecipeProcessRespond>,
@@ -81,6 +83,8 @@ class RecipeDetailViewModel: ViewModel() {
                 200 -> {
                     Log.d("getRecipeProcess_onSuccess", res.toString())
                     _getRecipeProcessLiveData.postValue(res.data)
+                    _addRecipeLikeLiveData.postValue(res.data.like)
+                    _addRecipeFavoriteLiveData.postValue(res.data.favorite)
                 }
             }
         }
@@ -96,7 +100,7 @@ class RecipeDetailViewModel: ViewModel() {
             val res = response.body()
             when(res?.status){
                 200 -> {
-                    _addRecipeFavoriteLiveData.postValue(true)
+                    _addRecipeFavoriteLiveData.postValue(res.data.favorite)
                     Log.d("addRecipeFavorite_onSuccess", res.toString())
                 }
                 else -> {
@@ -113,28 +117,50 @@ class RecipeDetailViewModel: ViewModel() {
 
     })
 
-
-    fun deleteRecipeFavorite(delete: DeleteFavorite) = repository.deleteRecipeFavorite(delete).enqueue(object: Callback<Status>{
-        override fun onResponse(call: Call<Status>, response: Response<Status>) {
+    fun userLikeRecipe(recipeCode: Int, userId: UserId = UserId(GlobalApplication.prefManager.getUserToken()?.userId!!, null)) = repository.userLikeRecipe(recipeCode, userId).enqueue(object: Callback<LikeRespond>{
+        override fun onResponse(call: Call<LikeRespond>, response: Response<LikeRespond>) {
             val res = response.body()
             when(res?.status){
                 200 -> {
-                    _deleteRecipeFavoriteLiveData.postValue(true)
-                    Log.d("deleteRecipeFavorite_onSuccess", res.toString())
+                    _addRecipeLikeLiveData.postValue(res.data.like)
+                    Log.d("addRecipeFavorite_onSuccess", res.toString())
                 }
                 else -> {
-                    _deleteRecipeFavoriteLiveData.postValue(false)
-                    Log.d("deleteRecipeFavorite_onSuccess:fail", res.toString())
+                    _addRecipeLikeLiveData.postValue(false)
+                    Log.d("addRecipeFavorite_onSuccess:fail", res.toString())
                 }
             }
         }
 
-        override fun onFailure(call: Call<Status>, t: Throwable) {
-            _deleteRecipeFavoriteLiveData.postValue(false)
-            Log.d("deleteRecipeFavorite_onFailure", t.message.toString())
+        override fun onFailure(call: Call<LikeRespond>, t: Throwable) {
+            _addRecipeLikeLiveData.postValue(false)
+            Log.d("addRecipeFavorite_fail", t.message.toString())
         }
 
     })
+
+
+//    fun deleteRecipeFavorite(delete: DeleteFavorite) = repository.deleteRecipeFavorite(delete).enqueue(object: Callback<Status>{
+//        override fun onResponse(call: Call<Status>, response: Response<Status>) {
+//            val res = response.body()
+//            when(res?.status){
+//                200 -> {
+//                    _deleteRecipeFavoriteLiveData.postValue(true)
+//                    Log.d("deleteRecipeFavorite_onSuccess", res.toString())
+//                }
+//                else -> {
+//                    _deleteRecipeFavoriteLiveData.postValue(false)
+//                    Log.d("deleteRecipeFavorite_onSuccess:fail", res.toString())
+//                }
+//            }
+//        }
+//
+//        override fun onFailure(call: Call<Status>, t: Throwable) {
+//            _deleteRecipeFavoriteLiveData.postValue(false)
+//            Log.d("deleteRecipeFavorite_onFailure", t.message.toString())
+//        }
+//
+//    })
 
     fun deleteUserComment(requestComment: requestComment) = repository.deleteUserComment(requestComment).enqueue(object: Callback<AuthResponse>{
         override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
@@ -142,7 +168,7 @@ class RecipeDetailViewModel: ViewModel() {
             when(res?.status){
                 200 -> {
                     Log.d("deleteUserComment", "Success")
-                    getRecipeProcess(requestComment.data)
+                    getRecipeProcess(requestComment.data, UserId(GlobalApplication.prefManager.getUserToken()?.userId!!, null))
                     _delUserCommentLiveData.postValue(true)
                 }
                 else -> {

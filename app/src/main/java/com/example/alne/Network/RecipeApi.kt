@@ -3,6 +3,7 @@ package com.example.alne.Network
 import com.example.alne.model.Comment
 import com.example.alne.model.DeleteFavorite
 import com.example.alne.model.FavoriteRespond
+import com.example.alne.model.LikeRespond
 import com.example.alne.model.RecipeProcessRespond
 import com.example.alne.model.UserId
 import com.example.alne.model.Status
@@ -24,12 +25,13 @@ interface RecipeApi {
         @Body comment: Comment
     ): Call<AuthResponse>
 
-    @GET("/recipe/{recipeCode}")
+    @POST("/recipe/{recipeCode}")
     fun getRecipeProcess(
-        @Path("recipeCode") recipeCode: Int
+        @Path("recipeCode") recipeCode: Int,
+        @Body userId: UserId
     ): Call<RecipeProcessRespond>
 
-    @POST("/recipe/{recipeCode}")
+    @POST("/recipe/{recipeCode}/favorite")
     fun addRecipeFavorite(
         @Path("recipeCode") recipeCode: Int,
         @Body userId: UserId
@@ -44,7 +46,7 @@ interface RecipeApi {
     fun likeRecipe(
         @Path("recipeCode") recipeCode: Int,
         @Body userid: UserId
-    )
+    ): Call<LikeRespond>
 
     @POST("/delComment")
     fun deleteUserComment(

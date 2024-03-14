@@ -19,6 +19,7 @@ class FridgeColdAdapter(val context: Context): RecyclerView.Adapter<FridgeColdAd
 
     val items: ArrayList<Food> = ArrayList()
     var calendar = Calendar.getInstance()
+    var sfp = SimpleDateFormat("yyyy.MM.dd")
     init {
         Log.d("adapter", "2")
         calendar.set(Calendar.HOUR, 0)
@@ -37,53 +38,57 @@ class FridgeColdAdapter(val context: Context): RecyclerView.Adapter<FridgeColdAd
         mItemClickListener = itemClickListener
     }
 
-    inner class ViewHolder(val binding: ItemFridgeBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(food: Food){
-            var date = food.exp!!.split(" ")
-            var sfp = SimpleDateFormat("yyyy.MM.dd")
-            var da = sfp.parse(date[0])
-            var diff: Long = ((da.time - calendar.time.time)/ (60 * 60 * 24 * 1000))
+    inner class ViewHolder(val binding: ItemFridgeBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(food: Food) {
+
+            // 마감 날짜
+            var expDate = sfp.parse(food.exp!!.split(" ")[0])
+
+            // 등록 날짜
+            var addDate = sfp.parse(food.addDate!!.split(" ")[0])
 
             // 유효날짜 - 등록 날짜
-            var startExp = 7.0
+            var dateLength = (expDate.time - addDate.time)/ (60 * 60 * 24 * 1000)
+
+            // 날짜 차이 (지난 시간)
+            var diff = ((calendar.time.time - addDate.time))/ (60 * 60 * 24 * 1000)
+
+            // 유효기간까지 남음 시간
+            var needDiff = ((expDate.time - calendar.time.time))/ (60 * 60 * 24 * 1000)
 
             binding.itemFridgeTitleTv.text = food.name
-            binding.itemFridgeExpireTv.text = date[0]+" 까지"
-            binding.itemFridgeExpireInfoTv.text = "유효기간 ${diff}일 남음"
-            binding.itemFridgeIv.setImageResource(R.drawable.bibimbap)
+            binding.itemFridgeExpireTv.text = food.exp!!.split(" ")[0] + " 까지"
+            if(needDiff < 0){
+                binding.itemFridgeExpireInfoTv.text = "유효기간 ${-needDiff}일 지남"
+            }else{
+                binding.itemFridgeExpireInfoTv.text = "유효기간 ${needDiff}일 남음"
+            }
+            binding.itemFridgeIv.setImageResource(R.drawable.camera )
+
+
             if(food.storage == "FROZEN"){
                 binding.itemFridgeStorageTv.text = "냉동"
             }else{
                 binding.itemFridgeStorageTv.text = "냉장"
             }
 
-            var progress: Double = (startExp - diff) / startExp
-            var scale = progress*100
-            Log.d("cold:progress_cold", progress.toString())
-            Log.d("cold:diff_cold", diff.toString())
-            Log.d("cold:scale_cold", scale.toString())
-            if(scale in 0.0..20.0){
+            if(needDiff > 15){
                 binding.itemFridgeExpireInfoTv.setTextColor(Color.parseColor("#00FF1A"))
                 binding.itemFridgePb.progressDrawable = ContextCompat.getDrawable(context, R.drawable.progressbar_border_low)
-                binding.itemFridgePb.max = startExp.toInt()
-                binding.itemFridgePb.progress = (progress * startExp).toInt()
-            }else if(scale in 21.0..50.0){
+            }else if(needDiff in 8..14){
                 binding.itemFridgeExpireInfoTv.setTextColor(Color.parseColor("#FFD500"))
                 binding.itemFridgePb.progressDrawable = ContextCompat.getDrawable(context, R.drawable.progressbar_border_low_high)
-                binding.itemFridgePb.max = startExp.toInt()
-                binding.itemFridgePb.progress = (progress * startExp).toInt()
             }
-            else if(scale in 51.0..80.0){
+            else if(needDiff in 4..7){
                 binding.itemFridgeExpireInfoTv.setTextColor(Color.parseColor("#FF9900"))
                 binding.itemFridgePb.progressDrawable = ContextCompat.getDrawable(context, R.drawable.progressbar_border_high_low)
-                binding.itemFridgePb.max = startExp.toInt()
-                binding.itemFridgePb.progress = (progress * startExp).toInt()
             }else{
                 binding.itemFridgeExpireInfoTv.setTextColor(Color.RED)
                 binding.itemFridgePb.progressDrawable = ContextCompat.getDrawable(context, R.drawable.progressbar_border_high)
-                binding.itemFridgePb.max = startExp.toInt()
-                binding.itemFridgePb.progress = (progress * startExp).toInt()
             }
+            binding.itemFridgePb.max = dateLength.toInt()
+            binding.itemFridgePb.progress = diff.toInt()
+
         }
     }
 

@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.alne.databinding.FragmentHomeBinding
 import com.example.alne.model.Food
 import com.example.alne.room.model.recipe
@@ -32,11 +33,10 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
 
-        viewModel.getRecipeLiveData.observe(viewLifecycleOwner, Observer {
-            var textItem: ArrayList<Food> = ArrayList()
-            var adapter = ExpireAdapter(textItem)
-            binding.homeItemRv.adapter = adapter
-        })
+//        viewModel.getFridgeLiveData.observe(viewLifecycleOwner, Observer {
+//            var adapter = ExpireAdapter(it)
+//            binding.homeItemRv.adapter = adapter
+//        })
 
 
         val adapter = HomeRecipeRankRVAdapter(requireContext())
@@ -48,6 +48,7 @@ class HomeFragment : Fragment() {
             }
         })
         binding.homeRecipeRankRv.adapter = adapter
+        binding.homeItemRv.adapter = adapter
 
         viewModel.getRecipeLiveData.observe(viewLifecycleOwner, Observer {data ->
             Log.d("viewModel" , data.toString())

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.alne.GlobalApplication
 import com.example.alne.databinding.FragmentReviewPageBinding
 import com.example.alne.model.Comments
+import com.example.alne.model.UserId
 import com.example.alne.model.requestComment
 import com.example.alne.room.model.recipe
 import com.example.alne.view.Fridge.IngredientChoice
@@ -45,7 +46,7 @@ class ReviewPageFragment(val recipe: recipe) : Fragment() {
             if(!it){
                 Toast.makeText(requireContext(), "리뷰 작성에 실패했습니다.", Toast.LENGTH_SHORT).show()
             }else{
-                viewModel.getRecipeProcess(recipe.recipe_code)
+                viewModel.getRecipeProcess(recipe.recipe_code, UserId(GlobalApplication.prefManager.getUserToken()?.userId!!, null))
                 setUi(it)
             }
         })

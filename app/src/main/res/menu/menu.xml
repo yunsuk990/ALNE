@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/refrigerator"
-        android:title="내 냉장고" />
+        android:title="냉장고" />
     <item
         android:id="@+id/recipeFragment"
         android:layout_width="wrap_content"

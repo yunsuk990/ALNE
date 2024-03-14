@@ -8,7 +8,8 @@ data class FavoriteRespond(
 data class Favorite(
     val id: Int,
     val user: UserInfo,
-    val recipe: Recipe
+    val recipe: Recipe,
+    val favorite: Boolean
 )
 
 data class UserInfo(

@@ -48,33 +48,46 @@
         app:layout_constraintStart_toEndOf="@+id/food_image_iv"
         app:layout_constraintTop_toTopOf="@+id/food_image_iv" />
 
-    <com.google.android.material.textfield.TextInputLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/food_food_name_tl"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:orientation="horizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
-        app:boxCornerRadiusBottomEnd="5dp"
-        app:boxCornerRadiusBottomStart="5dp"
-        app:boxCornerRadiusTopEnd="5dp"
-        app:boxCornerRadiusTopStart="5dp"
-        app:boxStrokeColor="@color/blue"
-        android:clickable="false"
+        android:background="@drawable/blue_border"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/food_name_title_tv"
-        app:layout_constraintTop_toBottomOf="@+id/food_name_title_tv">
+        app:layout_constraintTop_toBottomOf="@+id/food_name_title_tv" >
 
-        <com.google.android.material.textfield.TextInputEditText
+        <TextView
             android:id="@+id/food_title_et"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:editable="false"
             android:clickable="false"
-            android:text="소고기"
+            android:editable="false"
+            android:padding="10dp"
+            android:text="재료 선택"
             android:textColor="@color/black"
-            android:textSize="15sp" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/expand"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/food_memo_title_tv"
@@ -163,7 +176,7 @@
         android:id="@+id/food_add_datepicker_linear"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/spinner_background"
+        android:background="@drawable/blue_border"
         android:orientation="horizontal"
         android:padding="8dp"
         android:layout_marginStart="10dp"
@@ -176,6 +189,10 @@
             android:layout_height="wrap_content"
             android:text="2023.11.30"
             android:textSize="15sp" />
+        <View
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"/>
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
@@ -183,22 +200,22 @@
             android:scaleType="fitXY"
             android:src="@drawable/expand" />
     </LinearLayout>
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="시간"
         android:textColor="@color/black"
-        android:layout_marginStart="20dp"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/food_add_timepicker_linear"
-        app:layout_constraintStart_toEndOf="@+id/food_add_datepicker_linear"
+        app:layout_constraintStart_toStartOf="@+id/submit_bt"
         app:layout_constraintTop_toTopOf="@+id/food_add_timepicker_linear" />
     <LinearLayout
         android:id="@+id/food_add_timepicker_linear"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/spinner_background"
+        android:background="@drawable/blue_border"
         android:orientation="horizontal"
         android:padding="8dp"
         android:layout_marginStart="10dp"
@@ -211,6 +228,10 @@
             android:layout_height="wrap_content"
             android:text="12:50"
             android:textSize="15sp" />
+        <View
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"/>
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"

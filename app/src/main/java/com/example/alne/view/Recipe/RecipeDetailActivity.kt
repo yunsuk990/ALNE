@@ -7,8 +7,10 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.example.alne.GlobalApplication
 import com.example.alne.R
 import com.example.alne.databinding.ActivityRecipeDetailBinding
+import com.example.alne.model.UserId
 import com.example.alne.room.model.recipe
 import com.example.alne.viewmodel.RecipeDetailViewModel
 import com.google.android.material.tabs.TabLayoutMediator
@@ -19,7 +21,6 @@ class RecipeDetailActivity : AppCompatActivity() {
     lateinit var binding: ActivityRecipeDetailBinding
     lateinit var viewModel: RecipeDetailViewModel
     private val information = arrayListOf("순서 및 후기", "재료","참고 영상")
-    var favorite: Boolean = false
     var globalrecipe: recipe? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,12 +31,14 @@ class RecipeDetailActivity : AppCompatActivity() {
         Log.d("RecipeDetailActivity_recipe", globalrecipe.toString())
         viewModel = ViewModelProvider(this).get(RecipeDetailViewModel::class.java)
 
+
+
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d("RecipeDetailActivity", "onResume")
         init(globalrecipe!!)
+        Log.d("RecipeDetailActivity", "onResume")
     }
 
     override fun onStop() {
@@ -52,7 +55,7 @@ class RecipeDetailActivity : AppCompatActivity() {
     }
 
     private fun init(recipe: recipe){
-        viewModel.getRecipeProcess(recipe.recipe_code)
+        viewModel.getRecipeProcess(recipe.recipe_code, UserId(GlobalApplication.prefManager.getUserToken()?.userId!!, null))
         binding.recipeDetailTitleTv.text = recipe.name
         binding.recipeDetailChefTv.text = recipe.difficulty
         binding.recipeDetailIntroduceTv.text = recipe.introduce
@@ -67,21 +70,30 @@ class RecipeDetailActivity : AppCompatActivity() {
             tab.text = information[position]
         }.attach()
 
-        binding.like.setOnClickListener {
-            if(favorite){
-                binding.like.setImageResource(R.drawable.like_off)
-                favorite = false
-//                viewModel.deleteRecipeFavorite(DeleteFavorite)
-            }else{
+        viewModel.addRecipeLikeLiveData.observe(this, Observer {
+            if(it){
                 binding.like.setImageResource(R.drawable.like_on)
-                favorite = true
-                viewModel.addRecipeFavorite(recipe.recipe_code)
+            }else {
+                binding.like.setImageResource(R.drawable.like_off)
             }
+        })
+
+        viewModel.addRecipeFavoriteLiveData.observe(this, Observer{
+            if(it){
+                binding.bookmark.setImageResource(R.drawable.bookmark_on)
+            }else {
+                binding.bookmark.setImageResource(R.drawable.bookmark_off)
+            }
+        })
+
+        binding.like.setOnClickListener {
+            viewModel.userLikeRecipe(recipe.recipe_code)
         }
 
+        binding.bookmark.setOnClickListener {
+            viewModel.addRecipeFavorite(recipe.recipe_code)
+        }
         setOnClickListener()
-
-
     }
 
     private fun setOnClickListener(){
