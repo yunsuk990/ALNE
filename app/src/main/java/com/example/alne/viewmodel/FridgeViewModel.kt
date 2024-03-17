@@ -2,23 +2,23 @@ package com.example.alne.viewmodel
 
 import android.app.Application
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.alne.GlobalApplication
 import com.example.alne.Network.FridgeGetResponse
 import com.example.alne.Network.FridgePostResponse
 import com.example.alne.model.Food
-import com.example.alne.model.Jwt
 import com.example.alne.model.UserId
 import com.example.alne.repository.fridgeRepository
-import com.example.alne.repository.repository
 import com.google.gson.Gson
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 class FridgeViewModel(private val application: Application) : AndroidViewModel(application) {
 
@@ -35,8 +35,11 @@ class FridgeViewModel(private val application: Application) : AndroidViewModel(a
         }
     }
 
-    fun addFridgeData(accessToken: String,food: Food){
-        repository.addFridgeData(accessToken,food).enqueue(object: Callback<FridgePostResponse>{
+    fun addFridgeData(accessToken: String, food: Food, photoFile: File?){
+        var fileBody: RequestBody = RequestBody.create("image/*".toMediaTypeOrNull(), photoFile!!)
+        var file: MultipartBody.Part = MultipartBody.Part.createFormData("file", photoFile!!.name, fileBody)
+        var content: RequestBody = RequestBody.create("application/json".toMediaTypeOrNull(), Gson().toJson(food))
+        repository.addFridgeData(accessToken,content, file).enqueue(object: Callback<FridgePostResponse>{
             override fun onResponse(
                 call: Call<FridgePostResponse>,
                 response: Response<FridgePostResponse>,
@@ -81,7 +84,7 @@ class FridgeViewModel(private val application: Application) : AndroidViewModel(a
                             var items: ArrayList<Food> = ArrayList()
                             for(item in fridge){
                                 var name = item.ingredient.name
-                                var image = item.ingredient.image
+                                var image = item.imageUrl
                                 var storage = item.storage
                                 var expire = item.exp
                                 var memo = item.memo

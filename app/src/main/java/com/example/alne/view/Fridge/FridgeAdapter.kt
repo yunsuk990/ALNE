@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.alne.R
 import com.example.alne.databinding.ItemFridgeBinding
 import com.example.alne.model.Food
@@ -66,7 +67,11 @@ class FridgeAdapter(val context: Context,  val items: ArrayList<Food>): Recycler
             }else{
                 binding.itemFridgeExpireInfoTv.text = "유효기간 ${needDiff}일 남음"
             }
-            binding.itemFridgeIv.setImageResource(R.drawable.camera )
+            if(food.imageUrl != null){
+                Glide.with(context).load(food.imageUrl).into(binding.itemFridgeIv)
+            }else{
+                binding.itemFridgeIv.setImageResource(R.drawable.camera )
+            }
 
 
             if(food.storage == "FROZEN"){

@@ -13,10 +13,12 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.ImageDecoder
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -90,6 +92,13 @@ class CustomDialogAdd(context: Context, val jwt: Jwt, myCustomDialogInterface: M
         var addDate = date + " " + time
         Log.d("addDate", addDate.toString())
 
+        var defaultImage = com.example.alne.R.drawable.camera
+        var defaultImageBitmap = BitmapFactory.decodeResource(resources, defaultImage)
+        binding.foodImageDefaultIv.setImageBitmap(defaultImageBitmap)
+        binding.foodImageDefaultIv.scaleType = ImageView.ScaleType.FIT_XY
+
+
+
         // 이미지 선택
         binding.foodImageIv.setOnClickListener{
             showDialog()
@@ -100,7 +109,7 @@ class CustomDialogAdd(context: Context, val jwt: Jwt, myCustomDialogInterface: M
             val title = binding.itemFoodaddTitleTv.text.toString()
             Log.d("time",date + " " + time)
             myCustomDialogInterface?.onSubmitBtnClicked(Food(jwt.userId,title,date + " " + time, addDate, binding
-                .foodMemoTv.text.toString(),storage!!,null))
+                .foodMemoTv.text.toString(),storage!!), photoFile)
             dismiss()
         }
 
@@ -286,13 +295,13 @@ class CustomDialogAdd(context: Context, val jwt: Jwt, myCustomDialogInterface: M
                 val decode= ImageDecoder.createSource(requireContext().contentResolver,
                     Uri.fromFile(photoFile!!.absoluteFile))
                 bitmap= ImageDecoder.decodeBitmap(decode)
-                binding.foodImageDetailIv.visibility = View.VISIBLE
-                binding.foodImageDetailIv.setImageBitmap(bitmap)
-                binding.foodImageDetailIv.scaleType = ImageView.ScaleType.FIT_XY
-                binding.foodImageDefaultIv.visibility = View.GONE
 
 
                 if(bitmap != null){
+                    binding.foodImageDetailIv.visibility = View.VISIBLE
+                    binding.foodImageDetailIv.setImageBitmap(bitmap)
+                    binding.foodImageDetailIv.scaleType = ImageView.ScaleType.FIT_XY
+                    binding.foodImageDefaultIv.visibility = View.GONE
                     saveImageFile(photoFile!!.name,getExtension(photoFile!!.name),bitmap)
                 }
             }
@@ -300,9 +309,10 @@ class CustomDialogAdd(context: Context, val jwt: Jwt, myCustomDialogInterface: M
             var albumUri: Uri = data.data!!
             bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, data.data);
             if(albumUri!=null){
-                Glide.with(requireContext().applicationContext).load(albumUri)
-                    .into(binding.foodImageDetailIv)
+                binding.foodImageDetailIv.visibility = View.VISIBLE
+                binding.foodImageDetailIv.setImageBitmap(bitmap)
                 binding.foodImageDetailIv.scaleType = ImageView.ScaleType.FIT_XY
+                binding.foodImageDefaultIv.visibility = View.GONE
             }
         }
         Log.d("onActivityResult:bitmap", bitmap.toString())
@@ -337,5 +347,5 @@ class CustomDialogAdd(context: Context, val jwt: Jwt, myCustomDialogInterface: M
 }
 
 interface MyCustomDialogInterface {
-    fun onSubmitBtnClicked(food: Food)
+    fun onSubmitBtnClicked(food: Food, photoFile: File?)
 }

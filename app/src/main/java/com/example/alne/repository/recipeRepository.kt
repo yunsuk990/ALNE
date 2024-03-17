@@ -7,6 +7,7 @@ import com.example.alne.model.UserId
 import com.example.alne.room.model.recipe
 import com.example.alne.Network.RecipeApi
 import com.example.alne.Network.getRetrofit
+import com.example.alne.model.Id
 import com.example.alne.model.requestComment
 
 class recipeRepository {
@@ -28,6 +29,9 @@ class recipeRepository {
     fun addRecipeFavorite(recipeCode: Int,userId: UserId) = recipeService.addRecipeFavorite(recipeCode,userId)
 
     fun userLikeRecipe(recipeCode: Int, userId: UserId) = recipeService.likeRecipe(recipeCode,userId)
+
+    //사용자 즐겨찾기 전체 목록
+    fun getUserFavorites(id: Id) = recipeService.getUserFavorites(id)
 
     fun deleteRecipeFavorite(delete: DeleteFavorite) = recipeService.deleteRecipeFavorite(delete)
 }

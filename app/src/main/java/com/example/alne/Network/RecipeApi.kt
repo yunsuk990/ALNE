@@ -3,6 +3,8 @@ package com.example.alne.Network
 import com.example.alne.model.Comment
 import com.example.alne.model.DeleteFavorite
 import com.example.alne.model.FavoriteRespond
+import com.example.alne.model.FavoritesRespond
+import com.example.alne.model.Id
 import com.example.alne.model.LikeRespond
 import com.example.alne.model.RecipeProcessRespond
 import com.example.alne.model.UserId
@@ -52,6 +54,13 @@ interface RecipeApi {
     fun deleteUserComment(
         @Body requestComment: requestComment
     ): Call<AuthResponse>
+
+
+    //사용자가 즐겨찾기 한 모든 레시피 정보 가져오기
+    @POST("/favorites")
+    fun getUserFavorites(
+        @Body id: Id
+    ): Call<FavoritesRespond>
 
 
 

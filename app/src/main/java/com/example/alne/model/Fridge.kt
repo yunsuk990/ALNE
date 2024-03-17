@@ -6,6 +6,7 @@ data class Fridge(
     val addDate: String,
     val storage: String,
     val memo: String,
+    val imageUrl: String
 )
 
 data class UserId(

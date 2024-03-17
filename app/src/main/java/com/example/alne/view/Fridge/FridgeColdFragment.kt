@@ -19,6 +19,7 @@ import com.example.alne.model.Jwt
 import com.example.alne.model.UserId
 import com.example.alne.viewmodel.FridgeViewModel
 import com.google.gson.Gson
+import java.io.File
 
 class FridgeColdFragment : Fragment(), MyCustomDialogDetailInterface {
     lateinit var binding: FragmentFridgeColdBinding
@@ -84,7 +85,7 @@ class FridgeColdFragment : Fragment(), MyCustomDialogDetailInterface {
         Log.d("getjwt", userJwt.toString())
         return userJwt
     }
-    override fun onSubmitBtnDetailClicked(food: Food) {
-        viewModel.addFridgeData(getUserToken().accessToken!!, food)
+    override fun onSubmitBtnDetailClicked(food: Food, photoFile: File?) {
+        viewModel.addFridgeData(getUserToken().accessToken!!, food, photoFile)
     }
 }

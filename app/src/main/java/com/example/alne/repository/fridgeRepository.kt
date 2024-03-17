@@ -2,16 +2,18 @@ package com.example.alne.repository
 
 import com.example.alne.GlobalApplication
 import com.example.alne.Network.FridgeApi
-import com.example.alne.model.Food
 import com.example.alne.model.UserId
 import com.example.alne.room.model.food
 import com.example.alne.Network.getRetrofit
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class fridgeRepository() {
 
     private val fridgeService = getRetrofit().create(FridgeApi::class.java)
 
-    fun addFridgeData(accessToken: String, food: Food) = fridgeService.addFridgeFood(accessToken,food)
+    fun addFridgeData(accessToken: String, food: RequestBody, photoFile: MultipartBody.Part) = fridgeService.addFridgeFood(accessToken, photoFile, food)
+
 
     fun getFridgeFood(accessToken: String, userId: UserId) = fridgeService.getFridgeFood(accessToken,userId)
 

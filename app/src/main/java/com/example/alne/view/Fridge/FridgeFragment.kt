@@ -14,6 +14,7 @@ import com.example.alne.model.Jwt
 import com.example.alne.viewmodel.FridgeViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
+import java.io.File
 
 
 class FridgeFragment : Fragment(), MyCustomDialogInterface{
@@ -51,8 +52,8 @@ class FridgeFragment : Fragment(), MyCustomDialogInterface{
         return userJwt
     }
 
-    override fun onSubmitBtnClicked(food: Food) {
-        viewModel.addFridgeData(getUserToken().accessToken!!, food)
+    override fun onSubmitBtnClicked(food: Food, photoFile: File?) {
+        viewModel.addFridgeData(getUserToken().accessToken!!, food, photoFile)
     }
 
     override fun onDestroy() {

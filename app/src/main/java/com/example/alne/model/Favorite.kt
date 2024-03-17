@@ -6,7 +6,6 @@ data class FavoriteRespond(
 )
 
 data class Favorite(
-    val id: Int,
     val user: UserInfo,
     val recipe: Recipe,
     val favorite: Boolean
@@ -20,4 +19,9 @@ data class UserInfo(
     val account: String,
     val favoriteRecipes: List<Int> = ArrayList(),
     val likeRecipes: List<Int> = ArrayList()
+)
+
+data class FavoritesRespond(
+    val status: Int,
+    val data: List<Favorite>
 )

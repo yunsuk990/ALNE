@@ -77,6 +77,12 @@ class CustomDialogDetail(context: Context, val jwt: Jwt, val food: Food, myCusto
         savedInstanceState: Bundle?
     ): View? {
         binding = ItemFoodDetailBinding.inflate(inflater, container, false)
+        if(food.imageUrl != null){
+            binding.itemFoodDetailIv.visibility = View.VISIBLE
+            Glide.with(requireContext()).load(food.imageUrl).into(binding.itemFoodDetailIv)
+            binding.itemFoodDetailIv.scaleType = ImageView.ScaleType.FIT_XY
+            binding.itemFoodDetailDefaultIv.visibility = View.GONE
+        }
         var dateString: String = food.exp!!
         var date = dateString.split(" ")[0]
         var time = dateString.split(" ")[1]
@@ -100,7 +106,7 @@ class CustomDialogDetail(context: Context, val jwt: Jwt, val food: Food, myCusto
             val title = binding.foodTitleEt.text.toString()
             Log.d("data", title + " "+ storage)
             myCustomDialogDetailInterface?.onSubmitBtnDetailClicked(Food(jwt.userId,title,date + " " + time, addDate, binding
-                .foodMemoTv.text.toString(),storage!!,null))
+                .foodMemoTv.text.toString(),storage!!), photoFile)
             dismiss()
         }
 
@@ -314,5 +320,5 @@ class CustomDialogDetail(context: Context, val jwt: Jwt, val food: Food, myCusto
 
 // 재료 수정하기(편집)
 interface MyCustomDialogDetailInterface {
-    fun onSubmitBtnDetailClicked(food: Food)
+    fun onSubmitBtnDetailClicked(food: Food, photoFile: File?)
 }

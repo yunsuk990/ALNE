@@ -19,6 +19,7 @@ import com.example.alne.model.Jwt
 import com.example.alne.model.UserId
 import com.example.alne.viewmodel.FridgeViewModel
 import com.google.gson.Gson
+import java.io.File
 
 class FridgeFreezeFragment : Fragment(), MyCustomDialogDetailInterface {
 
@@ -89,8 +90,8 @@ class FridgeFreezeFragment : Fragment(), MyCustomDialogDetailInterface {
         Log.d("FridgeFreezeFragment", "onDestroy")
     }
 
-    override fun onSubmitBtnDetailClicked(food: Food) {
-        viewModel.addFridgeData(getUserToken().accessToken!!, food)
+    override fun onSubmitBtnDetailClicked(food: Food, photoFile: File?) {
+        viewModel.addFridgeData(getUserToken().accessToken!!, food, photoFile)
     }
 
 }

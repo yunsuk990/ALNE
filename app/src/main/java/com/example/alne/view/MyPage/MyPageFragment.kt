@@ -43,6 +43,10 @@ class MyPageFragment : Fragment() {
             startActivity(Intent(context, UserProfileActivity::class.java))
         }
 
+        binding.mypageFavoriteLinear.setOnClickListener {
+            startActivity(Intent(requireContext(), FavoriteActivity::class.java))
+        }
+
 
 //        binding.login.setOnClickListener {
 //            startActivity(Intent(requireContext(), LoginActivity::class.java))
