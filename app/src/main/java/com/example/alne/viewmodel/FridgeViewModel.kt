@@ -113,22 +113,20 @@ class FridgeViewModel(private val application: Application) : AndroidViewModel(a
                 response: Response<FridgePostResponse>,
             ) {
                 var res = response.body()
-                Log.d("deleteFridgeFood", "onSuccess")
                 Log.d("deleteFridgeFood", res.toString())
-                if(response.isSuccessful){
                     when(res?.status){
                         200 -> {
                             getFridgeFood(getUserToken()?.accessToken!!, UserId(getUserToken()?.userId!!, null))
                         }
                         else -> {
-
+                            Log.d("deleteFridgeFood", "onSuccess:fail")
                         }
                     }
-                }
+
             }
 
             override fun onFailure(call: Call<FridgePostResponse>, t: Throwable) {
-
+                Log.d("deleteFridgeFood:FAIL", t.message.toString())
             }
         })
     }

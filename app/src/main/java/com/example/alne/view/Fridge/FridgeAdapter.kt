@@ -67,6 +67,7 @@ class FridgeAdapter(val context: Context,  val items: ArrayList<Food>): Recycler
             }else{
                 binding.itemFridgeExpireInfoTv.text = "유효기간 ${needDiff}일 남음"
             }
+
             if(food.imageUrl != null){
                 Glide.with(context).load(food.imageUrl).into(binding.itemFridgeIv)
             }else{
