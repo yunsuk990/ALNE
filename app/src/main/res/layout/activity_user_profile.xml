@@ -33,21 +33,23 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/user_profile_image_cv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="50dp"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        app:cardCornerRadius="100dp"
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_profile_tb">
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/user_profile_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:padding="15dp"
             android:src="@drawable/user" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/user_profile_image_plus_cv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="50dp"
@@ -105,6 +107,7 @@
 
                 <ImageView
                     android:scaleType="fitXY"
+                    android:visibility="gone"
                     android:src="@drawable/arrow_right_gray"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
@@ -112,10 +115,13 @@
 
             </LinearLayout>
 
+            <View
+                android:background="@color/gray_light1"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"/>
             <LinearLayout
                 android:orientation="horizontal"
                 android:padding="15dp"
-                android:background="@drawable/profile_border_background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -140,6 +146,7 @@
                     android:layout_height="wrap_content"/>
 
                 <ImageView
+                    android:visibility="gone"
                     android:scaleType="fitXY"
                     android:src="@drawable/arrow_right_gray"
                     android:layout_gravity="center"
@@ -149,10 +156,17 @@
             </LinearLayout>
 
         </LinearLayout>
-
-
-
-
     </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/user_profile_bt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="저장하기"
+        android:textColor="@color/white"
+        android:background="@color/gray_light1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

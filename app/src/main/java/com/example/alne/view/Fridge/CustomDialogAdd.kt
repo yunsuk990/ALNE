@@ -107,9 +107,13 @@ class CustomDialogAdd(context: Context, val jwt: Jwt, myCustomDialogInterface: M
 
         binding.submitBt.setOnClickListener {
             val title = binding.itemFoodaddTitleTv.text.toString()
-            Log.d("time",date + " " + time)
-            myCustomDialogInterface?.onSubmitBtnClicked(Food(jwt.userId,title,date + " " + time, addDate, binding
-                .foodMemoTv.text.toString(),storage!!), photoFile)
+            if(title.equals("재료 선택")){
+                Toast.makeText(requireContext(), "재료를 선택해주세요.", Toast.LENGTH_SHORT).show()
+
+            }else{
+                myCustomDialogInterface?.onSubmitBtnClicked(Food(jwt.userId,title,date + " " + time, addDate, binding
+                    .foodMemoTv.text.toString(),storage!!), photoFile)
+            }
             dismiss()
         }
 

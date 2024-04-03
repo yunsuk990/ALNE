@@ -7,10 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ImageView.ScaleType
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.alne.databinding.FragmentMyPageBinding
+import com.example.alne.model.Profile
 import com.example.alne.view.Login.LoginActivity
 import com.example.alne.view.SignUp.SignUpActivity
 import com.example.alne.view.Splash.StartActivity
@@ -26,14 +30,15 @@ class MyPageFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentMyPageBinding.inflate(layoutInflater)
-        viewModel = ViewModelProvider(this).get(MyPageViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(MyPageViewModel::class.java)
 
-        viewModel.authStateRespond.observe(viewLifecycleOwner, Observer { state ->
-            if(state){
+        viewModel.userProfileLiveData.observe(viewLifecycleOwner, Observer { state ->
+            if(state != null){
                 binding.login.text = "로그아웃"
                 binding.login.setOnClickListener {
                     LogoutCustomDialog().show(requireActivity().supportFragmentManager, LogoutCustomDialog.TAG)
                 }
+                setProfile(state)
             }else{
                 binding.login.text = "로그인"
             }
@@ -53,5 +58,11 @@ class MyPageFragment : Fragment() {
 //        }
 //
         return binding.root
+    }
+
+    private fun setProfile(profile: Profile) {
+        Glide.with(requireContext()).load(profile.image).into(binding.myPageProfileIv)
+        binding.myPageProfileIv.scaleType = ScaleType.FIT_XY
+        binding.myPageProfileIv.setPadding(0,0,0,0)
     }
 }

@@ -42,7 +42,7 @@ class ReviewPageFragment(val recipe: recipe) : Fragment() {
             adapter.addAllItem(it.comments as ArrayList<Comments>)
         })
 
-        viewModel.addUserCommentLiveData.observe(this, Observer { it ->
+        viewModel.addUserCommentLiveData.observe(viewLifecycleOwner, Observer { it ->
             if(!it){
                 Toast.makeText(requireContext(), "리뷰 작성에 실패했습니다.", Toast.LENGTH_SHORT).show()
             }else{
@@ -65,7 +65,7 @@ class ReviewPageFragment(val recipe: recipe) : Fragment() {
     }
 
     private fun initAdapter() {
-        adapter = ReviewPageRVAdapter()
+        adapter = ReviewPageRVAdapter(requireContext())
         adapter.setMyItemClickListener(object: ReviewPageRVAdapter.MyItemClickListener{
             override fun deleteComment(position: Int) {
                 viewModel.deleteUserComment(requestComment(GlobalApplication.prefManager.getUserToken()?.userId!!, recipe.recipe_code))

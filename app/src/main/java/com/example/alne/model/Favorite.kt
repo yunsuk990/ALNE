@@ -17,6 +17,7 @@ data class UserInfo(
     val password: String,
     val name: String,
     val account: String,
+    val image: String,
     val favoriteRecipes: List<Int> = ArrayList(),
     val likeRecipes: List<Int> = ArrayList()
 )

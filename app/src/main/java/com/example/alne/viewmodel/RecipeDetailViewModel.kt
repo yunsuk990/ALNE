@@ -16,6 +16,8 @@ import com.example.alne.model.UserId
 import com.example.alne.repository.recipeRepository
 import com.example.alne.Network.AuthResponse
 import com.example.alne.model.LikeRespond
+import com.example.alne.model.Profile
+import com.example.alne.model.ProfileRespond
 import com.example.alne.model.requestComment
 import retrofit2.Call
 import retrofit2.Callback
@@ -49,6 +51,17 @@ class RecipeDetailViewModel: ViewModel() {
     private val _addRecipeLikeLiveData = MutableLiveData<Boolean>()
     val addRecipeLikeLiveData: LiveData<Boolean> = _addRecipeLikeLiveData
 
+    //사용자 프로필
+    private val _userProfileLiveData = MutableLiveData<Profile>()
+    val userProfileLiveData: LiveData<Profile> = _userProfileLiveData
+
+    init {
+        if(GlobalApplication.prefManager.getUserToken()?.userId != null){
+            getUserProfile(GlobalApplication.prefManager.getUserToken()!!.userId)
+        }else{
+            _userProfileLiveData.postValue(null)
+        }
+    }
 
     fun addUserComment(comment: Comment) = repository.addUserComment(comment).enqueue(object: Callback<AuthResponse>{
         override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
@@ -183,6 +196,27 @@ class RecipeDetailViewModel: ViewModel() {
             Log.d("deleteUserComment_onFailure", t.message.toString())
         }
 
+    })
+
+    fun getUserProfile(userId: Int) = repository.getUserProfile(UserId(userId,null)).enqueue(object: Callback<ProfileRespond>{
+        override fun onResponse(call: Call<ProfileRespond>, response: Response<ProfileRespond>) {
+            val res = response.body()
+            when(res?.status){
+                200 -> {
+                    _userProfileLiveData.postValue(res.data)
+                    Log.d("getUserProfile", "onResponse: {${res.data}")
+                }
+                else -> {
+                    _userProfileLiveData.postValue(null)
+                    Log.d("getUserProfile", "onResponse: Fail")
+                }
+            }
+        }
+
+        override fun onFailure(call: Call<ProfileRespond>, t: Throwable) {
+            _userProfileLiveData.postValue(null)
+            Log.d("getUserProfile", "onFailure: {${t.message.toString()}")
+        }
     })
 
 

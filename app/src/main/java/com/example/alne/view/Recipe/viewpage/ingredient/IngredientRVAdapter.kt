@@ -11,6 +11,7 @@ class IngredientRVAdapter(val items: ArrayList<Ingredient>): RecyclerView.Adapte
     inner class ViewHolder(val binding: ItemIngredientBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(ingredient: Ingredient){
             binding.itemIngredientTitleTv.text = ingredient.name
+            binding.itemIngredientDetailTv.text = ingredient.amount
         }
     }
     override fun onCreateViewHolder(

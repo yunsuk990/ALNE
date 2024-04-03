@@ -48,15 +48,16 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/my_page_profile_cv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 app:cardCornerRadius="50dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
+                    android:id="@+id/my_page_profile_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:padding="15dp"
                     android:src="@drawable/user" />
             </androidx.cardview.widget.CardView>

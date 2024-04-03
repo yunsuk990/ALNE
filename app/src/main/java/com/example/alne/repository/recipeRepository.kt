@@ -1,6 +1,7 @@
 package com.example.alne.repository
 
 import com.example.alne.GlobalApplication
+import com.example.alne.Network.AuthApi
 import com.example.alne.model.Comment
 import com.example.alne.model.DeleteFavorite
 import com.example.alne.model.UserId
@@ -9,10 +10,12 @@ import com.example.alne.Network.RecipeApi
 import com.example.alne.Network.getRetrofit
 import com.example.alne.model.Id
 import com.example.alne.model.requestComment
+import retrofit2.http.Body
 
 class recipeRepository {
 
     private val recipeService = getRetrofit().create(RecipeApi::class.java)
+    private val authService = getRetrofit().create(AuthApi::class.java)
 
     fun getAllRecipe(): ArrayList<recipe> = GlobalApplication.appDatabase.recipeDao().getAll() as ArrayList<recipe>
 
@@ -34,4 +37,6 @@ class recipeRepository {
     fun getUserFavorites(id: Id) = recipeService.getUserFavorites(id)
 
     fun deleteRecipeFavorite(delete: DeleteFavorite) = recipeService.deleteRecipeFavorite(delete)
+
+    fun getUserProfile(userId: UserId) = authService.getUserProfile(userId)
 }
