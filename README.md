@@ -31,7 +31,7 @@
 <p align="center">
   <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/5778219e-2b19-42a3-8d08-0ceb77899487" align="left">
   <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/6cf374f0-efcc-448b-81e3-385255c57511" align="center">
-  <span width="200"></span>
+  <div width="200"></div>
 </p>
 <br>
 
