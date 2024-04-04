@@ -19,7 +19,10 @@
 ## 👀 서비스 화면
 
 <p align="center">
-  <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/a92a83fe-45d0-45c8-9402-5b5e3ede55aa" align="left">
+  <p align"left">
+    <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/a92a83fe-45d0-45c8-9402-5b5e3ede55aa">
+    <figcaption>시작화면</figcaption>
+  </p>
   <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/799a5e60-b89e-4c94-89f8-5a362c3c2173" align="center">
   <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/37c3af6c-e168-45eb-9102-dd376bfd6a16" align="right">
 </p>
