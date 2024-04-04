@@ -13,42 +13,29 @@
 #### 2. 재료들의 유통 기한 관리
 #### 3. 레시피 정보 제공 - 조리 순서, 칼로리, 시간 등
 #### 4. 사용자들과의 소통 - 댓글, 좋아요, 즐겨찾기
-        
+<br>        
 
----
+
 ## 👀 서비스 화면
 
-<img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/a92a83fe-45d0-45c8-9402-5b5e3ede55aa">
+<p align="center">
+  <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/a92a83fe-45d0-45c8-9402-5b5e3ede55aa">
+  <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/799a5e60-b89e-4c94-89f8-5a362c3c2173">
+  <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/37c3af6c-e168-45eb-9102-dd376bfd6a16">
+</p>
+<p align="center">
+  <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/8178a778-5328-4983-ab95-dfcc6d0a0917">
+  <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/83964720-852d-443c-bb74-e01285299975">
+  <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/e787879f-5290-4aa0-be32-64674ff48e37">
+</p>
+<p align="center">
+  <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/5778219e-2b19-42a3-8d08-0ceb77899487">
+  <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/6cf374f0-efcc-448b-81e3-385255c57511">
+</p>
 
-시작화면
 
-<img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/d5dd8d8e-b0d8-454c-bf83-52ecd54472c0">
 
-회원가입
 
-<img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/a76677c3-acac-42e5-ab2b-732c2c31c593">
-
-레시피 메뉴
-
-<img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/aacedac5-fa49-486c-bf5e-e8873e2c0676">
-
-로그인, 회원가입
-
-![홈 메뉴](ALNE%2060ff6760963647278963844fb37c8537/%25E1%2584%2592%25E1%2585%25A9%25E1%2586%25B7%25E1%2584%2592%25E1%2585%25AA%25E1%2584%2586%25E1%2585%25A7%25E1%2586%25AB.png)
-
-홈 메뉴
-
-![마이페이지 메뉴](ALNE%2060ff6760963647278963844fb37c8537/%25E1%2584%2586%25E1%2585%25A1%25E1%2584%258B%25E1%2585%25B5%25E1%2584%2591%25E1%2585%25A6%25E1%2584%258B%25E1%2585%25B5%25E1%2584%258C%25E1%2585%25B5.png)
-
-마이페이지 메뉴
-
-![로그인](ALNE%2060ff6760963647278963844fb37c8537/%25E1%2584%2585%25E1%2585%25A9%25E1%2584%2580%25E1%2585%25B3%25E1%2584%258B%25E1%2585%25B5%25E1%2586%25AB.png)
-
-로그인
-
-![냉장고 메뉴](ALNE%2060ff6760963647278963844fb37c8537/%25E1%2584%2582%25E1%2585%25A2%25E1%2586%25BC%25E1%2584%258C%25E1%2585%25A1%25E1%2586%25BC%25E1%2584%2580%25E1%2585%25A9.png)
-
-냉장고 메뉴
 
 ## 냉장고 메뉴
 
