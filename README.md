@@ -29,7 +29,7 @@
   <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/e787879f-5290-4aa0-be32-64674ff48e37" align="right">
 </p>
 <p align="center">
-  <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/5778219e-2b19-42a3-8d08-0ceb77899487" align="left">
+  <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/5778219e-2b19-42a3-8d08-0ceb77899487" >
   <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/6cf374f0-efcc-448b-81e3-385255c57511" style="margin: 200">
 </p>
 <br>
