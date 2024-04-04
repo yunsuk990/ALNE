@@ -8,6 +8,7 @@
 <br>
 
 ## 제공되는 서비스
+<br>
 
 #### 1. 냉장고에 등록한 재료들로 만들 수 있는 레시피 추천
 #### 2. 재료들의 유통 기한 관리
@@ -17,7 +18,7 @@
 
 
 ## 👀 서비스 화면
-
+<br>
 <p align="center">
     <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/a92a83fe-45d0-45c8-9402-5b5e3ede55aa" align="left">
     <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/799a5e60-b89e-4c94-89f8-5a362c3c2173" align="center">
@@ -65,14 +66,9 @@
   <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/20d9e604-6078-4033-8736-99be971e6bb8" align="center">
   <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/80437742-ca5e-447f-8fad-e692ffb2e6c2" align="right">
 </p>
+<br>
+<br>
 
-<p align="center">
-  <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/26826b41-c771-4e85-be9b-385050343dbe" align="left">
-  <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/20d9e604-6078-4033-8736-99be971e6bb8" align="center">
-  <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/80437742-ca5e-447f-8fad-e692ffb2e6c2" align="right">
-</p>
-<br>
-<br>
 ## 레시피 메뉴
 
 ### 기능
@@ -129,7 +125,6 @@
 <br>
 
 ## 🛠 사용 라이브러리
-<br>
 
 - Android Studio(Kotlin)
 - Glide
