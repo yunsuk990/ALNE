@@ -19,16 +19,11 @@
 ## 👀 서비스 화면
 
 <p align="center">
-  <p align="left">
-    <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/a92a83fe-45d0-45c8-9402-5b5e3ede55aa">
-  </p>
-  <p align="center">
-    <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/799a5e60-b89e-4c94-89f8-5a362c3c2173">
-  </p>
-  <p align="right">
-    <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/37c3af6c-e168-45eb-9102-dd376bfd6a16">
-  </p>
+    <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/a92a83fe-45d0-45c8-9402-5b5e3ede55aa" align="left">
+    <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/799a5e60-b89e-4c94-89f8-5a362c3c2173" align="center">
+    <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/37c3af6c-e168-45eb-9102-dd376bfd6a16" align="right">
 </p>
+
 <p align="center">
   <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/8178a778-5328-4983-ab95-dfcc6d0a0917">
   <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/83964720-852d-443c-bb74-e01285299975">
