@@ -1,59 +1,36 @@
 # ALNE
 
 <p align="center">
-  <img src="https://github.com/yunsuk990/ALNE/assets/45827567/b586a4f5-c1b2-49e3-9b07-2cc4cff14eb4">
+  <img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/b586a4f5-c1b2-49e3-9b07-2cc4cff14eb4">
 </p>
 
-## 💁🏻‍♂️ 서비스 내용
+### <p align="center">레시피 추천 및 재료 관리 앱 서비스</p>
+<br>
 
-**레시피 추천 및 재료 관리 앱 서비스**
+## 제공되는 서비스
 
-자취생들이나 주부와 같은 사용자들에게 평소 집에 있는 재료들의 유통기한 관리나 레시피 정보들을 제공하여 조금 더 편리한 생활을 할 수 있다는 생각에 구상하게 되었습니다. 
-
-서비스의 핵심 기능 4가지
-
-1. 냉장고에 등록한 재료들로 만들 수 있는 레시피 추천
-2. 재료들의 유통 기한 관리
-3. 레시피 정보 - 조리 순서, 칼로리, 시간 등
-4. 사용자들과의 소통 - 댓글, 좋아요 등
-
----
-
-## 🛠 기술 스택
-
-- Android Studio(Kotlin)
-- Glide
-- Room
-- Kakao
-- Retrofit
-- Spring
-- AWS Ec2
-- AWS S3
-- 오픈 API (공공데이터 포털)
-    - **농림수산식품교육문화정보원_레시피 과정정보**
-        [https://www.data.go.kr/data/15056535/openapi.do](https://www.data.go.kr/data/15056535/openapi.do)
-    - **농림수산식품교육문화정보원_레시피 재료정보**
-        [https://www.data.go.kr/data/15058981/openapi.do](https://www.data.go.kr/data/15058981/openapi.do)
-    - **농림수산식품교육문화정보원_레시피 기본정보**
-        [https://www.data.go.kr/data/15057205/openapi.do](https://www.data.go.kr/data/15057205/openapi.do)
+#### 1. 냉장고에 등록한 재료들로 만들 수 있는 레시피 추천
+#### 2. 재료들의 유통 기한 관리
+#### 3. 레시피 정보 제공 - 조리 순서, 칼로리, 시간 등
+#### 4. 사용자들과의 소통 - 댓글, 좋아요, 즐겨찾기
         
 
 ---
 ## 👀 서비스 화면
 
-<img src="https://github.com/yunsuk990/ALNE/assets/45827567/aacedac5-fa49-486c-bf5e-e8873e2c0676">
+<img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/a92a83fe-45d0-45c8-9402-5b5e3ede55aa">
 
 시작화면
 
-<img src="https://github.com/yunsuk990/ALNE/assets/45827567/d5dd8d8e-b0d8-454c-bf83-52ecd54472c0">
+<img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/d5dd8d8e-b0d8-454c-bf83-52ecd54472c0">
 
 회원가입
 
-<img src="https://github.com/yunsuk990/ALNE/assets/45827567/a76677c3-acac-42e5-ab2b-732c2c31c593">
+<img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/a76677c3-acac-42e5-ab2b-732c2c31c593">
 
 레시피 메뉴
 
-<img src="https://github.com/yunsuk990/ALNE/assets/45827567/d5dd8d8e-b0d8-454c-bf83-52ecd54472c0">
+<img width="200" src="https://github.com/yunsuk990/ALNE/assets/45827567/aacedac5-fa49-486c-bf5e-e8873e2c0676">
 
 로그인, 회원가입
 
@@ -201,3 +178,19 @@
 ![내 정보 수정](ALNE%2060ff6760963647278963844fb37c8537/%25E1%2584%2582%25E1%2585%25A2%25E1%2584%258C%25E1%2585%25A5%25E1%2586%25BC%25E1%2584%2587%25E1%2585%25A9%25E1%2584%2589%25E1%2585%25AE%25E1%2584%258C%25E1%2585%25A5%25E1%2586%25BC.png)
 
 내 정보 수정
+
+
+## 🛠 사용 라이브러리
+
+- Android Studio(Kotlin)
+- Glide
+- Room
+- Kakao
+- Retrofit
+- 오픈 API (공공데이터 포털)
+    - **농림수산식품교육문화정보원_레시피 과정정보**
+        [https://www.data.go.kr/data/15056535/openapi.do](https://www.data.go.kr/data/15056535/openapi.do)
+    - **농림수산식품교육문화정보원_레시피 재료정보**
+        [https://www.data.go.kr/data/15058981/openapi.do](https://www.data.go.kr/data/15058981/openapi.do)
+    - **농림수산식품교육문화정보원_레시피 기본정보**
+        [https://www.data.go.kr/data/15057205/openapi.do](https://www.data.go.kr/data/15057205/openapi.do)
